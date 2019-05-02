@@ -14,4 +14,4 @@ const Home = () => (
 
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(Home);
+export default (Home);
