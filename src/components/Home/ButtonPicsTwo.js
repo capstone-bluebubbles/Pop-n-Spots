@@ -52,7 +52,7 @@ const styles = theme => ({
     top: 0,
     bottom: 0,
     backgroundSize: "cover",
-    backgroundPosition: "center 50%"
+    backgroundPosition: "center 70%"
   },
   imageBackdrop: {
     position: "absolute",
@@ -82,19 +82,18 @@ const styles = theme => ({
 
 const images = [
   {
-    url: require("../../images/coffee.jpg"),
-    title: "Coffee",
-    width: "40%",
-    height: "100%"
+    url: require("../../images/burgers.jpg"),
+    title: "Burgers",
+    width: "40%"
   },
   {
-    url: require("../../images/beer.jpg"),
-    title: "Beer",
+    url: require("../../images/pizza.jpg"),
+    title: "Pizza",
     width: "30%"
   },
   {
-    url: require("../../images/cocktail.jpg"),
-    title: "Cocktails",
+    url: require("../../images/tacos.jpg"),
+    title: "Tacos",
     width: "30%"
   }
 ];
