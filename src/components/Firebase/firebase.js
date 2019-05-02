@@ -1,5 +1,5 @@
 import app from "firebase/app";
-import { REACT_APP_API_KEY } from "../../secerts";
+import { REACT_APP_API_KEY } from "../../secrets";
 import "firebase/auth";
 
 const config = {

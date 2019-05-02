@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
-import { GOOGLE_API_KEY } from "../../secerts";
+import { GOOGLE_API_KEY } from "../../secrets";
 
 const style = {
   width: "100%",
