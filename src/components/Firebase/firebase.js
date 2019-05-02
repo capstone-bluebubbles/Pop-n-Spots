@@ -1,6 +1,6 @@
-import app from 'firebase/app';
-import { REACT_APP_API_KEY } from '../../secrets'
-import 'firebase/auth';
+import app from "firebase/app";
+import { REACT_APP_API_KEY } from "../../secerts";
+import "firebase/auth";
 
 const config = {
   apiKey: REACT_APP_API_KEY,
@@ -8,7 +8,7 @@ const config = {
   databaseURL: "https://bluebubbles-998d5.firebaseio.com",
   projectId: "bluebubbles-998d5",
   storageBucket: "bluebubbles-998d5.appspot.com",
-  messagingSenderId: "406743690960",
+  messagingSenderId: "406743690960"
 };
 
 class Firebase {
@@ -28,9 +28,7 @@ class Firebase {
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
-  doPasswordUpdate = password =>
-    this.auth.currentUser.updatePassword(password);
+  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 }
 
 export default Firebase;
-
