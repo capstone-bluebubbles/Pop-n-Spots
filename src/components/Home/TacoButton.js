@@ -42,7 +42,7 @@ function TacoButton(props) {
         <CardMedia
           component="img"
           height="300"
-          image={require("../images/Tacos.jpg")}
+          image={require("../images/tacos.jpg")}
         />
         <CardContent>
           <Typography
