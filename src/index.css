@@ -1,3 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,12 +18,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: gainsboro;
-  /* background-position: center;
-  background-image: url("https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1985&q=80");
-  background-size: cover; */
 }
 
 .Home-App {
+  margin: 0;
   text-align: center;
   background-position: center;
   background-image: url("https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1985&q=80");
@@ -33,7 +41,7 @@ body {
   text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
 }
 .subtitle {
-  font-size: 30px;
+  font-size: 40px;
   text-align: start;
 }
 
@@ -63,7 +71,7 @@ body {
 }
 
 .navbar {
-  background-color: grey;
+  background-color: gainsboro;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,6 +79,8 @@ body {
 
 .navbar-title {
   color: yellow;
-  margin-left: 20px;
+  margin-left: 50px;
+  font-size: 20px;
   font-family: "Akronim", cursive;
+  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
 }

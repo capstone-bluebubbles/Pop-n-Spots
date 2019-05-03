@@ -45,7 +45,6 @@ function PizzaButton(props) {
           height="300"
           image={require("../images/pizza.jpg")}
         />
-        <div style={styles.overlay}>Pizza</div>
         <CardContent>
           <Typography
             className={classes.typography}

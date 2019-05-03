@@ -42,9 +42,8 @@ function TacoButton(props) {
         <CardMedia
           component="img"
           height="300"
-          image={require("../images/tacos.jpg")}
+          image={require("../images/Tacos.jpg")}
         />
-        <div style={styles.overlay}>CockTails</div>
         <CardContent>
           <Typography
             className={classes.typography}
