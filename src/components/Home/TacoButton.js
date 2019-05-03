@@ -54,7 +54,7 @@ function TacoButton(props) {
             Tacos
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Hungry, EAT drink my friend!
+            Hungry, EAT my friend!
           </Typography>
         </CardContent>
       </CardActionArea>
