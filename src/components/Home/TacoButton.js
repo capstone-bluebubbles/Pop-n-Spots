@@ -12,7 +12,7 @@ const styles = {
   card: {
     position: "reletive",
     maxWidth: 300,
-    color: "Orange"
+    color: "purple"
   },
   overlay: {
     position: "absolute",
@@ -31,7 +31,7 @@ const styles = {
   }
 };
 
-function CocktailButton(props) {
+function TacoButton(props) {
   const { classes } = props;
   return (
     <Card className={classes.card} height="20">
@@ -42,7 +42,7 @@ function CocktailButton(props) {
         <CardMedia
           component="img"
           height="300"
-          image={require("../images/cocktail.jpg")}
+          image={require("../images/tacos.jpg")}
         />
         <div style={styles.overlay}>CockTails</div>
         <CardContent>
@@ -51,10 +51,10 @@ function CocktailButton(props) {
             gutterBottom
             variant="h5"
             component="h1">
-            Cocktail
+            Tacos
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Thirsty, drink my friend!
+            Hungry, EAT my friend!
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -62,8 +62,8 @@ function CocktailButton(props) {
   );
 }
 
-CocktailButton.propTypes = {
+TacoButton.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CocktailButton);
+export default withStyles(styles)(TacoButton);

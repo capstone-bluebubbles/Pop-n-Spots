@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { withFirebase } from "../Firebase";
-
 import Navigation from "../Navigation";
 import LandingPage from "../Landing";
 import SignUpPage from "../SignUp";
@@ -18,7 +17,7 @@ const App = () => (
     <Navigation />
     <hr />
     <div>
-      <Route exact path={ROUTES.DEFAULT} component={LandingPage} />
+      <Route exact path={ROUTES.DEFAULT} component={HomePage} />
       <Route path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
