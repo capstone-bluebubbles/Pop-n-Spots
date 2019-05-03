@@ -1,6 +1,4 @@
 import React from "react";
-import ButtonPics from "./ButtonPics";
-import ButtonTwo from "./ButtonPicsTwo";
 import BeerButton from "./BeerButton";
 import CoffeeButton from "./CoffeeButton";
 import BurgersButton from "./BurgersButton";
@@ -20,12 +18,6 @@ const Home = () => (
       <CocktailButton className="cardButton" />
       <PizzaButton className="cardButton" />
     </div>
-    {/* <div className="card">
-      <ButtonPics />
-    </div>
-    <div className="card">
-      <ButtonTwo />
-    </div> */}
   </div>
 );
 

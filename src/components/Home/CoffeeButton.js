@@ -38,7 +38,7 @@ const styles = {
   }
 };
 
-function ImgMediaCard(props) {
+function CoffeeButton(props) {
   const { classes } = props;
   return (
     <Card className={classes.card} height="20">
@@ -72,8 +72,8 @@ function ImgMediaCard(props) {
   );
 }
 
-ImgMediaCard.propTypes = {
+CoffeeButton.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ImgMediaCard);
+export default withStyles(styles)(CoffeeButton);

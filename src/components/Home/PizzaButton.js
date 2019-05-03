@@ -34,7 +34,7 @@ const styles = {
   }
 };
 
-function ImgMediaCard(props) {
+function PizzaButton(props) {
   const { classes } = props;
   return (
     <Card className={classes.card} height="20">
@@ -65,8 +65,8 @@ function ImgMediaCard(props) {
   );
 }
 
-ImgMediaCard.propTypes = {
+PizzaButton.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ImgMediaCard);
+export default withStyles(styles)(PizzaButton);
