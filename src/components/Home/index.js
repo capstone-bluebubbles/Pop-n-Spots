@@ -4,12 +4,13 @@ import CoffeeButton from "./CoffeeButton";
 import BurgersButton from "./BurgersButton";
 import CocktailButton from "./CocktailButton";
 import PizzaButton from "./PizzaButton";
+import TacoButton from "./TacoButton";
 import { withAuthorization } from "../Session";
 
 const Home = () => (
   <div className="Home-App">
     <h1 className="App-title">
-      Pop'n Spots<span class="subtitle">City Guide</span>
+      Pop'n Spots<span className="subtitle">City Guide</span>
     </h1>
     <div className="card">
       <BeerButton className="cardButton" />
@@ -17,6 +18,7 @@ const Home = () => (
       <BurgersButton className="cardButton" />
       <CocktailButton className="cardButton" />
       <PizzaButton className="cardButton" />
+      <TacoButton className="cardButton" />
     </div>
   </div>
 );
