@@ -15,12 +15,11 @@ import * as ROUTES from "../../constants/routes";
 
 const App = () => (
   <Router>
+    <Navigation />
+    <hr />
     <div>
-      <Navigation />
-
-      <hr />
-
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
+      <Route exact path={ROUTES.DEFAULT} component={LandingPage} />
+      <Route path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />

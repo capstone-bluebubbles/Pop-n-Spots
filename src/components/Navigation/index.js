@@ -6,8 +6,8 @@ import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 
 const Navigation = () => (
-  <div>
-    {" "}
+  <div className="navbar">
+    <h1 className="navbar-title">PoP'n SpOts</h1>
     <AuthUserContext.Consumer>
       {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
     </AuthUserContext.Consumer>
