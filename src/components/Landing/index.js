@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 
 const styleMapSilver = [
@@ -166,14 +166,16 @@ const styleMapSilver = [
 
 export class Landing extends React.Component {
 
+  defaultCenter = {
+    lat: 41.90876,
+    lng: -87.65065
+  }
+
   constructor(props) {
     super(props)
 
     this.state = {
-      currentCenter: {
-        lat: 41.90876,
-        lng: -87.65065
-      },
+      currentCenter: this.defaultCenter,
       currentMessage: {
         txt: "Locating - Blockchain AI Working"
       }
@@ -214,6 +216,24 @@ export class Landing extends React.Component {
   }
 
   render() {
+    /*
+        var image = {
+          url: '\favicon.ico',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new window.google.maps.Size(20, 32),
+          // The origin for this image is (0, 0).
+          origin: new window.google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new window.google.maps.Point(0, 32)
+        };
+    */
+    var image = {
+      url: '\\BubbleTarget400.png',
+      size: new window.google.maps.Size(400, 400),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(10, 10),
+      scaledSize: new window.google.maps.Size(20, 20)
+    };
 
     const styleMapCSS = {
       width: "100%",
@@ -238,6 +258,16 @@ export class Landing extends React.Component {
           fullscreenControl={false}
           styles={styleMapSilver}
         >
+          <Marker
+            position={this.defaultCenter}
+            icon={image}
+          >
+          </Marker>
+          <Marker
+            position={this.state.currentCenter}
+            icon={image}
+          >
+          </Marker>
         </Map>
       </div>
     );
