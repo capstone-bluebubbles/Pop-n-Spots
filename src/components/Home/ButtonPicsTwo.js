@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import { yellow } from "@material-ui/core/colors";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -82,17 +83,17 @@ const styles = theme => ({
 
 const images = [
   {
-    url: require("../../images/burgers.jpg"),
+    url: require("../images/burgers.jpg"),
     title: "Burgers",
     width: "40%"
   },
   {
-    url: require("../../images/pizza.jpg"),
+    url: require("../images/pizza.jpg"),
     title: "Pizza",
     width: "30%"
   },
   {
-    url: require("../../images/tacos.jpg"),
+    url: require("../images/tacos.jpg"),
     title: "Tacos",
     width: "30%"
   }
@@ -104,7 +105,7 @@ function ButtonBases(props) {
     <div className={classes.root}>
       {images.map(image => (
         <ButtonBase
-          style={{ heigth: 0, paddingTop: "50%" }}
+          style={{ height: 0, paddingTop: "50%" }}
           focusRipple
           key={image.title}
           className={classes.image}
@@ -112,6 +113,8 @@ function ButtonBases(props) {
           style={{
             width: image.width
           }}
+          component={Link}
+          to="/"
           onClick={() => console.log(`IS THIS CLICKING`)}>
           <span
             className={classes.imageSrc}
