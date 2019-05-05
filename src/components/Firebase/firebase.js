@@ -35,6 +35,49 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
-}
+
+  bars = () => {
+    let ref = this.db.ref('bars');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      console.log(state);
+    });
+  }
+  burgers = () => {
+    let ref = this.db.ref('burgers');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      console.log(state);
+    });
+  }
+  cocktails = () => {
+    let ref = this.db.ref('cocktails');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      console.log(state);
+    });
+  }
+  pizza = () => {
+    let ref = this.db.ref('pizza');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      console.log(state);
+    });
+  }
+  tacos = () => {
+    let ref = this.db.ref('tacos');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      console.log(state);
+    });
+  }
+  winebars = () => {
+    let ref = this.db.ref('winebars');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      console.log(state);
+    });
+  }
+};
 
 export default Firebase;

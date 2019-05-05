@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import BeerButton from "./BeerButton";
 import CoffeeButton from "./CoffeeButton";
 import BurgersButton from "./BurgersButton";
@@ -6,8 +6,22 @@ import CocktailButton from "./CocktailButton";
 import PizzaButton from "./PizzaButton";
 import TacoButton from "./TacoButton";
 import { withAuthorization } from "../Session";
+import { withFirebase } from "../Firebase"
+import { compose } from "recompose";
+import { withRouter } from "react-router-dom"
+const INITIAL_STATE = {
+  data: {}
+};
 
-const Home = () => (
+class Home extends Component {
+  constructor(props){
+    super(props);
+    this.state = { ...INITIAL_STATE}
+  }
+
+  render() {
+    console.log(this.props.firebase.tacos())
+    return (
   <div className="Home-App">
     <h1 className="App-title">
       Pop'n Spots<span className="subtitle">City Guide</span>
@@ -21,8 +35,15 @@ const Home = () => (
       <TacoButton className="cardButton" />
     </div>
   </div>
-);
+    );
+  }
+};
 
 const condition = authUser => !!authUser;
 
-export default Home;
+const homePage = compose(
+  withFirebase,
+  withRouter
+)(Home)
+
+export default homePage
