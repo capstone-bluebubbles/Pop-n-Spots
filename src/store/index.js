@@ -5,10 +5,10 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // store imports
-//import user from "./user";
+import userReducer from "../store/user";
 
 const reducer = combineReducers({
-  // user: user,
+  //user: userReducer
 });
 
 const middleware = composeWithDevTools(
@@ -17,4 +17,4 @@ const middleware = composeWithDevTools(
 const store = createStore(reducer, middleware);
 
 export default store;
-//export * from './user'
+//export * from '/src/user'
