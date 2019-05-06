@@ -9,18 +9,15 @@ import { withAuthorization } from "../Session";
 import { withFirebase } from "../Firebase"
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom"
-const INITIAL_STATE = {
-  data: {}
-};
+
 
 class Home extends Component {
   constructor(props){
     super(props);
-    this.state = { ...INITIAL_STATE}
   }
 
   render() {
-    console.log(this.props.firebase.tacos())
+
     return (
   <div className="Home-App">
     <h1 className="App-title">

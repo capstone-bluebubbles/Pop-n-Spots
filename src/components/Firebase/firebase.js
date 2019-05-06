@@ -39,43 +39,44 @@ class Firebase {
   bars = () => {
     let ref = this.db.ref('bars');
     ref.on('value', snapshot => {
-      const state = snapshot.val();
-      console.log(state);
+      const bars = snapshot.val();
+       return bars;
+      //  console.log(bars);
     });
   }
   burgers = () => {
     let ref = this.db.ref('burgers');
     ref.on('value', snapshot => {
-      const state = snapshot.val();
-      console.log(state);
+      const burgers = snapshot.val();
+      return burgers;
     });
   }
   cocktails = () => {
     let ref = this.db.ref('cocktails');
     ref.on('value', snapshot => {
-      const state = snapshot.val();
-      console.log(state);
+      const cocktails = snapshot.val();
+      console.log(cocktails);
     });
   }
   pizza = () => {
     let ref = this.db.ref('pizza');
     ref.on('value', snapshot => {
-      const state = snapshot.val();
-      console.log(state);
+      const pizza = snapshot.val();
+      console.log(pizza);
     });
   }
   tacos = () => {
     let ref = this.db.ref('tacos');
     ref.on('value', snapshot => {
-      const state = snapshot.val();
-      console.log(state);
+      const tacos = snapshot.val();
+      console.log(tacos);
     });
   }
   winebars = () => {
     let ref = this.db.ref('winebars');
     ref.on('value', snapshot => {
-      const state = snapshot.val();
-      console.log(state);
+      const winebars = snapshot.val();
+      console.log(winebars);
     });
   }
 };
