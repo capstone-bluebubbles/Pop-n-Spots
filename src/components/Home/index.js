@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import BeerButton from "./BeerButton";
 import CoffeeButton from "./CoffeeButton";
 import BurgersButton from "./BurgersButton";
@@ -6,8 +6,26 @@ import CocktailButton from "./CocktailButton";
 import PizzaButton from "./PizzaButton";
 import TacoButton from "./TacoButton";
 import { withAuthorization } from "../Session";
+import { withFirebase } from "../Firebase"
+import { compose } from "recompose";
+import { withRouter } from "react-router-dom"
+import { placesReducer, fetchPlaces } from '../../store/places'
+import {connect} from "react-redux"
 
-const Home = () => (
+const state = {
+
+}
+
+class Home extends Component {
+  constructor(props){
+    super(props);
+  }
+  componentDidMount(){
+    this.props.fetchAllPlaces()
+  }
+
+  render() {
+    return (
   <div className="Home-App">
     <h1 className="App-title">
       Pop'n Spots<span className="subtitle">City Guide</span>
@@ -21,8 +39,22 @@ const Home = () => (
       <TacoButton className="cardButton" />
     </div>
   </div>
-);
+    );
+  }
+};
 
 const condition = authUser => !!authUser;
 
-export default Home;
+const mapDispatchToProps = dispatch => (
+  {fetchAllPlaces : () => dispatch(fetchPlaces())}
+)
+const mapStateToProps =state => ({
+  places: state.places
+})
+
+const homePage = compose(
+  withFirebase,
+  withRouter
+)(Home)
+
+export default connect(mapStateToProps, mapDispatchToProps)(homePage)

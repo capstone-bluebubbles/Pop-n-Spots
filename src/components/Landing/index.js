@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 
+
 const styleMapSilver = [
   {
     "elementType": "geometry",
