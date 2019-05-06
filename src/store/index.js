@@ -5,7 +5,7 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // store imports
-import userReducer from "../store/user";
+//import userReducer from "../store/user";
 
 const reducer = combineReducers({
   //user: userReducer
