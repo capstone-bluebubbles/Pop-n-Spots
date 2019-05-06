@@ -50,15 +50,6 @@ class Firebase {
   burgers = () => this.db.ref('burgers');
 
 
-  // cocktails = () => {
-  //   let ref = this.db.ref('cocktails');
-  //   ref.on('value', snapshot => {
-  //     const cocktails = snapshot.val();
-  //     console.log(cocktails);
-  //   }).then( () => {
-  //     console.log('hellooooooooooo!!!')
-  //   });
-  // }
   pizza = () => {
     let ref = this.db.ref('pizza');
     ref.on('value', snapshot => {
@@ -83,5 +74,5 @@ class Firebase {
 };
 
 export const databaseRef = firebase.database().ref()
-export const burgersRef = databaseRef.child("burgers")
+export const placesRef = databaseRef.child("places")
 export default Firebase;

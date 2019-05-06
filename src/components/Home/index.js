@@ -9,14 +9,11 @@ import { withAuthorization } from "../Session";
 import { withFirebase } from "../Firebase"
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom"
-import { placesReducer, fetchPlaces } from '../../store/places'
+import { fetchPlaces } from '../../store/places'
 import {connect} from "react-redux"
 
-const state = {
-
-}
-
 class Home extends Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor(props){
     super(props);
   }
