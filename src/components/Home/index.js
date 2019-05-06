@@ -9,15 +9,22 @@ import { withAuthorization } from "../Session";
 import { withFirebase } from "../Firebase"
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom"
+import { placesReducer, fetchPlaces } from '../../store/places'
+import {connect} from "react-redux"
 
+const state = {
+
+}
 
 class Home extends Component {
   constructor(props){
     super(props);
   }
+  componentDidMount(){
+    this.props.fetchAllPlaces()
+  }
 
   render() {
-
     return (
   <div className="Home-App">
     <h1 className="App-title">
@@ -38,9 +45,16 @@ class Home extends Component {
 
 const condition = authUser => !!authUser;
 
+const mapDispatchToProps = dispatch => (
+  {fetchAllPlaces : () => dispatch(fetchPlaces())}
+)
+const mapStateToProps =state => ({
+  places: state.places
+})
+
 const homePage = compose(
   withFirebase,
   withRouter
 )(Home)
 
-export default homePage
+export default connect(mapStateToProps, mapDispatchToProps)(homePage)

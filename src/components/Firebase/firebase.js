@@ -11,13 +11,14 @@ const config = {
   storageBucket: "bluebubbles-998d5.appspot.com",
   messagingSenderId: "406743690960"
 };
+const firebase = app.initializeApp(config)
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);
+    // app.initializeApp(config);
 
-    this.auth = app.auth();
-    this.db = app.database();
+    this.auth = firebase.auth();
+    this.db = firebase.database();
   }
 
   doCreateUserWithEmailAndPassword = (email, password) =>
@@ -36,28 +37,28 @@ class Firebase {
 
   users = () => this.db.ref('users');
 
-  bars = () => {
-    let ref = this.db.ref('bars');
-    ref.on('value', snapshot => {
-      const bars = snapshot.val();
-       return bars;
-      //  console.log(bars);
-    });
-  }
-  burgers = () => {
-    let ref = this.db.ref('burgers');
-    ref.on('value', snapshot => {
-      const burgers = snapshot.val();
-      return burgers;
-    });
-  }
-  cocktails = () => {
-    let ref = this.db.ref('cocktails');
-    ref.on('value', snapshot => {
-      const cocktails = snapshot.val();
-      console.log(cocktails);
-    });
-  }
+
+
+  // bars = () => {
+  //   let ref = this.db.ref('bars');
+  //   ref.on('value', snapshot => {
+  //     const bars = snapshot.val();
+  //      return bars;
+  //     //  console.log(bars);
+  //   });
+  // }
+  burgers = () => this.db.ref('burgers');
+
+
+  // cocktails = () => {
+  //   let ref = this.db.ref('cocktails');
+  //   ref.on('value', snapshot => {
+  //     const cocktails = snapshot.val();
+  //     console.log(cocktails);
+  //   }).then( () => {
+  //     console.log('hellooooooooooo!!!')
+  //   });
+  // }
   pizza = () => {
     let ref = this.db.ref('pizza');
     ref.on('value', snapshot => {
@@ -81,4 +82,6 @@ class Firebase {
   }
 };
 
+export const databaseRef = firebase.database().ref()
+export const burgersRef = databaseRef.child("burgers")
 export default Firebase;
