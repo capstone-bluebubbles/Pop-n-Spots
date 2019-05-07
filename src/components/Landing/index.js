@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from 'react-redux'
 import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
-
+const queryString = require('query-string');
 
 const styleMapSilver = [
   {
@@ -244,14 +244,20 @@ export class Landing extends React.Component {
       options);
   }
 
+  setMarker(m) {
+    this.setState({
+      currentMarker: m
+    })
+  }
+
   render() {
 
     var bubbleRed = {
       url: '\\Bubble128Red.png',
       size: new window.google.maps.Size(128, 128),
-      scaledSize: new window.google.maps.Size(24, 24),
+      scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(12, 12),
+      anchor: new window.google.maps.Point(8, 8),
     };
 
     var bubbleBlue = {
@@ -276,6 +282,8 @@ export class Landing extends React.Component {
     console.log('REACT -> Landing -> componentDidMount -> this.state.currentCenter -> ', this.state.currentCenter)
 
     const distance = getDistance(currentCenter, this.defaultCenter, 3)
+
+    const markers = []
 
     return (
 
@@ -304,17 +312,20 @@ export class Landing extends React.Component {
               center={this.state.currentCenter}
               radius={500}
             />
-            <Marker
-              position={this.defaultCenter}
-              icon={bubbleBlue}
-            />
+            {
+              markers.map((item, index) => {
+                return (
+                  <Marker
+                    key={index}
+                    position={item}
+                    icon={bubbleBlue}
+                  />
+                )
+              })
+            }
             <Marker
               position={this.state.currentCenter}
               icon={bubbleRed}
-            />
-            <Marker
-              position={this.state.currentCenter}
-              icon={bubbleBlue}
             />
           </Map>
         </div >
@@ -330,7 +341,38 @@ const GoogleLanding = GoogleApiWrapper({
   apiKey: GOOGLE_API_KEY
 })(Landing);
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
+  /*
+    const targets = state.places.burgers;
+    const addresses = []
+    const markers = []
+  
+    for (let index = 0; index < targets.length; index++) {
+      const targetObject = targets[index]
+      addresses.push(targetObject.address)
+    }
+  
+    for (let index = 0; index < Math.min(1, addresses.length); index++) {
+      const targetObject = addresses[index]
+      let geocoder = new window.google.maps.Geocoder();
+      if (geocoder) {
+        geocoder.geocode({ address: targetObject }, (results, status) => {
+          console.log(status)
+          console.log(results[0])
+          if (status === window.google.maps.GeocoderStatus.OK) {
+            const marker = {
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng(),
+            }
+  
+            markers.push(marker)
+            console.log(marker);
+          }
+        })
+      }
+    }
+    console.log(markers);
+  */
   return {
     redux_state: state
   }
