@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { connect } from 'react-redux'
+import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 
 const styleMapSilver = [
@@ -164,6 +165,34 @@ const styleMapSilver = [
   }
 ]
 
+/** Converts numeric degrees to radians */
+if (typeof (Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function () {
+    return this * Math.PI / 180;
+  }
+}
+
+// return distance in km between two points defined by lat/long
+const getDistance = function (start, end) {
+
+  let earthRadius = 6371; // km
+  let lat1 = parseFloat(start.lat);
+  let lat2 = parseFloat(end.lat);
+  let lon1 = parseFloat(start.lng);
+  let lon2 = parseFloat(end.lng);
+
+  let dLat = (lat2 - lat1).toRad();
+  let dLon = (lon2 - lon1).toRad();
+  lat1 = lat1.toRad();
+  lat2 = lat2.toRad();
+
+  let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  let d = earthRadius * c;
+  return d
+};
+
 export class Landing extends React.Component {
 
   defaultCenter = {
@@ -182,7 +211,6 @@ export class Landing extends React.Component {
 
     }
   }
-
 
   componentDidMount() {
     var options = {
@@ -215,65 +243,146 @@ export class Landing extends React.Component {
       options);
   }
 
+  setMarker(m) {
+    this.setState({
+      currentMarker: m
+    })
+  }
+
   render() {
-    /*
-        var image = {
-          url: '\favicon.ico',
-          // This marker is 20 pixels wide by 32 pixels high.
-          size: new window.google.maps.Size(20, 32),
-          // The origin for this image is (0, 0).
-          origin: new window.google.maps.Point(0, 0),
-          // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new window.google.maps.Point(0, 32)
-        };
-    */
-    var image = {
-      url: '\\BubbleTarget400.png',
-      size: new window.google.maps.Size(400, 400),
+
+    var bubbleRed = {
+      url: '\\Bubble128Red.png',
+      size: new window.google.maps.Size(128, 128),
+      scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(10, 10),
-      scaledSize: new window.google.maps.Size(20, 20)
+      anchor: new window.google.maps.Point(8, 8),
+    };
+
+    var bubbleBlue = {
+      url: '\\Bubble128Blue.png',
+      size: new window.google.maps.Size(128, 128),
+      scaledSize: new window.google.maps.Size(16, 16),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(8, 8),
+    };
+
+    const styleDivCSS = {
+      width: "100%",
+      height: "360px"
     };
 
     const styleMapCSS = {
       width: "100%",
-      height: "50%"
+      height: "360px"
     };
 
     const currentCenter = this.state.currentCenter;
     console.log('REACT -> Landing -> componentDidMount -> this.state.currentCenter -> ', this.state.currentCenter)
 
+    const distance = getDistance(currentCenter, this.defaultCenter, 3)
+
+    const markers = []
+
     return (
 
       <div>
-        <h3>Landing</h3>
-        <h3>{this.state.currentMessage.txt}</h3>
-        <Map
-          google={this.props.google}
-          zoom={15}
-          center={{ lat: currentCenter.lat, lng: currentCenter.lng }}
-          style={styleMapCSS}
-          streetViewControl={false}
-          mapTypeControl={false}
-          fullscreenControl={false}
-          styles={styleMapSilver}
-        >
-          <Marker
-            position={this.defaultCenter}
-            icon={image}
+        <div>
+          <p>Landing</p>
+          <p>{this.state.currentMessage.txt}</p>
+        </div >
+        <div style={styleDivCSS}>
+          <Map
+            google={this.props.google}
+            zoom={15}
+            center={{ lat: currentCenter.lat, lng: currentCenter.lng }}
+            style={styleMapCSS}
+            streetViewControl={false}
+            mapTypeControl={false}
+            fullscreenControl={false}
+            styles={styleMapSilver}
           >
-          </Marker>
-          <Marker
-            position={this.state.currentCenter}
-            icon={image}
-          >
-          </Marker>
-        </Map>
-      </div>
+            <Circle
+              strokeColor={"#0000FF"}
+              strokeOpacity={1.0}
+              strokeWeight={2}
+              fillColor={"#0000FF"}
+              fillOpacity={0.10}
+              center={this.state.currentCenter}
+              radius={500}
+            />
+            {
+              markers.map((item, index) => {
+                return (
+                  <Marker
+                    key={index}
+                    position={item}
+                    icon={bubbleBlue}
+                  />
+                )
+              })
+            }
+            <Marker
+              position={this.state.currentCenter}
+              icon={bubbleRed}
+            />
+          </Map>
+        </div >
+        <p>
+          {distance}
+        </p >
+      </div >
     );
   }
 }
 
-export default GoogleApiWrapper({
+const GoogleLanding = GoogleApiWrapper({
   apiKey: GOOGLE_API_KEY
 })(Landing);
+
+const mapStateToProps = (state) => {
+  /*
+    const targets = state.places.burgers;
+    const addresses = []
+    const markers = []
+
+    for (let index = 0; index < targets.length; index++) {
+      const targetObject = targets[index]
+      addresses.push(targetObject.address)
+    }
+
+    for (let index = 0; index < Math.min(1, addresses.length); index++) {
+      const targetObject = addresses[index]
+      let geocoder = new window.google.maps.Geocoder();
+      if (geocoder) {
+        geocoder.geocode({ address: targetObject }, (results, status) => {
+          console.log(status)
+          console.log(results[0])
+          if (status === window.google.maps.GeocoderStatus.OK) {
+            const marker = {
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng(),
+            }
+
+            markers.push(marker)
+            console.log(marker);
+          }
+        })
+      }
+    }
+    console.log(markers);
+  */
+  return {
+    redux_state: state
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    redux_dispatch: dispatch,
+  }
+}
+
+const ReduxGoogleLanding = connect(mapStateToProps, mapDispatchToProps)(GoogleLanding)
+export default ReduxGoogleLanding
+
