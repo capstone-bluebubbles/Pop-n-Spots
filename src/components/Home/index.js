@@ -11,8 +11,6 @@ import { compose } from "recompose";
 import { withRouter } from "react-router-dom"
 import { fetchPlaces } from '../../store/places'
 import {connect} from "react-redux"
-import { messageRef } from "../Firebase/firebase"
-//import { updateMessage } from "../../../functions/index"
 
 class Home extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -23,11 +21,6 @@ class Home extends Component {
   componentDidMount() {
     this.props.fetchAllPlaces();
   }
-
-  handleClick(event){
-    console.log(event)
-    messageRef.update({'temp1': 'this home page update'})
-  }  
 
   render() {
     return (
@@ -43,9 +36,6 @@ class Home extends Component {
           <PizzaButton className="cardButton" />
           <TacoButton className="cardButton" />
         </div>
-        <div>
-            <button type='button' onClick={this.handleClick}>Click Me For Update</button>
-          </div>
       </div>
     );
   }
