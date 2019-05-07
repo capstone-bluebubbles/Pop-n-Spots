@@ -24,10 +24,10 @@ class Home extends Component {
   render() {
     return (
       <div className="Home-App">
-        <h1 className="App-title">
+        <h1 className="home-title">
           Pop'n Spots<span className="subtitle">City Guide</span>
         </h1>
-        <div className="card">
+        <div className="home-page">
           <BeerButton className="cardButton" />
           <CoffeeButton className="cardButton" />
           <BurgersButton className="cardButton" />
