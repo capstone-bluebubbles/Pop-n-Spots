@@ -6,8 +6,8 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
+  <div className="sign-up-container">
+    <h1 className="sign-up-title">SignUp</h1>
     <SignUpForm />
   </div>
 );
@@ -34,12 +34,10 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your Firebase realtime database
-        return this.props.firebase
-          .user(authUser.user.uid)
-          .set({
-            username,
-            email,
-          });
+        return this.props.firebase.user(authUser.user.uid).set({
+          username,
+          email
+        });
       })
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
@@ -66,8 +64,9 @@ class SignUpFormBase extends Component {
       username === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form className="form-item" onSubmit={this.onSubmit}>
         <input
+          className="sign-up-email"
           name="username"
           value={username}
           onChange={this.onChange}
@@ -75,6 +74,7 @@ class SignUpFormBase extends Component {
           placeholder="Full Name"
         />
         <input
+          className="sign-up-email"
           name="email"
           value={email}
           onChange={this.onChange}
@@ -82,6 +82,7 @@ class SignUpFormBase extends Component {
           placeholder="Email Address"
         />
         <input
+          className="sign-up-pass"
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
@@ -89,13 +90,14 @@ class SignUpFormBase extends Component {
           placeholder="Password"
         />
         <input
+          className="sign-up-pass"
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
           placeholder="Confirm Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <button className="sign-up-button" disabled={isInvalid} type="submit">
           Sign Up
         </button>
 
