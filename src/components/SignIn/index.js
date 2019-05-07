@@ -3,13 +3,13 @@ import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
 import { SignUpLink } from "../SignUp";
-import { PasswordForgetLink } from '../PasswordForget'
+import { PasswordForgetLink } from "../PasswordForget";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
 const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
+  <div className="signin-container">
+    <h1 className="sign-in-title">Sign In</h1>
     <SignInForm />
     <PasswordForgetLink />
     <SignUpLink />
@@ -55,25 +55,32 @@ class SignInFormBase extends Component {
     const isInvalid = password === "" || email === "";
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
-
+      <form className="form-item" onSubmit={this.onSubmit}>
+        <div>
+          <input
+            className="email"
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address:"
+          />
+        </div>
+        <div>
+          <input
+            className="pass"
+            name="password"
+            value={password}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password:"
+          />
+        </div>
+        <div>
+          <button className="submit" type="submit">
+            Sign In
+          </button>
+        </div>
         {error && <p>{error.message}</p>}
       </form>
     );
