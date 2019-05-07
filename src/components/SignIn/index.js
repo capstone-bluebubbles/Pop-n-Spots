@@ -50,7 +50,7 @@ class SignInFormBase extends Component {
   };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     const { email, password, error } = this.state;
 
     const isInvalid = password === "" || email === "";
@@ -64,7 +64,7 @@ class SignInFormBase extends Component {
             value={email}
             onChange={this.onChange}
             type="text"
-            placeholder="Email Address:"
+            placeholder="Email:"
           />
         </div>
         <div>
