@@ -49,6 +49,7 @@ body {
   color: #61dafb;
 }
 
+/* FOOD and BEER Big Card buttons */
 .card {
   display: flex;
   flex-direction: row;
@@ -70,6 +71,7 @@ body {
   margin: 10px;
 }
 
+/* Navagation Bar */
 .navbar {
   background-color: gainsboro;
   display: flex;
@@ -83,4 +85,222 @@ body {
   font-size: 20px;
   font-family: "Akronim", cursive;
   text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
+}
+
+/* sign in Big white card */
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 400px;
+  height: 400px;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+/* Centering items on form */
+.form-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+/* submit Button */
+.submit {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  border: 0;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* password forgot page */
+.password-forgot-title {
+  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+  color: black;
+  padding-top: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* sign in */
+.sign-in-title {
+  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
+  color: yellow;
+  padding-top: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-family: "Akronim", cursive;
+  font-size: 60px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* input labels */
+.email {
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+  padding-left: 90px;
+  padding-right: 90px;
+}
+
+/*  */
+.pass {
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+  padding-left: 90px;
+  padding-right: 90px;
+}
+
+.email:focus,
+.pass:focus {
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+/* sign up form input box  */
+.sign-up-email {
+  width: 150%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  text-align: center;
+  margin-bottom: 27px;
+  margin: 30px;
+  font-family: "Ubuntu", sans-serif;
+  padding-left: 90px;
+  padding-right: 90px;
+}
+/* sign up form input box */
+.sign-up-pass {
+  width: 150%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 60px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  text-align: center;
+  margin-bottom: 27px;
+  margin: 30px;
+  font-family: "Ubuntu", sans-serif;
+  padding-left: 90px;
+  padding-right: 90px;
+}
+
+.sign-up-email:focus,
+.sign-up-pass:focus {
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.sign-up-button {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  border: 0;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin: 10%;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* white continer */
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 800px;
+  height: 600px;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+.sign-up-title {
+  color: yellow;
+  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
+  padding-top: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-family: "Akronim", cursive;
+  font-size: 60px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
