@@ -16,7 +16,6 @@ class Home extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props){
     super(props);
-    this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
     this.props.fetchAllPlaces();
