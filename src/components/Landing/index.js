@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from 'react-redux'
 import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
-const queryString = require('query-string');
 
 const styleMapSilver = [
   {
@@ -346,12 +345,12 @@ const mapStateToProps = (state) => {
     const targets = state.places.burgers;
     const addresses = []
     const markers = []
-  
+
     for (let index = 0; index < targets.length; index++) {
       const targetObject = targets[index]
       addresses.push(targetObject.address)
     }
-  
+
     for (let index = 0; index < Math.min(1, addresses.length); index++) {
       const targetObject = addresses[index]
       let geocoder = new window.google.maps.Geocoder();
@@ -364,7 +363,7 @@ const mapStateToProps = (state) => {
               lat: results[0].geometry.location.lat(),
               lng: results[0].geometry.location.lng(),
             }
-  
+
             markers.push(marker)
             console.log(marker);
           }
