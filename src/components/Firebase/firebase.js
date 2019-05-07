@@ -3,6 +3,7 @@ import { REACT_APP_API_KEY } from '../../secrets';
 import 'firebase/auth';
 import 'firebase/database';
 
+
 const config = {
   apiKey: REACT_APP_API_KEY,
   authDomain: 'bluebubbles-998d5.firebaseapp.com',
@@ -40,4 +41,5 @@ class Firebase {
 
 export const databaseRef = firebase.database().ref();
 export const placesRef = databaseRef.child('places');
+export const messageRef = databaseRef.child('messages')
 export default Firebase;
