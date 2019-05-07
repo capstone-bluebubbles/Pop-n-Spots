@@ -168,13 +168,13 @@ const styleMapSilver = [
 
 /** Converts numeric degrees to radians */
 if (typeof Number.prototype.toRad === "undefined") {
-  Number.prototype.toRad = function() {
+  Number.prototype.toRad = function () {
     return (this * Math.PI) / 180;
   };
 }
 
 // return distance in km between two points defined by lat/long
-const getDistance = function(start, end) {
+const getDistance = function (start, end) {
   let earthRadius = 6371; // km
   let lat1 = parseFloat(start.lat);
   let lat2 = parseFloat(end.lat);
@@ -274,12 +274,12 @@ export class Landing extends React.Component {
 
     const styleDivCSS = {
       width: "100%",
-      height: "360px"
+      height: "640px"
     };
 
     const styleMapCSS = {
       width: "100%",
-      height: "360px"
+      height: "640px"
     };
 
     const currentCenter = this.state.currentCenter;
@@ -290,7 +290,52 @@ export class Landing extends React.Component {
 
     const distance = getDistance(currentCenter, this.defaultCenter, 3);
 
-    const markers = [];
+
+    // get the current places from redux
+    const places = this.props.redux_state.places.places;
+
+    // construct a collection of all places
+    let placesFlat = []
+
+    const categories = Object.keys(places)
+    for (let c in categories) {
+
+      // get the category
+      const category = categories[c]
+
+      const placesByCategory = places[category];
+      for (let index = 0; index < placesByCategory.length; index++) {
+
+        // get the place
+        const place = placesByCategory[index]
+
+        // add metrics
+        place.databaseCategory = category
+        place.databaseCategoryIndex = index;
+
+        if (!place.gpsLat) {
+          place.gpsLat = 0
+        }
+
+        if (!place.gpsLong) {
+          place.gpsLong = 0
+        }
+
+        // target ready
+        placesFlat.push(place)
+      }
+    }
+
+    const markers = []
+
+    for (let index = 0; index < placesFlat.length; index++) {
+      const place = placesFlat[index]
+      const placeGPS = { lat: place.gpsLat, lng: place.gpsLong }
+      const placeDistance = getDistance(currentCenter, placeGPS);
+      if (placeDistance <= 1.0) {
+        markers.push(placeGPS)
+      }
+    }
 
     return (
       <div>
@@ -315,7 +360,7 @@ export class Landing extends React.Component {
               fillColor={"#0000FF"}
               fillOpacity={0.1}
               center={this.state.currentCenter}
-              radius={500}
+              radius={1000}
             />
             {markers.map((item, index) => {
               return <Marker key={index} position={item} icon={bubbleBlue} />;
