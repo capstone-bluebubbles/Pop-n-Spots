@@ -57,12 +57,9 @@ class PasswordForgetFormBase extends Component {
           type="text"
           placeholder="Email Address"
         />
-        <Link className="submit" to={ROUTES.ACCOUNT}>
-          RESET
-          {/* <button className="submit" disabled={isInvalid} type="submit">
-            Reset My Password
-          </button> */}
-        </Link>
+        <button className="submit" disabled={isInvalid} type="submit">
+          Reset Password
+        </button>
         {error && <p>{error.message}</p>}
       </form>
     );

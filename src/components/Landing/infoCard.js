@@ -9,7 +9,7 @@ class InfoCard extends React.Component {
   componentDidMount() {}
   render() {
     console.log(`what is this thing?????`, this);
-    return <div>Hello</div>;
+    return <div className="info-container">Hello</div>;
   }
 }
 
