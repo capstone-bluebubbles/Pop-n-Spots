@@ -14,6 +14,7 @@
 # secrets
 /src/secrets.js
 src/constants/secerts.js
+
 # misc
 .DS_Store
 .env.local

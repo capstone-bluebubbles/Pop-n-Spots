@@ -14,6 +14,7 @@ const Navigation = () => (
     </AuthUserContext.Consumer>
   </div>
 );
+
 const NavigationAuth = () => (
   <ul>
     <li>
