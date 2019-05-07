@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 
-class InfoCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  componentDidMount() {}
-  render() {
-    console.log(`what is this thing?????`, this);
-    return <div className="info-container">Hello</div>;
-  }
-}
+const InfoCard = props => {
+  console.log(`what is this thing?????`, this);
+  return (
+    <div className="info-container">
+      <h2>{props.place.title}</h2>
+      <ul>
+        <li>{props.place.address}</li>
+      </ul>
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   places: state.places

@@ -168,13 +168,13 @@ const styleMapSilver = [
 
 /** Converts numeric degrees to radians */
 if (typeof Number.prototype.toRad === "undefined") {
-  Number.prototype.toRad = function () {
+  Number.prototype.toRad = function() {
     return (this * Math.PI) / 180;
   };
 }
 
 // return distance in km between two points defined by lat/long
-const getDistance = function (start, end) {
+const getDistance = function(start, end) {
   let earthRadius = 6371; // km
   let lat1 = parseFloat(start.lat);
   let lat2 = parseFloat(end.lat);
@@ -290,50 +290,52 @@ export class Landing extends React.Component {
 
     const distance = getDistance(currentCenter, this.defaultCenter, 3);
 
-
     // get the current places from redux
     const places = this.props.redux_state.places.places;
 
     // construct a collection of all places
-    let placesFlat = []
+    let placesFlat = [];
 
-    const categories = Object.keys(places)
+    const categories = Object.keys(places);
     for (let c in categories) {
-
       // get the category
-      const category = categories[c]
+      const category = categories[c];
 
       const placesByCategory = places[category];
       for (let index = 0; index < placesByCategory.length; index++) {
-
         // get the place
-        const place = placesByCategory[index]
+        const place = placesByCategory[index];
 
         // add metrics
-        place.databaseCategory = category
+        place.databaseCategory = category;
         place.databaseCategoryIndex = index;
 
         if (!place.gpsLat) {
-          place.gpsLat = 0
+          place.gpsLat = 0;
         }
 
         if (!place.gpsLong) {
-          place.gpsLong = 0
+          place.gpsLong = 0;
         }
 
         // target ready
-        placesFlat.push(place)
+        placesFlat.push(place);
       }
     }
 
-    const markers = []
+    const markers = [];
+    const cards = [];
 
     for (let index = 0; index < placesFlat.length; index++) {
-      const place = placesFlat[index]
-      const placeGPS = { lat: place.gpsLat, lng: place.gpsLong }
+      const place = placesFlat[index];
+      const placeGPS = { lat: place.gpsLat, lng: place.gpsLong };
       const placeDistance = getDistance(currentCenter, placeGPS);
       if (placeDistance <= 1.0) {
-        markers.push(placeGPS)
+        // create a marker for this place
+        markers.push(placeGPS);
+
+        // create a card for this place
+        cards.push(place);
       }
     }
 
@@ -369,7 +371,9 @@ export class Landing extends React.Component {
           </Map>
         </div>
         <p>{distance}</p>
-        <InfoCard />
+        {cards.map((item, index) => {
+          return <InfoCard place={item} />;
+        })}
       </div>
     );
   }
