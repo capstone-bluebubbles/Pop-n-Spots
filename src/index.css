@@ -291,6 +291,7 @@ body {
 /* Resturant Info.  Small white card */
 .info-container {
   display: flex;
+  font-family: "Ubuntu", sans-serif;
   flex-direction: column;
   align-items: center;
   background-color: white;
