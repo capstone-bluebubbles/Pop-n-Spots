@@ -17,11 +17,15 @@ class Home extends Component {
   constructor(props){
     super(props);
   }
+
   componentDidMount() {
     this.props.fetchAllPlaces();
   }
 
+  
+
   render() {
+    console.log(this.props)
     return (
       <div className="Home-App">
         <h1 className="home-title">
@@ -45,6 +49,7 @@ const condition = authUser => !!authUser;
 const mapDispatchToProps = dispatch => ({
   fetchAllPlaces: () => dispatch(fetchPlaces())
 });
+
 const mapStateToProps = state => ({
   places: state.places
 });
