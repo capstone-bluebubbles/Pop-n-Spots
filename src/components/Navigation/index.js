@@ -4,7 +4,7 @@ import { AuthUserContext } from "../Session";
 import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 
-const Navigation = () => (
+const Navigation = ({ authUser }) => (
   <div className="navbar">
     <Link to={ROUTES.HOME}>
       <h1 className="navbar-title">PoP'n SpOts</h1>
