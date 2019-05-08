@@ -8,15 +8,15 @@ class LockCard extends React.Component {
   }
 
   render() {
-    console.log(`THE OBJECT===>`, this.props);
+    //console.log(`THE OBJECT===>`, this.props);
     return (
       <div className="info-container">
         <h3>User Places</h3>
         <button
-          className="unpop-button"
+          className="drop-pop-button"
           type="button"
           onClick={() => console.log(`IS THIS CLICKING`)}>
-          UnLock It!
+          DROP!
         </button>
       </div>
     );

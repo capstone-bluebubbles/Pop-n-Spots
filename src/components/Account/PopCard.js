@@ -13,10 +13,10 @@ class PopCard extends React.Component {
       <div className="info-container">
         <h3>User Places</h3>
         <button
-          className="pop-button"
+          className="lock-button"
           type="button"
           onClick={() => console.log(`IS THIS CLICKING`)}>
-          LOCK IT!
+          LOCK!
         </button>
       </div>
     );

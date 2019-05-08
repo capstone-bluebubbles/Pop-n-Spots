@@ -288,7 +288,7 @@ body {
   align-items: center;
 }
 
-/* Resturant Info.  Small white card */
+/* Resturant card Info.  Small white card */
 .info-container {
   background-color: white;
   width: 100%;
@@ -301,7 +301,7 @@ body {
   box-shadow: 0px 22px 65px 4px rgba(0, 0, 0, 0.14);
 }
 
-/* Resturant Info.  Small white card */
+/* Resturant Text Info.  Small white card */
 .info-card {
   list-style: none;
   font-family: "Ubuntu", sans-serif;
@@ -328,10 +328,10 @@ body {
   color: yellow;
   background: linear-gradient(to right, #01cbe6, #1367e4);
   border: none;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   font-family: "Ubuntu", sans-serif;
   text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
   font-style: italic;
@@ -343,7 +343,6 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  display: inline-block;
   cursor: pointer;
 }
 .pop-button:active {
@@ -353,18 +352,18 @@ body {
   border: none;
 }
 
-.unpop-button {
+.drop-pop-button {
   cursor: pointer;
   border-radius: 5em;
   color: yellow;
   background: linear-gradient(to right, #f75f92, #e6014d);
   border: none;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   font-family: "Ubuntu", sans-serif;
-  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   font-style: italic;
   font-display: black;
   font-size: 15px;
@@ -374,10 +373,9 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  display: inline-block;
   cursor: pointer;
 }
-.unpop-button:active {
+.drop-pop-button:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -391,4 +389,35 @@ body {
   align-items: center;
   text-align: center;
   margin: 25px;
+}
+
+.lock-button {
+  cursor: pointer;
+  border-radius: 5em;
+  color: yellow;
+  background: linear-gradient(to right, #baecbd, #71fc14);
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-family: "Ubuntu", sans-serif;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-style: italic;
+  font-display: black;
+  font-size: 15px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.lock-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  border: none;
 }

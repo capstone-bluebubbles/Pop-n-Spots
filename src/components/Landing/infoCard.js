@@ -9,7 +9,7 @@ class InfoCard extends React.Component {
   }
 
   render() {
-    //console.log(`THE OBJECT===>`, props);
+    //console.log(`THE OBJECT===>`, this.props);
     const weekObject = this.props.place.popularTimesHistogram;
     for (let day in weekObject) {
       //console.log(`!!!!`, day);
