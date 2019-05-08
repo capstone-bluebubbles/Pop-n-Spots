@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
+import { getCurrentPosition } from "../../store/position"
 
 const styleMapSilver = [
   {
@@ -168,13 +169,13 @@ const styleMapSilver = [
 
 /** Converts numeric degrees to radians */
 if (typeof Number.prototype.toRad === "undefined") {
-  Number.prototype.toRad = function() {
+  Number.prototype.toRad = function () {
     return (this * Math.PI) / 180;
   };
 }
 
 // return distance in km between two points defined by lat/long
-const getDistance = function(start, end) {
+const getDistance = function (start, end) {
   let earthRadius = 6371; // km
   let lat1 = parseFloat(start.lat);
   let lat2 = parseFloat(end.lat);
@@ -194,68 +195,27 @@ const getDistance = function(start, end) {
   return d;
 };
 
+//--------------------------------------------------
+// Landing
+//--------------------------------------------------
 export class Landing extends React.Component {
-  defaultCenter = {
-    lat: 41.90876,
-    lng: -87.65065
-  };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      currentCenter: this.defaultCenter,
-      currentMessage: {
-        txt: "Locating - Blockchain AI Working"
-      }
-    };
+    // set the state
+    this.state = {}
   }
 
   componentDidMount() {
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    };
-
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        console.log(
-          "REACT -> Landing -> componentDidMount -> getCurrentPosition -> pos ->",
-          pos
-        );
-        this.setState({
-          currentCenter: {
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude
-          },
-          currentMessage: {
-            txt: "Locating - Found"
-          }
-        });
-      },
-      err => {
-        console.log(
-          "REACT -> Landing -> componentDidMount -> getCurrentPosition -> err ->",
-          err
-        );
-        this.setState({
-          currentMessage: {
-            txt: `Locating - Error - ${err.message}`
-          }
-        });
-      },
-      options
-    );
-  }
-
-  setMarker(m) {
-    this.setState({
-      currentMarker: m
-    });
+    // the default position has a timestamp of zero
+    if (this.props.currentPosition.timestamp === 0) {
+      this.props.currentDispatch(getCurrentPosition())
+    }
   }
 
   render() {
+
     var bubbleRed = {
       url: "\\Bubble128Red.png",
       size: new window.google.maps.Size(128, 128),
@@ -274,82 +234,79 @@ export class Landing extends React.Component {
 
     const styleDivCSS = {
       width: "100%",
-      height: "640px"
+      height: "600px"
     };
 
     const styleMapCSS = {
       width: "100%",
-      height: "640px"
+      height: "600px"
     };
 
-    const currentCenter = this.state.currentCenter;
-    console.log(
-      "REACT -> Landing -> componentDidMount -> this.state.currentCenter -> ",
-      this.state.currentCenter
-    );
-
-    const distance = getDistance(currentCenter, this.defaultCenter, 3);
+    const currentPosition = this.props.currentPosition
+    const currentPlaces = this.props.currentPlaces
+    const currentRadius = (1.60934 / 2)
 
     // get the current places from redux
-    const places = this.props.redux_state.places.places;
+    const places = currentPlaces
 
     // construct a collection of all places
-    let placesFlat = [];
-
-    const categories = Object.keys(places);
+    let placesFlat = []
+    const categories = Object.keys(places)
     for (let c in categories) {
+
       // get the category
-      const category = categories[c];
+      const category = categories[c]
 
       const placesByCategory = places[category];
       for (let index = 0; index < placesByCategory.length; index++) {
+
         // get the place
-        const place = placesByCategory[index];
+        const place = placesByCategory[index]
 
         // add metrics
-        place.databaseCategory = category;
+        place.databaseCategory = category
         place.databaseCategoryIndex = index;
 
         if (!place.gpsLat) {
-          place.gpsLat = 0;
+          place.gpsLat = 0
         }
 
         if (!place.gpsLong) {
-          place.gpsLong = 0;
+          place.gpsLong = 0
         }
 
         // target ready
-        placesFlat.push(place);
+        placesFlat.push(place)
       }
     }
 
-    const markers = [];
-    const cards = [];
+    const markers = []
+    const cards = []
 
     for (let index = 0; index < placesFlat.length; index++) {
-      const place = placesFlat[index];
-      const placeGPS = { lat: place.gpsLat, lng: place.gpsLong };
-      const placeDistance = getDistance(currentCenter, placeGPS);
-      if (placeDistance <= 1.0) {
+
+      const place = placesFlat[index]
+      const placeGPS = { lat: place.gpsLat, lng: place.gpsLong }
+
+      const placeDistance = getDistance(currentPosition, placeGPS);
+      if (placeDistance <= (currentRadius)) {
+
         // create a marker for this place
-        markers.push(placeGPS);
+        markers.push(placeGPS)
 
         // create a card for this place
-        cards.push(place);
+        cards.push(place)
       }
     }
 
     return (
       <div>
-        <div>
-          <p>Landing</p>
-          <p>{this.state.currentMessage.txt}</p>
-        </div>
         <div style={styleDivCSS}>
           <Map
             google={this.props.google}
             zoom={15}
-            center={{ lat: currentCenter.lat, lng: currentCenter.lng }}
+            initialCenter={currentPosition}
+            center={currentPosition}
             style={styleMapCSS}
             streetViewControl={false}
             mapTypeControl={false}
@@ -361,19 +318,20 @@ export class Landing extends React.Component {
               strokeWeight={2}
               fillColor={"#0000FF"}
               fillOpacity={0.1}
-              center={this.state.currentCenter}
-              radius={1000}
+              center={currentPosition}
+              radius={currentRadius * 1000}
             />
             {markers.map((item, index) => {
               return <Marker key={index} position={item} icon={bubbleBlue} />;
             })}
-            <Marker position={this.state.currentCenter} icon={bubbleRed} />
+            <Marker position={currentPosition} icon={bubbleRed} />
           </Map>
         </div>
-        <p>{distance}</p>
-        {cards.map((item, index) => {
-          return <InfoCard place={item} />;
-        })}
+        <div>
+          {cards.map((item, index) => {
+            return <InfoCard place={item} />;
+          })}
+        </div>
       </div>
     );
   }
@@ -384,45 +342,15 @@ const GoogleLanding = GoogleApiWrapper({
 })(Landing);
 
 const mapStateToProps = state => {
-  /*
-    const targets = state.places.burgers;
-    const addresses = []
-    const markers = []
-
-    for (let index = 0; index < targets.length; index++) {
-      const targetObject = targets[index]
-      addresses.push(targetObject.address)
-    }
-
-    for (let index = 0; index < Math.min(1, addresses.length); index++) {
-      const targetObject = addresses[index]
-      let geocoder = new window.google.maps.Geocoder();
-      if (geocoder) {
-        geocoder.geocode({ address: targetObject }, (results, status) => {
-          console.log(status)
-          console.log(results[0])
-          if (status === window.google.maps.GeocoderStatus.OK) {
-            const marker = {
-              lat: results[0].geometry.location.lat(),
-              lng: results[0].geometry.location.lng(),
-            }
-
-            markers.push(marker)
-            console.log(marker);
-          }
-        })
-      }
-    }
-    console.log(markers);
-  */
   return {
-    redux_state: state
+    currentPosition: state.position.currentPosition,
+    currentPlaces: state.position.currentPlaces
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    redux_dispatch: dispatch
+    currentDispatch: dispatch
   };
 };
 
