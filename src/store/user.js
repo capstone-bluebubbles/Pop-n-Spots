@@ -1,71 +1,39 @@
-import axios from "axios"; //ARE WE USING AXIOS???????
-//import history from "../history";
+// import { userRef } from "../components/Firebase/firebase";
+// import store from ".";
 
-/**
- * ACTION TYPES
- */
-const GET_USER = "GET_USER";
-const REMOVE_USER = "REMOVE_USER";
+// export const GET_USER = "GET_USER";
 
-/**
- * INITIAL STATE
- */
-const defaultUser = {};
+// const userPlaces = {
+//   places: {}
+// };
 
-/**
- * ACTION CREATORS
- */
-const getUser = user => ({ type: GET_USER, user });
-const removeUser = () => ({ type: REMOVE_USER });
+// export const getUser = user => {
+//   return {
+//     type: GET_USER,
+//     user
+//   };
+// };
 
-/**
- * THUNK CREATORS
- */
-export const me = () => async dispatch => {
-  try {
-    const res = await axios.get("/auth/me");
-    dispatch(getUser(res.data || defaultUser));
-  } catch (err) {
-    console.error(err);
-  }
-};
+// export const fetchUser = () => async dispatch => {
+//   try {
+//     userRef.on("value", snapshot => {
+//       const places = snapshot.val();
+//       dispatch(userPlaces(places));
+//     });
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
-export const auth = (email, password, method) => async dispatch => {
-  let res;
-  try {
-    res = await axios.post(`/auth/${method}`, { email, password });
-  } catch (authError) {
-    return dispatch(getUser({ error: authError }));
-  }
+// export const userReducer = (state = userPlaces, action) => {
+//   switch (action.type) {
+//     case GET_USER:
+//       return {
+//         ...store,
+//         places: action.user
+//       };
 
-  try {
-    dispatch(getUser(res.data));
-    //history.push("/home");
-  } catch (dispatchOrHistoryErr) {
-    console.error(dispatchOrHistoryErr);
-  }
-};
-
-export const logout = () => async dispatch => {
-  try {
-    await axios.post("/auth/logout");
-    dispatch(removeUser());
-    // history.push("/login");
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-/**
- * REDUCER
- */
-export default function(state = defaultUser, action) {
-  switch (action.type) {
-    case GET_USER:
-      return action.user;
-    case REMOVE_USER:
-      return defaultUser;
-    default:
-      return state;
-  }
-}
+//     default:
+//       return state;
+//   }
+// };

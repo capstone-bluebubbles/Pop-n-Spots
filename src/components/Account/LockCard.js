@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-class PopCard extends React.Component {
+class LockCard extends React.Component {
   constructor(props) {
     super();
     this.state = {};
@@ -13,10 +13,10 @@ class PopCard extends React.Component {
       <div className="info-container">
         <h3>User Places</h3>
         <button
-          className="pop-button"
+          className="unpop-button"
           type="button"
           onClick={() => console.log(`IS THIS CLICKING`)}>
-          LOCK IT!
+          UnLock It!
         </button>
       </div>
     );
@@ -26,4 +26,4 @@ const mapStateToProps = state => ({
   places: state.places
 });
 
-export default connect(mapStateToProps)(PopCard);
+export default connect(mapStateToProps)(LockCard);

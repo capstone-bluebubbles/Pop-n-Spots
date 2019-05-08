@@ -1,6 +1,6 @@
 import React from "react";
 import PopCard from "../Account/PopCard";
-
+import LockCard from "../Account/LockCard";
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import { AuthUserContext, withAuthorization } from "../Session";
@@ -10,9 +10,14 @@ const AccountPage = () => (
     {authUser => (
       <div>
         <h1>Account: {authUser.email}</h1>
-        <h2 style={{ textAlign: "center" }}>Pops</h2>
+        <h2 className="lock-title">Pops</h2>
         <PopCard />
-        <PasswordChangeForm />
+        <h2 className="lock-title">Locks/Favorites</h2>
+        <LockCard />
+        <h3 className="lock-title">Change Your Password</h3>
+        <div className="lock-title">
+          <PasswordChangeForm />
+        </div>
       </div>
     )}
   </AuthUserContext.Consumer>
