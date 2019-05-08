@@ -244,6 +244,7 @@ export class Landing extends React.Component {
 
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
+    const currentRadius = (1.60934 / 2)
 
     // get the current places from redux
     const places = currentPlaces
@@ -280,13 +281,21 @@ export class Landing extends React.Component {
     }
 
     const markers = []
+    const cards = []
 
     for (let index = 0; index < placesFlat.length; index++) {
+
       const place = placesFlat[index]
       const placeGPS = { lat: place.gpsLat, lng: place.gpsLong }
+
       const placeDistance = getDistance(currentPosition, placeGPS);
-      if (placeDistance <= (1.60934 / 2)) {
+      if (placeDistance <= (currentRadius)) {
+
+        // create a marker for this place
         markers.push(placeGPS)
+
+        // create a card for this place
+        cards.push(place)
       }
     }
 
@@ -310,7 +319,7 @@ export class Landing extends React.Component {
               fillColor={"#0000FF"}
               fillOpacity={0.1}
               center={currentPosition}
-              radius={1000}
+              radius={currentRadius * 1000}
             />
             {markers.map((item, index) => {
               return <Marker key={index} position={item} icon={bubbleBlue} />;
@@ -318,7 +327,11 @@ export class Landing extends React.Component {
             <Marker position={currentPosition} icon={bubbleRed} />
           </Map>
         </div>
-        {/* <InfoCard /> */}
+        <div>
+          {cards.map((item, index) => {
+            return <InfoCard place={item} />;
+          })}
+        </div>
       </div>
     );
   }
