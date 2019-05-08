@@ -42,7 +42,8 @@ function BeerButton(props) {
       <CardActionArea
         component={Link}
         to="/landing"
-        onClick={() => console.log(`IS THIS CLICKING`)}>
+        // onClick={() => console.log(`IS THIS CLICKING`)}
+      >
         <CardMedia
           component="img"
           height="300"
