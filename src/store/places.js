@@ -14,23 +14,14 @@ export const getAllPlaces = (places) => {
   places
 }}
 
-// const defaultCenter = {
-//   lat: 41.90876,
-//   lng: -87.65065
-// };
-
 export const fetchPlaces = () => async dispatch => {
   try {
-
     let firebase = databaseRef.child('geoFire')
-
     let geoFire = new GeoFire(firebase)
-
     let geoQuery = geoFire.query({
       center: [41.90876, -87.65065],
       radius: 1.609
     })
-
     let data = [];
 
     geoQuery.on("key_entered", function(key, location, distance) {
@@ -43,21 +34,12 @@ export const fetchPlaces = () => async dispatch => {
         let locationSnap = snapshot.child(`${number}`)
         let locationVal = locationSnap.val()
         data.push(locationVal)
-        //dispatch(getAllPlaces(locationVal))
-      })
 
-      // console.log(word)
-      // console.log(number)
-      // console.log("Bar " + key + " found at " + location + " (" + distance + " km away)");
+      })
     });
 
-    console.log(data)
     dispatch(getAllPlaces(data))
 
-    // placesRef.on('value', snapshot => {
-    // const places = snapshot.val()
-    // dispatch(getAllPlaces(places))
-    // })
   } catch (err) {
     console.error(err)
   }
