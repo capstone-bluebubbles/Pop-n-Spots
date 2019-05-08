@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { getUser } from "../../store/user";
 
 class LockCard extends React.Component {
   constructor(props) {
     super();
     this.state = {};
   }
-
+  componentDidMount() {
+    // this.props.getUser();
+  }
   render() {
     //console.log(`THE OBJECT===>`, this.props);
     return (

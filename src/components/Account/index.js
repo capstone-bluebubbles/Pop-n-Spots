@@ -6,6 +6,7 @@ import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import { AuthUserContext, withAuthorization } from "../Session";
 import { getCurrentPosition } from "../../store/position";
+import { getUser } from "../../store/user";
 
 class AccountPageComponent extends React.Component {
   constructor(props) {
@@ -22,16 +23,15 @@ class AccountPageComponent extends React.Component {
   }
 
   render() {
-    //console.log(`THE OBJECT`, this.props);
     return (
       <AuthUserContext.Consumer>
         {authUser => (
           <div>
             <h1>Account: {authUser.email}</h1>
             <h2 className="lock-title">Pops</h2>
-            <PopCard />
+            <PopCard uID={authUser.uid} />
             <h2 className="lock-title">Locks/Favorites</h2>
-            <LockCard />
+            <LockCard uID={authUser.uid} />
             <h3 className="lock-title">Change Your Password</h3>
             <div className="lock-title">
               <PasswordChangeForm />
