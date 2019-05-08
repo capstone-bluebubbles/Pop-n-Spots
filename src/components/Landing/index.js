@@ -208,7 +208,7 @@ export class Landing extends React.Component {
   }
 
   componentDidMount() {
-    // check for an updated current position
+    // the default position has a timestamp of zero
     if (this.props.currentPosition.timestamp === 0) {
       this.props.currentDispatch(getCurrentPosition())
     }
