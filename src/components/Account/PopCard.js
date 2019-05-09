@@ -12,24 +12,24 @@ class PopCard extends React.Component {
     this.props.fetchUser(this.props.uID)
   }
 
-  componentDidUpdate(){
-
-    this.props.fetchPops(this.props.user.pops)
-    this.props.fetchUser(this.props.uID)
+  shouldComponentUpdate(){
+    if (Object.keys(this.props.pops).length === 0){
+      return false;
+    } else {
+      return true;
+    }
   }
 
-  compo
+  componentDidUpdate(){
+    if (Object.keys(this.props.pops).length === 0){
+      this.props.fetchPops(this.props.user.pops)
+    }
+  }
 
   render() {
     let pops = this.props.user
-    console.log(pops)
+    console.log(this.props)
     if(pops !== undefined){
-      // const bars = pops.places.bars;
-      // const cocktails = pops.places.cocktails;
-      // const coffeeshop = pops.places.coffeeshops;
-      // const tacos = pops.places.tacos;
-      // const burgers = pops.places.burgers;
-      // const pizza = pops.places.pizza;
 
     return (
       <div className="info-container">
@@ -63,7 +63,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  user: state.user.user
+  user: state.user.user,
+  pops: state.user.pops,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopCard);

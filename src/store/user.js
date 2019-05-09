@@ -16,10 +16,10 @@ export const getUser = user => {
   };
 };
 
-export const getPops = data => {
+export const getPops = pops => {
   return {
     type: GET_POPS,
-    data,
+    pops,
   };
 };
 
@@ -37,9 +37,9 @@ export const fetchUser = uID => async dispatch => {
 
 export const fetchPops = places => async dispatch => {
   try {
-    let data = [];
-
+    let pops = [];
     if (places.length !== 0) {
+      
       for (let i = 0; i <= places.length - 1; i++) {
         let current = places[i];
         let location = current.placeKey;
@@ -49,13 +49,16 @@ export const fetchPops = places => async dispatch => {
 
         const typeRef = placesRef.child(`${word}`);
 
-        typeRef.on('value', snapshot => {
+        typeRef.once('value', snapshot => {
           let locationSnap = snapshot.child(`${number}`);
           let locationVal = locationSnap.val();
-          data.push(locationVal);
+          //dispatch(getPops(locationVal))
+          pops.push(locationVal);
         });
       }
-      dispatch(getPops(data));
+
+      dispatch(getPops(pops));  
+    
     }
   } catch (error) {
     console.log(error);
@@ -66,13 +69,13 @@ export const userReducer = (state = userPlaces, action) => {
   switch (action.type) {
     case GET_USER:
       return {
-        ...store,
+        ...state,
         user: action.user,
       };
     case GET_POPS:
       return {
-        ...store,
-        pops: action.data,
+        ...state,
+        pops: action.pops,
       };
     default:
       return state;
