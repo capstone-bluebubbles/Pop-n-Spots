@@ -28,7 +28,7 @@ class PopCard extends React.Component {
 
   render() {
     let pops = this.props.user
-    console.log(this.props)
+    console.log(this.props.pops)
     if(pops !== undefined){
 
     return (
