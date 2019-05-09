@@ -4,7 +4,7 @@ import store from ".";
 export const GET_USER = "GET_USER";
 
 const userPlaces = {
-  places: {}
+  user:{}
 };
 
 export const getUser = user => {
@@ -14,11 +14,12 @@ export const getUser = user => {
   };
 };
 
-export const fetchUser = () => async dispatch => {
+export const fetchUser = (uID) => async dispatch => {
   try {
-    userRef.on("value", snapshot => {
-      const places = snapshot.val();
-      dispatch(userPlaces(places));
+    const aUser = userRef.child(uID)
+    aUser.on("value", snapshot => {
+      const user = snapshot.val();
+      dispatch(getUser(user));
     });
   } catch (err) {
     console.error(err);
@@ -28,10 +29,10 @@ export const fetchUser = () => async dispatch => {
 export const userReducer = (state = userPlaces, action) => {
   switch (action.type) {
     case GET_USER:
-      return {
-        ...store,
-        places: action.user
-      };
+    return {
+      ...store,
+      user: action.user
+    };
 
     default:
       return state;

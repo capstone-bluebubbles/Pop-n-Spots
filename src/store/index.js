@@ -11,9 +11,8 @@ import { positionReducer } from "./position";
 //import userReducer from "../store/user";
 
 const reducer = combineReducers({
-  //user: userReducer,
+  user: userReducer,
   places: placesReducer,
-  //user: userReducer
   position: positionReducer
 });
 

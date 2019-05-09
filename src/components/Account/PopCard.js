@@ -1,10 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import { fetchUser } from '../../store/user'
 class PopCard extends React.Component {
   constructor(props) {
     super();
-    this.state = {};
+  }
+
+  componentDidMount(){
+    this.props.fetchUser(this.props.uID)
   }
 
   render() {
@@ -22,8 +25,13 @@ class PopCard extends React.Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  places: state.places
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: (uID) => dispatch(fetchUser(uID))
 });
 
-export default connect(mapStateToProps)(PopCard);
+const mapStateToProps = state => ({
+  user: state
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PopCard);
