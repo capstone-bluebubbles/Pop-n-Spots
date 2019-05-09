@@ -13,22 +13,39 @@ class PopCard extends React.Component {
   render() {
     let pops = this.props.user.pops
     if(pops !== undefined){
-    console.log(Object.keys(pops.places))
-    }
+      const bars = pops.places.bars;
+      const cocktails = pops.places.cocktails;
+      const coffeeshop = pops.places.coffeeshops;
+      const tacos = pops.places.tacos;
+      const burgers = pops.places.burgers;
+      const pizza = pops.places.pizza;
+
     return (
       <div className="info-container">
         <h3>User Places</h3>
+        {bars.map(place =>{
+            return(
+        <div>
         <button
           className="lock-button"
           type="button"
           onClick={() => console.log(`IS THIS CLICKING`)}>
           LOCK!
         </button>
+              {place.title}
+
+              {place.address}
+        </div>
+        )})}
       </div>
     );
+  } else{
+    return (
+      <div>Loading...</div>
+    )
   }
 }
-
+}
 const mapDispatchToProps = dispatch => ({
   fetchUser: (uID) => dispatch(fetchUser(uID))
 });
