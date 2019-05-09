@@ -11,7 +11,10 @@ class PopCard extends React.Component {
   }
 
   render() {
-    console.log(`THE OBJECT===>`, this.props);
+    let pops = this.props.user.pops
+    if(pops !== undefined){
+    console.log(Object.keys(pops.places))
+    }
     return (
       <div className="info-container">
         <h3>User Places</h3>
@@ -31,7 +34,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  user: state
+  user: state.user.user
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopCard);

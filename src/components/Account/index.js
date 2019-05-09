@@ -6,7 +6,7 @@ import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import { AuthUserContext, withAuthorization } from "../Session";
 import { getCurrentPosition } from "../../store/position";
-import { getUser } from "../../store/user";
+import { fetchUser } from "../../store/user";
 
 class AccountPageComponent extends React.Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class AccountPageComponent extends React.Component {
     // if (this.props.currentPosition.timestamp === 0) {
     //   this.props.currentDispatch(getCurrentPosition());
     // }
+
   }
 
   render() {
