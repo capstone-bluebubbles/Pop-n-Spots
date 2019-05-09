@@ -1,43 +1,59 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchUser, fetchPops } from '../../store/user'
+import { fetchUser, fetchPops, getPops } from '../../store/user'
+import { placesRef } from '../Firebase/firebase'
 
 
 class PopCard extends React.Component {
   constructor(props) {
     super();
-    this.count = 0;
-  }
-
-  componentDidMount(){
-    this.props.fetchUser(this.props.uID)
-    // this.props.fetchPops(this.props.user.pops)
-  }
-
-  // shouldComponentUpdate(){
-  //   if (Object.keys(this.props.pops).length === 0){
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
-  componentDidUpdate(){
-    if (this.props.user.pops !== undefined && this.count === 0){
-      this.count++
-      this.props.fetchPops(this.props.user.pops)
+    this.state ={
+      pops: []
     }
   }
 
+  async componentDidMount(){
+    getPops()
+    await this.props.fetchUser(this.props.uID)
+    // this.props.fetchPops(this.props.user.pops)
+  }
+
+
+  async shouldComponentUpdate(nextProps, nextState){
+    console.log(nextProps)
+    let pops = await nextProps.pops
+    console.log('>>>>> ', pops.length)
+    if (pops.length > 0) {
+      this.setState({
+        pops
+      })
+    }
+
+    // if (Object.keys(this.props.pops).length === 0){
+    //   return false;
+    // } else {
+    //   return true;
+    // }
+  }
+
+  // componentDidUpdate(){
+    // console.log('this.props ====> ', prevProps)
+    // if (this.props.user.pops !== undefined && this.count === 0){
+    //   this.count++
+    //   this.props.fetchPops(this.props.user.pops)
+    // }
+  // }
+
   render() {
-    let pops = this.props.user
-    console.log(this.props)
-    if(pops !== undefined){
+    let pops = this.state.pops
+    console.log(this.state)
+
+    if(this.state.pops.length > 0){
 
     return (
       <div className="info-container">
         <h3>User Places</h3>
-        {/* {bars.map(place =>{
+        {pops.map(place =>{
             return(
         <div>
         <button
@@ -50,7 +66,7 @@ class PopCard extends React.Component {
 
               {place.address}
         </div>
-        )})} */}
+        )})}
       </div>
     );
   } else{

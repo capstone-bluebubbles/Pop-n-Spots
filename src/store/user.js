@@ -6,7 +6,7 @@ export const GET_POPS = 'GET_POPS';
 
 const userPlaces = {
   user: {},
-  pops: {},
+  pops: [],
 };
 
 export const getUser = user => {
@@ -17,6 +17,7 @@ export const getUser = user => {
 };
 
 export const getPops = pops => {
+  console.log(pops)
   return {
     type: GET_POPS,
     pops,
@@ -28,7 +29,10 @@ export const fetchUser = uID => async dispatch => {
     const aUser = userRef.child(uID);
     aUser.on('value', snapshot => {
       const user = snapshot.val();
-      dispatch(getUser(user));
+      console.log('im user', user)
+      dispatch(getUser(user)).then(() => dispatch(fetchPops(user.pops)));
+      console.log(user.pops)
+
     });
   } catch (err) {
     console.error(err);
@@ -49,16 +53,15 @@ export const fetchPops = places => async dispatch => {
 
         const typeRef = placesRef.child(`${word}`);
 
-        typeRef.once('value', snapshot => {
+        typeRef.on('value', snapshot => {
           let locationSnap = snapshot.child(`${number}`);
           let locationVal = locationSnap.val();
           //dispatch(getPops(locationVal))
           pops.push(locationVal);
         });
       }
-
+      console.log(pops)
       dispatch(getPops(pops));
-
     }
   } catch (error) {
     console.log(error);
