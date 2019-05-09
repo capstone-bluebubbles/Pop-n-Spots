@@ -5,6 +5,7 @@ import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
 import { getCurrentPosition } from "../../store/position"
+import { longStackSupport } from "q";
 
 const styleMapSilver = [
   {
@@ -167,6 +168,10 @@ const styleMapSilver = [
   }
 ];
 
+//--------------------------------------------------
+// helper functions
+//--------------------------------------------------
+
 /** Converts numeric degrees to radians */
 if (typeof Number.prototype.toRad === "undefined") {
   Number.prototype.toRad = function () {
@@ -195,6 +200,24 @@ const getDistance = function (start, end) {
   return d;
 };
 
+const KM_PER_MILE = 1.60934
+const MILE_PER_KM = 1 / KM_PER_MILE
+
+//--------------------------------------------------
+// hacky functions
+//--------------------------------------------------
+
+const MapRef = (props) => {
+  if (props.map) {
+    props.this.googleMap = props.map;
+  }
+
+  return (
+    <div>
+    </div>
+  )
+}
+
 //--------------------------------------------------
 // Landing
 //--------------------------------------------------
@@ -203,8 +226,13 @@ export class Landing extends React.Component {
   constructor(props) {
     super(props);
 
+    // the target for the google map
+    this.googleMap = null;
+
     // set the state
-    this.state = {}
+    this.state = {
+      currentRadius: 0.5
+    }
   }
 
   componentDidMount() {
@@ -214,7 +242,30 @@ export class Landing extends React.Component {
     }
   }
 
+  OnClickButton1(event) {
+    this.setState({ currentRadius: 0.5 });
+  }
+
+  OnClickButton2(event) {
+    this.setState({ currentRadius: 1.0 });
+  }
+
+  OnClickButton3(event) {
+    this.setState({ currentRadius: 2.0 });
+  }
+
+  OnClickButton4(event) {
+    if (this.googleMap) {
+      this.googleMap.setCenter(this.props.currentPosition)
+    }
+  }
+
+  centerMoved(mapProps, map) {
+  }
+
   render() {
+
+    console.log("REACT -> Landing -> this.props ->", this.props)
 
     var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -259,7 +310,7 @@ export class Landing extends React.Component {
 
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
-    const currentRadius = (1.60934 / 2)
+    const currentRadiusInKilometers = this.state.currentRadius * KM_PER_MILE
 
     // get the current places from redux
     const places = currentPlaces
@@ -304,7 +355,7 @@ export class Landing extends React.Component {
       const placeGPS = { lat: place.gpsLat, lng: place.gpsLong }
 
       const placeDistance = getDistance(currentPosition, placeGPS);
-      if (placeDistance <= (currentRadius)) {
+      if (placeDistance <= (currentRadiusInKilometers)) {
 
         // create a marker for this place
         markers.push(placeGPS)
@@ -330,11 +381,13 @@ export class Landing extends React.Component {
             zoom={15}
             initialCenter={currentPosition}
             center={currentPosition}
+            setCenter={currentPosition}
             style={styleMapCSS}
             streetViewControl={false}
             mapTypeControl={false}
             fullscreenControl={false}
             gestureHandling={"cooperative"}
+            onDragend={this.centerMoved}
             styles={styleMapSilver}>
             <Circle
               strokeColor={"#0000FF"}
@@ -343,12 +396,19 @@ export class Landing extends React.Component {
               fillColor={"#0000FF"}
               fillOpacity={0.1}
               center={currentPosition}
-              radius={currentRadius * 1000}
+              radius={currentRadiusInKilometers * 1000}
             />
             {markers.map((item, index) => {
               return <Marker key={index} position={item} icon={bubbleBlue} />;
             })}
             <Marker position={currentPosition} icon={bubbleRed} />
+            <div style={{ position: 'relative', zIndex: '2', display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <button onClick={(event) => { this.OnClickButton1(event) }} >0.5</button>
+              <button onClick={(event) => { this.OnClickButton2(event) }} >1.0</button>
+              <button onClick={(event) => { this.OnClickButton3(event) }} >2.0</button>
+              <button onClick={(event) => { this.OnClickButton4(event) }} >center</button>
+            </div>
+            <MapRef this={this}></MapRef>
           </Map>
         </div >
         <div>
