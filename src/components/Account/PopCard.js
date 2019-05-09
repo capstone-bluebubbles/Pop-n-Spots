@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchUser } from '../../store/user'
+import { fetchUser, fetchPops } from '../../store/user'
+
+
 class PopCard extends React.Component {
   constructor(props) {
     super();
@@ -10,20 +12,29 @@ class PopCard extends React.Component {
     this.props.fetchUser(this.props.uID)
   }
 
+  componentDidUpdate(){
+
+    this.props.fetchPops(this.props.user.pops)
+    this.props.fetchUser(this.props.uID)
+  }
+
+  compo
+
   render() {
-    let pops = this.props.user.pops
+    let pops = this.props.user
+    console.log(pops)
     if(pops !== undefined){
-      const bars = pops.places.bars;
-      const cocktails = pops.places.cocktails;
-      const coffeeshop = pops.places.coffeeshops;
-      const tacos = pops.places.tacos;
-      const burgers = pops.places.burgers;
-      const pizza = pops.places.pizza;
+      // const bars = pops.places.bars;
+      // const cocktails = pops.places.cocktails;
+      // const coffeeshop = pops.places.coffeeshops;
+      // const tacos = pops.places.tacos;
+      // const burgers = pops.places.burgers;
+      // const pizza = pops.places.pizza;
 
     return (
       <div className="info-container">
         <h3>User Places</h3>
-        {bars.map(place =>{
+        {/* {bars.map(place =>{
             return(
         <div>
         <button
@@ -36,7 +47,7 @@ class PopCard extends React.Component {
 
               {place.address}
         </div>
-        )})}
+        )})} */}
       </div>
     );
   } else{
@@ -47,7 +58,8 @@ class PopCard extends React.Component {
 }
 }
 const mapDispatchToProps = dispatch => ({
-  fetchUser: (uID) => dispatch(fetchUser(uID))
+  fetchUser: (uID) => dispatch(fetchUser(uID)),
+  fetchPops: (places) => dispatch(fetchPops(places))
 });
 
 const mapStateToProps = state => ({
