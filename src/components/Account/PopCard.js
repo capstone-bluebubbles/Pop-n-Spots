@@ -5,7 +5,7 @@ import { fetchUser, fetchPops } from '../../store/user'
 
 class PopCard extends React.Component {
   constructor(props) {
-    super();
+    super(props);
   }
 
   componentDidMount(){
@@ -14,9 +14,9 @@ class PopCard extends React.Component {
 
   shouldComponentUpdate(){
     if (Object.keys(this.props.pops).length === 0){
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 
