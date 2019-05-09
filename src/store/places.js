@@ -2,17 +2,18 @@ import {placesRef, databaseRef} from "../components/Firebase/firebase"
 import store from ".";
 import { GeoFire } from "geofire";
 
-export const GET_PLACES = 'GET_PLACES'
+export const GET_PLACES = "GET_PLACES";
 
-const allPlaces ={
-  places: {},
-}
+const allPlaces = {
+  places: {}
+};
 
-export const getAllPlaces = (places) => {
+export const getAllPlaces = places => {
   return {
-  type: GET_PLACES,
-  places
-}}
+    type: GET_PLACES,
+    places
+  };
+};
 
 export const fetchPlaces = () => async dispatch => {
   try {
@@ -41,18 +42,19 @@ export const fetchPlaces = () => async dispatch => {
     dispatch(getAllPlaces(data))
 
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
+};
 
 export const placesReducer = (state = allPlaces, action) => {
   switch (action.type) {
     case GET_PLACES:
-      return{
-         ...store, places: action.places}
-
+      return {
+        ...store,
+        places: action.places
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};

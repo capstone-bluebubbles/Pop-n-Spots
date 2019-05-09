@@ -166,6 +166,7 @@ const PlacesList = ({ places }) => {
                 mapAddressToGPS(item.address, (gps) => {
                   let location = placesRef.child(`${item.databaseCategory}/${item.databaseCategoryIndex}`)
                   location.update({ 'gpsLat': `${gps.lat}`, 'gpsLong': `${gps.lng}` })
+                  location.update({ 'locationId': `${item.databaseCategory}-${item.databaseCategoryIndex}`})
                   
                   let firebaseRef = databaseRef.child("geoFire");
                   let geoFire = new GeoFire(firebaseRef)
