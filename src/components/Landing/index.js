@@ -216,6 +216,14 @@ export class Landing extends React.Component {
 
   render() {
 
+    var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    var clientm = Math.min(clientw, clienth)
+    let clientdivw = clientm * 0.5;
+    let clientdivh = clientm * 0.5;
+    let clientmapw = "100%";
+    let clientmaph = clientm * 0.80;
+
     var bubbleRed = {
       url: "\\Bubble128Red.png",
       size: new window.google.maps.Size(128, 128),
@@ -233,13 +241,20 @@ export class Landing extends React.Component {
     };
 
     const styleDivCSS = {
-      width: "100%",
-      height: "600px"
+      "width": clientmapw,
+      "height": clientmaph,
+      //"position": "absolute",
     };
 
     const styleMapCSS = {
-      width: "100%",
-      height: "600px"
+      "width": clientmapw,
+      "height": clientmaph,
+      //"position": "absolute",
+      /*      "position": "absolute",
+      "display": "flex",
+      "justify-content": "center",
+      "align-items": "center",
+      "text-align": "center"*/
     };
 
     const currentPosition = this.props.currentPosition
@@ -295,13 +310,21 @@ export class Landing extends React.Component {
         markers.push(placeGPS)
 
         // create a card for this place
-        cards.push(place)
+        const card = {
+          placeDistance,
+          place
+        }
+
+        cards.push(card)
       }
     }
 
+    // sort the cards into distance order
+    cards.sort((a, b) => { return a.placeDistance - b.placeDistance })
+
     return (
       <div>
-        <div style={styleDivCSS}>
+        <div style={styleDivCSS} >
           <Map
             google={this.props.google}
             zoom={15}
@@ -311,6 +334,7 @@ export class Landing extends React.Component {
             streetViewControl={false}
             mapTypeControl={false}
             fullscreenControl={false}
+            gestureHandling={"cooperative"}
             styles={styleMapSilver}>
             <Circle
               strokeColor={"#0000FF"}
@@ -326,13 +350,13 @@ export class Landing extends React.Component {
             })}
             <Marker position={currentPosition} icon={bubbleRed} />
           </Map>
-        </div>
+        </div >
         <div>
           {cards.map((item, index) => {
-            return <InfoCard place={item} />;
+            return <InfoCard key={index} place={item.place} />;
           })}
         </div>
-      </div>
+      </div >
     );
   }
 }
