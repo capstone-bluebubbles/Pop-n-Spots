@@ -14,6 +14,7 @@ const defaultState = {
 }
 
 export const setCurrentPosition = (currentPosition) => {
+  console.log("REDUX -> position -> setCurrentPosition");
   return {
     type: SET_CURRENT_POSITION,
     currentPosition
@@ -21,6 +22,7 @@ export const setCurrentPosition = (currentPosition) => {
 }
 
 export const setCurrentPlaces = (currentPlaces) => {
+  console.log("REDUX -> position -> setCurrentPlaces");
   return {
     type: SET_CURRENT_PLACES,
     currentPlaces
@@ -28,6 +30,7 @@ export const setCurrentPlaces = (currentPlaces) => {
 }
 
 export const getCurrentPosition = () => async dispatch => {
+  console.log("REDUX -> position -> getCurrentPosition");
   try {
 
     var getCurrentPositionOptions = {
@@ -39,7 +42,7 @@ export const getCurrentPosition = () => async dispatch => {
     navigator.geolocation.getCurrentPosition(
       pos => {
         console.log(
-          "REDUX -> fetchPosition -> getCurrentPosition -> pos ->",
+          "REDUX -> position- > getCurrentPosition -> navigator.geolocation.getCurrentPosition -> pos ->",
           pos
         );
         dispatch(setCurrentPosition({
@@ -51,7 +54,7 @@ export const getCurrentPosition = () => async dispatch => {
       },
       err => {
         console.log(
-          "REDUX -> fetchPosition ->  getCurrentPosition -> err ->",
+          "REDUX -> position -> getCurrentPosition -> navigator.geolocation.getCurrentPosition -> err ->",
           err
         );
       },
@@ -63,8 +66,9 @@ export const getCurrentPosition = () => async dispatch => {
 }
 
 export const getCurrentPlaces = () => async dispatch => {
+  console.log("REDUX -> position -> getCurrentPlaces");
   try {
-    placesRef.on('value', snapshot => {
+    placesRef.once('value', snapshot => {
       const places = snapshot.val()
       dispatch(setCurrentPlaces(places))
     })
