@@ -4,15 +4,16 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { placesReducer } from "./places";
-import { positionReducer } from "./position"
+import { userReducer } from "./user";
+import { positionReducer } from "./position";
 
 // store imports
 //import userReducer from "../store/user";
 
 const reducer = combineReducers({
-  //user: userReducer
-  position: positionReducer,
+  user: userReducer,
   places: placesReducer,
+  position: positionReducer
 });
 
 const middleware = composeWithDevTools(

@@ -23,7 +23,6 @@ const withAuthorization = condition => Component => {
     }
 
     render() {
-      console.log('im in authorization')
       return (
         <AuthUserContext.Consumer>
           {authUser =>
