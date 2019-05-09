@@ -6,22 +6,25 @@ import { fetchUser, fetchPops } from '../../store/user'
 class PopCard extends React.Component {
   constructor(props) {
     super();
+    this.count = 0;
   }
 
   componentDidMount(){
     this.props.fetchUser(this.props.uID)
+    // this.props.fetchPops(this.props.user.pops)
   }
 
-  shouldComponentUpdate(){
-    if (Object.keys(this.props.pops).length === 0){
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // shouldComponentUpdate(){
+  //   if (Object.keys(this.props.pops).length === 0){
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   componentDidUpdate(){
-    if (Object.keys(this.props.pops).length === 0){
+    if (this.props.user.pops !== undefined && this.count === 0){
+      this.count++
       this.props.fetchPops(this.props.user.pops)
     }
   }

@@ -37,9 +37,9 @@ export const fetchUser = uID => async dispatch => {
 
 export const fetchPops = places => async dispatch => {
   try {
+    console.log(places)
     let pops = [];
-    if (places.length !== 0) {
-      
+    if (places.length !== 0 || places !== undefined) {
       for (let i = 0; i <= places.length - 1; i++) {
         let current = places[i];
         let location = current.placeKey;
@@ -57,8 +57,8 @@ export const fetchPops = places => async dispatch => {
         });
       }
 
-      dispatch(getPops(pops));  
-    
+      dispatch(getPops(pops));
+
     }
   } catch (error) {
     console.log(error);
