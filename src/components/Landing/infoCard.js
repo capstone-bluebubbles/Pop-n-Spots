@@ -9,6 +9,8 @@ class InfoCard extends React.Component {
   }
 
   handleClick(location){
+    console.log(this.props)
+    console.log(location)
     window.open(`http://maps.google.com/?q=${location}`);
   }
 
