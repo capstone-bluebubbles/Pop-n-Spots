@@ -29,10 +29,7 @@ export const fetchUser = uID => async dispatch => {
     const aUser = userRef.child(uID);
     aUser.on('value', snapshot => {
       const user = snapshot.val();
-      //console.log('im user', user)
       dispatch(getUser(user))
-      dispatch(fetchPops(user.pops));
-      //console.log(user.pops)
 
     });
   } catch (err) {
@@ -42,7 +39,6 @@ export const fetchUser = uID => async dispatch => {
 
 export const fetchPops = places => async dispatch => {
   try {
-    //console.log(places)
     let pops = [];
     if (places.length !== 0 || places !== undefined) {
       for (let i = 0; i <= places.length - 1; i++) {
@@ -57,12 +53,11 @@ export const fetchPops = places => async dispatch => {
         typeRef.on('value', snapshot => {
           let locationSnap = snapshot.child(`${number}`);
           let locationVal = locationSnap.val();
-          //dispatch(getPops(locationVal))
           pops.push(locationVal);
         });
       }
-      //console.log(pops)
       dispatch(getPops(pops));
+      return pops
     }
   } catch (error) {
     console.log(error);

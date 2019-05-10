@@ -12,6 +12,7 @@ const styles = {
   card: {
     position: "reletive",
     maxWidth: 300,
+    // height: "38vh",
     color: "purple"
   },
   overlay: {
@@ -27,7 +28,8 @@ const styles = {
     fontSize: 24,
     fontWeightLight: 300,
     fontWeightRegular: 400,
-    fontWeightMedium: 500
+    fontWeightMedium: 500,
+    color: "black"
   }
 };
 
@@ -51,9 +53,6 @@ function TacoButton(props) {
             variant="h5"
             component="h1">
             Tacos
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Hungry, EAT my friend!
           </Typography>
         </CardContent>
       </CardActionArea>

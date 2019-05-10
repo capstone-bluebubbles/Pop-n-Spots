@@ -7,87 +7,33 @@ import { placesRef } from '../Firebase/firebase'
 class PopCard extends React.Component {
   constructor(props) {
     super();
-    this.count=0
+    this.count = 0
     this.state ={
       pops: []
     }
     this.getPops = this.getPops.bind(this);
   }
 
-  async componentDidMount(){
-    //getPops()
-    this.props.fetchUser(this.props.uID)
+  componentDidMount(){
+     this.props.fetchUser(this.props.uID)
     // this.props.fetchPops(this.props.user.pops)
   }
 
-  async getPops(places){
-    console.log(places)
-    let pops = [];
-    if (places.length !== 0 || places !== undefined) {
-      for (let i = 0; i <= places.length - 1; i++) {
-        let current = places[i];
-        let location = current.placeKey;
-        let word = location.replace(/[^a-zA-Z]+/g, '');
-        let number = location.match(/\d/g);
-        number = number.join('');
-        console.log(word)
-        console.log(number)
-
-        const typeRef = placesRef.child(`${word}`);
-
-        await typeRef.on('value', snapshot => {
-          let locationSnap = snapshot.child(`${number}`);
-          let locationVal = locationSnap.val();
-          console.log(locationVal)
-          this.setState({pops: locationVal})
-          //dispatch(getPops(locationVal))
-          pops.push(locationVal);
-        });
-      }
-      //console.log(pops)
-      this.setState({pops})
-      //dispatch(getPops(pops));
-    }
-  }
-
-
-  // async shouldComponentUpdate(nextProps, nextState){
-  //   console.log(nextProps)
-  //   let pops = await nextProps.pops
-  //   console.log('>>>>> ', pops.length)
-  //   if (pops.length > 0) {
-  //     this.setState({
-  //       pops
-  //     })
-  //   }
-
-    // if (Object.keys(this.props.pops).length === 0){
-    //   return false;
-    // } else {
-    //   return true;
-    // }
-  
-
-  componentDidUpdate(){
-    
-    if (this.props.user.pops !== undefined && this.count === 3){
-      console.log(this.props.user.pops)
-      this.getPops(this.props.user.pops)
+  componentDidUpdate(prevProps){
+    if (this.props.user !== prevProps.user){
       this.count++
-      
+      this.props.fetchPops(this.props.user.pops)
     }
   }
 
-  render() {
-    let pops = this.state.pops
-    console.log(this.props)
+   render() {
 
-    if(this.state.pops.length > 0){
+    if(this.props.pops.length > 0){
 
-    return (
+     return (
       <div className="info-container">
         <h3>User Places</h3>
-        {pops.map(place =>{
+        {this.props.pops.map(place =>{
             return(
         <div>
         <button
