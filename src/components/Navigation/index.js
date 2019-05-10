@@ -4,15 +4,6 @@ import { AuthUserContext } from "../Session";
 import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 
-// function myFunction() {
-//   let x = document.getElementById("myTopnav");
-//   if (x.className === "topnav") {
-//     x.className += "responsive";
-//   } else {
-//     x.className = "topnav";
-//   }
-// }
-
 const Navigation = ({ authUser }) => (
   <div>
     <AuthUserContext.Consumer>
@@ -24,14 +15,19 @@ const Navigation = ({ authUser }) => (
 class NavigationAuth extends React.Component {
   constructor() {
     super();
-    this.state = { open: true };
-    this.toggleOpen = this.toggleOpen.bind(this);
+    this.state = { showMenu: false };
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
-  toggleOpen() {
-    this.setState(state => {
-      return {
-        open: !state.open
-      };
+  showMenu() {
+    // event.preventDefault();
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener("click", this.closeMenu);
+    });
+  }
+  closeMenu() {
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener("click", this.closeMenu);
     });
   }
   render() {
@@ -60,6 +56,17 @@ class NavigationAuth extends React.Component {
             onClick={this.toggleOpen}>
             <i className="fa fa-bars" />
           </Link>
+          <div>
+            <button onClick={this.showMenu}>Show menu</button>
+
+            {this.state.showMenu ? (
+              <div className="menu">
+                <button> Menu item 1 </button>
+                <button> Menu item 2 </button>
+                <button> Menu item 3 </button>
+              </div>
+            ) : null}
+          </div>
         </ul>
       </div>
     );
@@ -88,33 +95,46 @@ class NavigationNonAuth extends React.Component {
   }
   render() {
     return (
-      <ul className="topnav">
-        <li>
-          <Link className="active" to={ROUTES.HOME}>
-            HOME
+      <div className="nav-flex">
+        <ul className="topnav">
+          <li className="active">
+            <Link className="active" to={ROUTES.HOME}>
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link to={ROUTES.LANDING}>Map</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+          </li>
+        </ul>
+        <ul className="nav-flex-burger">
+          <Link
+            to={"javascript:void(0)"}
+            className="icon"
+            onClick={this.toggleOpen}>
+            <i className="fa fa-bars" />
           </Link>
-        </li>
-        <li>
-          <Link className="nav-link" to={ROUTES.LANDING}>
-            Map
-          </Link>
-        </li>
-        <li>
-          <Link to={ROUTES.ACCOUNT}>POPS!</Link>
-        </li>
-      </ul>
+        </ul>
+      </div>
     );
   }
 }
 
 //HAMBURGER MENU
-{
-  /* <li>
+// this.setState(state => {
+//   return {
+//     open: !state.open
+//   };
+// });
+
+/* <li>
 <div className={this.state.open ? "open" : "closed"}>
   <Link to={""} className="icon" onClick={this.toggleOpen}>
     <i className="fa fa-bars" />
   </Link>
 </div>
 </li> */
-}
+
 export default Navigation;

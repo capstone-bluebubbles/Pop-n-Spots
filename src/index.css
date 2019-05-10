@@ -443,7 +443,7 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .topnav li:not(:first-child) {
     display: none;
   }
@@ -451,9 +451,7 @@ body {
     float: right;
     display: block;
   }
-  /* .nav-flex-burger {
-    display: none;
-  } */
+
 }
 @media screen and (min-width: 600px) {
   .nav-flex-burger {
@@ -474,10 +472,9 @@ body {
     display: block;
     text-align: left;
   }
-}
+} */
 
 /* need for Navbar */
-
 a {
   color: #fff;
   text-decoration: none;
