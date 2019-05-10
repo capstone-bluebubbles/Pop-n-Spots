@@ -5,47 +5,134 @@ import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 
 const Navigation = ({ authUser }) => (
-  <div className="navbar">
-    <Link to={ROUTES.HOME}>
-      <h1 className="navbar-title">PoP'n SpOts</h1>
-    </Link>
+  <div>
     <AuthUserContext.Consumer>
       {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
     </AuthUserContext.Consumer>
   </div>
 );
 
-const NavigationAuth = () => (
-  <ul>
-    <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.HOME}>Home</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.ADMIN}>Admin</Link>
-    </li>
-    <li>
-      <SignOutButton />
-    </li>
-  </ul>
-);
-const NavigationNonAuth = () => (
-  <ul>
-    <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.HOME}>Home</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-    </li>
-  </ul>
-);
+class NavigationAuth extends React.Component {
+  constructor() {
+    super();
+    this.state = { showMenu: false };
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+  showMenu() {
+    // event.preventDefault();
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener("click", this.closeMenu);
+    });
+  }
+  closeMenu() {
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener("click", this.closeMenu);
+    });
+  }
+  render() {
+    return (
+      <div className="nav-flex">
+        <ul className="topnav">
+          <li className="active">
+            <Link className="active" to={ROUTES.HOME}>
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link to={ROUTES.LANDING}>Map</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+          </li>
+          <li>
+            <SignOutButton />
+          </li>
+        </ul>
+        <ul className="nav-flex-burger">
+          <Link className="icon" onClick={this.showMenu}>
+            <i className="fa fa-bars" />
+          </Link>
+          {/* Hamburger Drop Down Menue */}
+          <div>
+            {this.state.showMenu ? (
+              <div className="menu">
+                <li>
+                  <Link to={ROUTES.LANDING}>Map</Link>
+                </li>
+                <li>
+                  <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+                </li>
+                <li>
+                  <SignOutButton />
+                </li>
+              </div>
+            ) : null}
+          </div>
+        </ul>
+      </div>
+    );
+  }
+}
+
+class NavigationNonAuth extends React.Component {
+  constructor() {
+    super();
+    this.state = { showMenu: false };
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+  showMenu() {
+    // event.preventDefault();
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener("click", this.closeMenu);
+    });
+  }
+  closeMenu() {
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener("click", this.closeMenu);
+    });
+  }
+  render() {
+    return (
+      <div className="nav-flex">
+        <ul className="topnav">
+          <li className="active">
+            <Link className="active" to={ROUTES.HOME}>
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link to={ROUTES.LANDING}>Map</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+          </li>
+          <li>
+            <SignOutButton />
+          </li>
+        </ul>
+        <ul className="nav-flex-burger">
+          <Link className="icon" onClick={this.showMenu}>
+            <i className="fa fa-bars" />
+          </Link>
+          {/* Hamburger Drop Down Menue */}
+          <div>
+            {this.state.showMenu ? (
+              <div className="menu">
+                <li>
+                  <Link to={ROUTES.LANDING}>Map</Link>
+                </li>
+                <li>
+                  <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+                </li>
+              </div>
+            ) : null}
+          </div>
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default Navigation;

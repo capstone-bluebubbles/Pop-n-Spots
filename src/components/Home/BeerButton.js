@@ -57,9 +57,6 @@ function BeerButton(props) {
             component="h2">
             Beer
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Thirsty, drink my friend!
-          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>

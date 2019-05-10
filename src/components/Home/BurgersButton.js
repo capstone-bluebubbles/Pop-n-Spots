@@ -12,6 +12,7 @@ const styles = {
   card: {
     position: "reletive",
     maxWidth: 300,
+    // height: "38vh",
     color: "blue"
   },
   media: {
@@ -55,9 +56,6 @@ function BurgersButton(props) {
             variant="h5"
             component="h1">
             Burgers
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Hungry, EAT my friend!
           </Typography>
         </CardContent>
       </CardActionArea>

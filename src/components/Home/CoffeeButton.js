@@ -12,8 +12,8 @@ const styles = {
   card: {
     position: "reletive",
     maxWidth: 300,
+    // height: "38vh",
     color: "black"
-    //height: "30vw"
   },
   media: {
     height: 0,
@@ -57,9 +57,6 @@ function CoffeeButton(props) {
             variant="h5"
             component="h1">
             Coffee
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Thirsty, drink my friend!
           </Typography>
         </CardContent>
       </CardActionArea>
