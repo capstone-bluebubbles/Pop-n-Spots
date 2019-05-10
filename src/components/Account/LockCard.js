@@ -13,7 +13,7 @@ class LockCard extends React.Component {
   render() {
     //console.log(`THE OBJECT===>`, this.props);
     return (
-      <div className="info-container">
+      <div >
         <h3>User Places</h3>
         <button
           className="drop-pop-button"
