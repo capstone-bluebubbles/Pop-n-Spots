@@ -10,11 +10,11 @@ import { withFirebase } from "../Firebase";
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom"
 import { fetchPlaces } from '../../store/places'
-import {connect} from "react-redux"
+import { connect } from "react-redux"
 
 class Home extends Component {
   // eslint-disable-next-line no-useless-constructor
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
@@ -22,7 +22,7 @@ class Home extends Component {
     this.props.fetchAllPlaces();
   }
 
-  
+
 
   render() {
     console.log(this.props)
