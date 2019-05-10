@@ -231,7 +231,7 @@ export class Landing extends React.Component {
 
     // set the state
     this.state = {
-      currentRadius: 0.5
+      currentRadius: 0.25
     }
   }
 
@@ -243,11 +243,11 @@ export class Landing extends React.Component {
   }
 
   OnClickButton1(event) {
-    this.setState({ currentRadius: 0.5 });
+    this.setState({ currentRadius: 0.25 });
   }
 
   OnClickButton2(event) {
-    this.setState({ currentRadius: 1.0 });
+    this.setState({ currentRadius: 0.50 });
   }
 
   OnClickButton3(event) {
@@ -276,7 +276,7 @@ export class Landing extends React.Component {
     let clientmaph = clientm * 0.80;
 
     var bubbleRed = {
-      url: "\\Bubble128Red.png",
+      url: "\\Pop1100.32.png",
       size: new window.google.maps.Size(128, 128),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
@@ -284,8 +284,8 @@ export class Landing extends React.Component {
     };
 
     var bubbleBlue = {
-      url: "\\Bubble128Blue.png",
-      size: new window.google.maps.Size(128, 128),
+      url: "\\Pop1000.32.png",
+      size: new window.google.maps.Size(32, 32),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
@@ -390,11 +390,11 @@ export class Landing extends React.Component {
             onDragend={this.centerMoved}
             styles={styleMapSilver}>
             <Circle
-              strokeColor={"#0000FF"}
+              strokeColor={"#036fc0"}
               strokeOpacity={1.0}
               strokeWeight={2}
-              fillColor={"#0000FF"}
-              fillOpacity={0.1}
+              fillColor={"#036fc0"}
+              fillOpacity={0.0625}
               center={currentPosition}
               radius={currentRadiusInKilometers * 1000}
             />
@@ -403,9 +403,9 @@ export class Landing extends React.Component {
             })}
             <Marker position={currentPosition} icon={bubbleRed} />
             <div style={{ position: 'relative', zIndex: '2', display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <button onClick={(event) => { this.OnClickButton1(event) }} >0.5</button>
-              <button onClick={(event) => { this.OnClickButton2(event) }} >1.0</button>
-              <button onClick={(event) => { this.OnClickButton3(event) }} >2.0</button>
+              <button onClick={(event) => { this.OnClickButton1(event) }} >0.25</button>
+              <button onClick={(event) => { this.OnClickButton2(event) }} >0.50</button>
+              <button onClick={(event) => { this.OnClickButton3(event) }} >2.00</button>
               <button onClick={(event) => { this.OnClickButton4(event) }} >center</button>
             </div>
             <MapRef this={this}></MapRef>
