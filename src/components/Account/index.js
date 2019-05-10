@@ -26,13 +26,13 @@ class AccountPageComponent extends React.Component {
     return (
       <AuthUserContext.Consumer>
         {authUser => (
-          <div>
+          <div className="account-container">
             <h1>Welcome: {authUser.email}</h1>
             <h2 className="lock-title">Pops</h2>
             <PopCard uID={authUser.uid} />
             <h2 className="lock-title">Locks</h2>
             <LockCard uID={authUser.uid} />
-            <h3 className="change-password-title">Change Your Password</h3>
+            <h3 className="password-userChange">Change Your Password</h3>
             <div className="change-password-title">
               <PasswordChangeForm />
             </div>
