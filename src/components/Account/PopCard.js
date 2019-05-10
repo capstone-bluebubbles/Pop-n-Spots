@@ -11,7 +11,6 @@ class PopCard extends React.Component {
     this.state ={
       pops: []
     }
-    this.getPops = this.getPops.bind(this);
   }
 
   componentDidMount(){
