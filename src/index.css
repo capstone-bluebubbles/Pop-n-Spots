@@ -443,7 +443,7 @@ body {
   display: none;
 }
 
-/* @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .topnav li:not(:first-child) {
     display: none;
   }
@@ -451,13 +451,12 @@ body {
     float: right;
     display: block;
   }
-
 }
-@media screen and (min-width: 600px) {
+/* @media screen and (min-width: 600px) {
   .nav-flex-burger {
     display: none;
   }
-}
+} */
 @media screen and (max-width: 600px) {
   .topnav.responsive {
     position: relative;
@@ -472,7 +471,7 @@ body {
     display: block;
     text-align: left;
   }
-} */
+}
 
 /* need for Navbar */
 a {
