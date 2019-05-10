@@ -1,5 +1,6 @@
-import { placesRef } from "../components/Firebase/firebase";
+import {placesRef, databaseRef} from "../components/Firebase/firebase"
 import store from ".";
+import { GeoFire } from "geofire";
 
 export const GET_PLACES = "GET_PLACES";
 
@@ -16,10 +17,30 @@ export const getAllPlaces = places => {
 
 export const fetchPlaces = () => async dispatch => {
   try {
-    placesRef.on("value", snapshot => {
-      const places = snapshot.val();
-      dispatch(getAllPlaces(places));
+    let firebase = databaseRef.child('geoFire')
+    let geoFire = new GeoFire(firebase)
+    let geoQuery = geoFire.query({
+      center: [41.90876, -87.65065],
+      radius: 1.609
+    })
+    let data = [];
+
+    geoQuery.on("key_entered", function(key, location, distance) {
+      let word = key.replace(/[^a-zA-Z]+/g, '');
+      let number = key.match(/\d/g);
+      number = number.join("");
+      const typeRef = placesRef.child(`${word}`)
+
+      typeRef.on('value', snapshot => {
+        let locationSnap = snapshot.child(`${number}`)
+        let locationVal = locationSnap.val()
+        data.push(locationVal)
+
+      })
     });
+
+    dispatch(getAllPlaces(data))
+
   } catch (err) {
     console.error(err);
   }

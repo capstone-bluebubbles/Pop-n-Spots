@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 import { withFirebase } from '../Firebase';
-import { placesRef } from "../Firebase/firebase"
+import Firebase, { placesRef, databaseRef } from "../Firebase/firebase"
 //import { debug } from 'util';
 import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
+import { GeoFire } from 'geofire';
 
 
 class AdminPage extends Component {
@@ -158,17 +159,27 @@ const PlacesList = ({ places }) => {
         </tbody>
         <tbody>
           {
-            placesFlat.map((item) => {
+            placesFlat.map((item, index) => {
               const key = `${item.databaseCategory}.${item.databaseCategoryIndex}`
               const onClick = (event, item) => {
-                debugger
+              
                 mapAddressToGPS(item.address, (gps) => {
-                  debugger
                   let location = placesRef.child(`${item.databaseCategory}/${item.databaseCategoryIndex}`)
                   location.update({ 'gpsLat': `${gps.lat}`, 'gpsLong': `${gps.lng}` })
+                  location.update({ 'locationId': `${item.databaseCategory}-${item.databaseCategoryIndex}`})
+                  
+                  let firebaseRef = databaseRef.child("geoFire");
+                  let geoFire = new GeoFire(firebaseRef)
+                  geoFire.set(`${item.databaseCategory}-${item.databaseCategoryIndex}`, [Number(item.gpsLat), Number(item.gpsLong)]).then(function(){
+                    console.log("Provided data has been added to key geoHash via GeoFire", item.gpsLat + item.gpsLong)
+                  }, function (error){
+                    console.log("Error: " + error)
+                  })
+                
                 })
               }
 
+              
               return (
                 <tr key={key}>
                   <td style={styleTableData}>{item.title}</td>
