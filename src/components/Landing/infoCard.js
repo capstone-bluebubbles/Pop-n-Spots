@@ -8,7 +8,13 @@ class InfoCard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+<<<<<<< HEAD
   handleClick(location) {
+=======
+  handleClick(location){
+    console.log(this.props)
+    console.log(location)
+>>>>>>> e3c93b5321badb9c6b623329d0248ca45bbb99a1
     window.open(`http://maps.google.com/?q=${location}`);
   }
 
