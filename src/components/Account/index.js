@@ -20,7 +20,6 @@ class AccountPageComponent extends React.Component {
     // if (this.props.currentPosition.timestamp === 0) {
     //   this.props.currentDispatch(getCurrentPosition());
     // }
-
   }
 
   render() {
@@ -28,7 +27,7 @@ class AccountPageComponent extends React.Component {
       <AuthUserContext.Consumer>
         {authUser => (
           <div>
-            <h1>Account: {authUser.email}</h1>
+            <h1>Welcome: {authUser.email}</h1>
             <h2 className="lock-title">Pops</h2>
             <PopCard uID={authUser.uid} />
             <h2 className="lock-title">Locks/Favorites</h2>
