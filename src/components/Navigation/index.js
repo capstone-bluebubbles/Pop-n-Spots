@@ -34,18 +34,22 @@ class NavigationAuth extends React.Component {
     return (
       <div className="nav-flex">
         <ul className="topnav">
-          <li className="active">
+          <li className="App-link">
             <Link className="active" to={ROUTES.HOME}>
-              HOME
+              <button className="nav-buttons">Home</button>
             </Link>
           </li>
-          <li>
-            <Link to={ROUTES.LANDING}>Map</Link>
+          <li className="App-link">
+            <Link to={ROUTES.LANDING}>
+              <button className="nav-buttons">Map</button>
+            </Link>
           </li>
-          <li>
-            <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+          <li className="App-link">
+            <Link to={ROUTES.ACCOUNT}>
+              <button className="nav-buttons">POPS!</button>
+            </Link>
           </li>
-          <li>
+          <li className="App-link">
             <SignOutButton />
           </li>
         </ul>
