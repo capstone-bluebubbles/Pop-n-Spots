@@ -42,7 +42,7 @@ function BurgersButton(props) {
     <Card className={classes.card} height="10">
       <CardActionArea
         component={Link}
-        to="/landing"
+        to="/landing/?category=burgers"
         onClick={() => console.log(`IS THIS CLICKING`)}>
         <CardMedia
           component="img"

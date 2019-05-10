@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
-import { getCurrentPosition } from "../../store/position"
+import { setCurrentCategory, getCurrentPosition } from "../../store/position"
 import { longStackSupport } from "q";
+import queryString from "query-string"
 
 const styleMapSilver = [
   {
@@ -237,9 +238,13 @@ export class Landing extends React.Component {
 
   componentDidMount() {
     // the default position has a timestamp of zero
-    if (this.props.currentPosition.timestamp === 0) {
-      this.props.currentDispatch(getCurrentPosition())
-    }
+    /*    if (this.props.currentPosition.timestamp === 0) {
+          this.props.currentDispatch(getCurrentPosition())
+        }*/
+    const search = queryString.parse(this.props.location.search)
+    const category = search.category ? search.category : "bars"
+    this.props.currentDispatch(setCurrentCategory(category))
+    this.props.currentDispatch(getCurrentPosition())
   }
 
   OnClickButton1(event) {
@@ -431,7 +436,8 @@ const GoogleLanding = GoogleApiWrapper({
 const mapStateToProps = state => {
   return {
     currentPosition: state.position.currentPosition,
-    currentPlaces: state.position.currentPlaces
+    currentPlaces: state.position.currentPlaces,
+    currentCategory: state.position.currentCategory
   };
 };
 
