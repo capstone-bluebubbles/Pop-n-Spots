@@ -7,53 +7,52 @@ import { placesRef } from '../Firebase/firebase'
 class PopCard extends React.Component {
   constructor(props) {
     super();
+    this.count = 0
     this.state ={
       pops: []
     }
   }
 
-  async componentDidMount(){
-    getPops()
-    await this.props.fetchUser(this.props.uID)
+  componentDidMount(){
+     this.props.fetchUser(this.props.uID)
     // this.props.fetchPops(this.props.user.pops)
   }
 
 
-  async shouldComponentUpdate(nextProps, nextState){
-    console.log(nextProps)
-    let pops = await nextProps.pops
-    console.log('>>>>> ', pops.length)
-    if (pops.length > 0) {
-      this.setState({
-        pops
-      })
-    }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   console.log(nextProps)
+  //   let pops = await nextProps.pops
+  //   console.log('>>>>> ', pops.length)
+  //   if (pops.length > 0) {
+  //     this.setState({
+  //       pops
+  //     })
+  //   }
 
     // if (Object.keys(this.props.pops).length === 0){
     //   return false;
     // } else {
     //   return true;
     // }
+  //}
+
+  componentDidUpdate(){
+    // console.log('this.props ====> ', prevProps)
+    if (this.props.user.pops !== undefined && this.count === 0){
+      this.count++
+      this.props.fetchPops(this.props.user.pops)
+    }
   }
 
-  // componentDidUpdate(){
-    // console.log('this.props ====> ', prevProps)
-    // if (this.props.user.pops !== undefined && this.count === 0){
-    //   this.count++
-    //   this.props.fetchPops(this.props.user.pops)
-    // }
-  // }
+   render() {
+    console.log(this.props)
+    console.log(this.props.pops)
+    if(this.props.pops.length > 0){
 
-  render() {
-    let pops = this.state.pops
-    console.log(this.state)
-
-    if(this.state.pops.length > 0){
-
-    return (
+     return (
       <div className="info-container">
         <h3>User Places</h3>
-        {pops.map(place =>{
+        {this.props.pops.map(place =>{
             return(
         <div>
         <button
