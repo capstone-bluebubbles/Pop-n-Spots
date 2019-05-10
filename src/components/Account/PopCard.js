@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops, getPops } from "../../store/user";
 import { placesRef } from "../Firebase/firebase";
+import { number } from "prop-types";
 
 class PopCard extends React.Component {
   constructor(props) {
@@ -10,6 +11,21 @@ class PopCard extends React.Component {
     this.state = {
       pops: []
     };
+  }
+
+  numberOfPops(popsObj) {
+    console.log(popsObj);
+    const userPops = this.props.user.pops;
+    if (!userPops) {
+      return "No Pops!";
+    } else {
+      for (let i = 0; i < userPops.length; i++) {
+        // console.log('POPSOBJ',popsObj.locationId, 'USERKEYS', userPops[i].placeKey)
+        if (popsObj.locationId === userPops[i].placeKey) {
+          return Object.keys(userPops[i].timestamp).length;
+        }
+      }
+    }
   }
 
   componentDidMount() {

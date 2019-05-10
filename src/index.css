@@ -285,6 +285,16 @@ body {
   box-shadow: 0px 22px 65px 4px rgba(0, 0, 0, 0.14);
 }
 
+.userPops {
+  background-color: white;
+  margin: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 22px 65px 4px rgba(0, 0, 0, 0.14);
+}
+
 /* Resturant Text Info.  Small white card */
 .info-card {
   list-style: none;
