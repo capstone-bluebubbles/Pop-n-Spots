@@ -64,6 +64,21 @@ export const fetchPops = places => async dispatch => {
   }
 };
 
+export const addPop = (uID, locationID) => async dispatch => {
+  try {
+    const aUser = userRef.child(uID);
+    aUser.on('value', snapshot => {
+      const user = snapshot.val();
+      console.log('I MADE IT', user)
+    })
+
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
+
 export const userReducer = (state = userPlaces, action) => {
   switch (action.type) {
     case GET_USER:
