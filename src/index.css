@@ -98,7 +98,7 @@ body {
   cursor: pointer;
   border-radius: 5em;
   color: #fff;
-  background: linear-gradient(to right, #9c27b0, #e040fb);
+  background: linear-gradient(to right, #3497f3, #172df0);
   border: 0;
   padding-left: 50px;
   padding-right: 50px;
@@ -443,7 +443,7 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .topnav li:not(:first-child) {
     display: none;
   }
@@ -471,7 +471,7 @@ body {
     display: block;
     text-align: left;
   }
-}
+} */
 
 /* need for Navbar */
 a {
@@ -486,6 +486,7 @@ i {
   width: 10px;
   height: 10px;
   display: block;
+  list-style-type: none;
 }
 
 /* need for Navbar */

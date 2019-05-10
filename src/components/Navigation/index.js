@@ -49,12 +49,12 @@ class NavigationAuth extends React.Component {
             <SignOutButton />
           </li>
         </ul>
-        <ul className="nav-flex-burger">
+        {/* <ul className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
-          </Link>
-          {/* Hamburger Drop Down Menue */}
-          <div>
+          </Link> */}
+        {/* Hamburger Drop Down Menue */}
+        {/* <div>
             {this.state.showMenu ? (
               <div className="menu">
                 <li>
@@ -68,8 +68,8 @@ class NavigationAuth extends React.Component {
                 </li>
               </div>
             ) : null}
-          </div>
-        </ul>
+          </div> */}
+        {/* </ul> */}
       </div>
     );
   }
@@ -108,28 +108,25 @@ class NavigationNonAuth extends React.Component {
           <li>
             <Link to={ROUTES.ACCOUNT}>POPS!</Link>
           </li>
-          <li>
-            <SignOutButton />
-          </li>
         </ul>
-        <ul className="nav-flex-burger">
+        {/* <ul className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
-          </Link>
-          {/* Hamburger Drop Down Menue */}
-          <div>
+          </Link> */}
+        {/* Hamburger Drop Down Menue */}
+        {/* <div>
             {this.state.showMenu ? (
               <div className="menu">
                 <li>
-                  <Link to={ROUTES.LANDING}>Map</Link>
+                  <Link to={ROUTES.LANDING}>MAP</Link>
                 </li>
                 <li>
                   <Link to={ROUTES.ACCOUNT}>POPS!</Link>
                 </li>
               </div>
             ) : null}
-          </div>
-        </ul>
+          </div> */}
+        {/* </ul> */}
       </div>
     );
   }
