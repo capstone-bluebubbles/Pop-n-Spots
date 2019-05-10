@@ -12,7 +12,7 @@ const styles = {
   card: {
     position: "reletive",
     maxWidth: 300,
-    maxHeigth: 100,
+    // height: "38vh",
     color: "red"
   },
   overlay: {
@@ -52,9 +52,6 @@ function PizzaButton(props) {
             variant="h5"
             component="h1">
             Pizza
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Hungry, EAT my friend!
           </Typography>
         </CardContent>
       </CardActionArea>

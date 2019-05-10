@@ -12,6 +12,7 @@ const styles = {
   card: {
     position: "reletive",
     maxWidth: 300,
+    // height: "38vh",
     color: "Orange"
   },
   overlay: {
@@ -50,10 +51,7 @@ function CocktailButton(props) {
             gutterBottom
             variant="h5"
             component="h1">
-            Cocktail
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Thirsty, drink my friend!
+            Cocktails
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -16,9 +16,7 @@ class InfoCard extends React.Component {
     }
     return (
       <div className="info-container">
-        <Link to={ROUTES.LANDING}>
-          <h3 className="place-title">{this.props.place.title}</h3>
-        </Link>
+        <h3 className="place-title">{this.props.place.title}</h3>
         <ul className="info-card">
           <li>{this.props.place.address}</li>
           <li>Phone: {this.props.place.phone}</li>
