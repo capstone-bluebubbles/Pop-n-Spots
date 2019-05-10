@@ -264,8 +264,9 @@ export class Landing extends React.Component {
   }
 
   render() {
-
-    console.log("REACT -> Landing -> this.props ->", this.props)
+    // if (this.props.currentPlaces.length > 0){
+    //   debugger;}
+    console.log("REACT -> Landing -> this.props ->", this.props.currentPlaces.length)
 
     var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -307,44 +308,46 @@ export class Landing extends React.Component {
       "align-items": "center",
       "text-align": "center"*/
     };
-
+    // if (this.props.currentPlaces.length > 0){
+    //   debugger;}
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
     const currentRadiusInKilometers = this.state.currentRadius * KM_PER_MILE
 
     // get the current places from redux
     const places = currentPlaces
+    let placesFlat = places
 
     // construct a collection of all places
-    let placesFlat = []
-    const categories = Object.keys(places)
-    for (let c in categories) {
+    // let placesFlat = []
+    // const categories = Object.keys(places)
+    // for (let c in categories) {
 
-      // get the category
-      const category = categories[c]
+    //   // get the category
+    //   const category = categories[c]
 
-      const placesByCategory = places[category];
-      for (let index = 0; index < placesByCategory.length; index++) {
+    //   const placesByCategory = places[category];
+    //   for (let index = 0; index < placesByCategory.length; index++) {
 
-        // get the place
-        const place = placesByCategory[index]
+    //     // get the place
+    //     const place = placesByCategory[index]
 
-        // add metrics
-        place.databaseCategory = category
-        place.databaseCategoryIndex = index;
+    //     // add metrics
+    //     place.databaseCategory = category
+    //     place.databaseCategoryIndex = index;
 
-        if (!place.gpsLat) {
-          place.gpsLat = 0
-        }
+    //     if (!place.gpsLat) {
+    //       place.gpsLat = 0
+    //     }
 
-        if (!place.gpsLong) {
-          place.gpsLong = 0
-        }
+    //     if (!place.gpsLong) {
+    //       place.gpsLong = 0
+    //     }
 
-        // target ready
-        placesFlat.push(place)
-      }
-    }
+    //     // target ready
+    //     placesFlat.push(place)
+    //   }
+    // }
 
     const markers = []
     const cards = []
@@ -352,7 +355,7 @@ export class Landing extends React.Component {
     for (let index = 0; index < placesFlat.length; index++) {
 
       const place = placesFlat[index]
-      const placeGPS = { lat: place.gpsLat, lng: place.gpsLong }
+      const placeGPS = { lat: Number(place.gpsLat), lng: Number(place.gpsLong) }
 
       const placeDistance = getDistance(currentPosition, placeGPS);
       if (placeDistance <= (currentRadiusInKilometers)) {
