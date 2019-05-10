@@ -1,11 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 
 class InfoCard extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(location) {
+    console.log(this.props);
+    console.log(location);
+    window.open(`http://maps.google.com/?q=${location}`);
   }
 
   render() {
@@ -22,6 +28,14 @@ class InfoCard extends React.Component {
           <li>Phone: {this.props.place.phone}</li>
           <li>Star Rating: {this.props.place.totalScore}</li>
         </ul>
+        <button
+          className="navigate-button"
+          type="button"
+          onClick={() => {
+            this.handleClick(this.props.place.title);
+          }}>
+          NAVIGATE
+        </button>
         <button
           className="pop-button"
           type="button"
