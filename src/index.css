@@ -310,7 +310,7 @@ body {
 /* Resturant Info.  Small white card */
 .place-title {
   display: flex;
-  width: 200px;
+  width: 300px;
   font-family: "Ubuntu", sans-serif;
   flex-direction: row;
   align-items: center;
