@@ -17,7 +17,7 @@ export const getUser = user => {
 };
 
 export const getPops = pops => {
-  console.log(pops)
+  //console.log(pops)
   return {
     type: GET_POPS,
     pops,
@@ -29,7 +29,6 @@ export const fetchUser = uID => async dispatch => {
     const aUser = userRef.child(uID);
     aUser.on('value', snapshot => {
       const user = snapshot.val();
-      console.log('im user', user)
       dispatch(getUser(user))
 
     });
@@ -40,7 +39,6 @@ export const fetchUser = uID => async dispatch => {
 
 export const fetchPops = places => async dispatch => {
   try {
-    console.log(places)
     let pops = [];
     if (places.length !== 0 || places !== undefined) {
       for (let i = 0; i <= places.length - 1; i++) {
@@ -55,11 +53,9 @@ export const fetchPops = places => async dispatch => {
         typeRef.on('value', snapshot => {
           let locationSnap = snapshot.child(`${number}`);
           let locationVal = locationSnap.val();
-          // dispatch(getPops(locationVal))
           pops.push(locationVal);
         });
       }
-      //  debugger
       dispatch(getPops(pops));
       return pops
     }

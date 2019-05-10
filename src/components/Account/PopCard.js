@@ -11,6 +11,7 @@ class PopCard extends React.Component {
     this.state ={
       pops: []
     }
+    this.getPops = this.getPops.bind(this);
   }
 
   componentDidMount(){
@@ -18,36 +19,15 @@ class PopCard extends React.Component {
     // this.props.fetchPops(this.props.user.pops)
   }
 
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   console.log(nextProps)
-  //   let pops = await nextProps.pops
-  //   console.log('>>>>> ', pops.length)
-  //   if (pops.length > 0) {
-  //     this.setState({
-  //       pops
-  //     })
-  //   }
-
-    // if (Object.keys(this.props.pops).length === 0){
-    //   return false;
-    // } else {
-    //   return true;
-    // }
-  //}
-
   componentDidUpdate(prevProps){
     if (this.props.user !== prevProps.user){
-    // if (this.props.user.pops !== undefined && this.count <= 1){
-      console.log('this.props ====> ', prevProps)
       this.count++
       this.props.fetchPops(this.props.user.pops)
     }
   }
 
    render() {
-    console.log(this.props)
-    console.log(this.props.pops)
+
     if(this.props.pops.length > 0){
 
      return (
