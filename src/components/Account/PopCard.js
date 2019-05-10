@@ -36,9 +36,10 @@ class PopCard extends React.Component {
     // }
   //}
 
-  componentDidUpdate(){
-    // console.log('this.props ====> ', prevProps)
-    if (this.props.user.pops !== undefined && this.count === 0){
+  componentDidUpdate(prevProps){
+    if (this.props.user !== prevProps.user){
+    // if (this.props.user.pops !== undefined && this.count <= 1){
+      console.log('this.props ====> ', prevProps)
       this.count++
       this.props.fetchPops(this.props.user.pops)
     }
