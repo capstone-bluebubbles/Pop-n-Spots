@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { fetchUser, fetchPops, getPops } from "../../store/user";
+import { fetchPlaces } from "../../store/places";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 
@@ -25,16 +27,28 @@ class InfoCard extends React.Component {
         <button
           className="pop-button"
           type="button"
-          onClick={() => console.log(`IS THIS CLICKING`)}>
+          onClick={() => {
+            console.log(`IS THIS CLICKING`);
+          }}>
           POP
         </button>
       </div>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  fetchUser: uID => dispatch(fetchUser(uID)),
+  fetchPops: places => dispatch(fetchPops(places)),
+  fetchPlaces: () => dispatch(fetchPlaces())
+});
 
 const mapStateToProps = state => ({
+  user: state.user.user,
+  pops: state.user.pops,
   places: state.places
 });
 
-export default connect(mapStateToProps)(InfoCard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InfoCard);

@@ -36,40 +36,41 @@ class NavigationAuth extends React.Component {
         <ul className="topnav">
           <li className="active">
             <Link className="active" to={ROUTES.HOME}>
-              HOME
+              Home
             </Link>
           </li>
           <li>
             <Link to={ROUTES.LANDING}>Map</Link>
           </li>
           <li>
-            <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+            <Link to={ROUTES.ACCOUNT}>Pops!</Link>
           </li>
           <li>
             <SignOutButton />
           </li>
         </ul>
+        {/* Hamburger Drop Down Menue */}
         {/* <ul className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
-          </Link> */}
-        {/* Hamburger Drop Down Menue */}
-        {/* <div>
+          </Link>
+          <div>
             {this.state.showMenu ? (
               <div className="menu">
                 <li>
                   <Link to={ROUTES.LANDING}>Map</Link>
                 </li>
                 <li>
-                  <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+                  <Link to={ROUTES.ACCOUNT}>Pops!</Link>
                 </li>
                 <li>
                   <SignOutButton />
                 </li>
               </div>
             ) : null}
-          </div> */}
-        {/* </ul> */}
+          </div>
+
+        </ul> */}
       </div>
     );
   }
@@ -99,14 +100,14 @@ class NavigationNonAuth extends React.Component {
         <ul className="topnav">
           <li className="active">
             <Link className="active" to={ROUTES.HOME}>
-              HOME
+              Home
             </Link>
           </li>
           <li>
             <Link to={ROUTES.LANDING}>Map</Link>
           </li>
           <li>
-            <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+            <Link to={ROUTES.ACCOUNT}>Pops!</Link>
           </li>
         </ul>
         {/* <ul className="nav-flex-burger">
@@ -118,10 +119,10 @@ class NavigationNonAuth extends React.Component {
             {this.state.showMenu ? (
               <div className="menu">
                 <li>
-                  <Link to={ROUTES.LANDING}>MAP</Link>
+                  <Link to={ROUTES.LANDING}>Map</Link>
                 </li>
                 <li>
-                  <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+                  <Link to={ROUTES.ACCOUNT}>Pops!</Link>
                 </li>
               </div>
             ) : null}

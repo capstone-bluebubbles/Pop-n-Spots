@@ -1,69 +1,67 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchUser, fetchPops, getPops } from '../../store/user'
-import { placesRef } from '../Firebase/firebase'
-
+import { fetchUser, fetchPops, getPops } from "../../store/user";
+import { placesRef } from "../Firebase/firebase";
 
 class PopCard extends React.Component {
   constructor(props) {
     super();
-    this.count = 0
-    this.state ={
+    this.count = 0;
+    this.state = {
       pops: []
-    }
-    this.getPops = this.getPops.bind(this);
+    };
   }
 
-  componentDidMount(){
-     this.props.fetchUser(this.props.uID)
+  componentDidMount() {
+    this.props.fetchUser(this.props.uID);
     // this.props.fetchPops(this.props.user.pops)
   }
 
-  componentDidUpdate(prevProps){
-    if (this.props.user !== prevProps.user){
-      this.count++
-      this.props.fetchPops(this.props.user.pops)
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      this.count++;
+      this.props.fetchPops(this.props.user.pops);
     }
   }
 
-   render() {
+  render() {
+    if (this.props.pops.length > 0) {
+      return (
+        <div className="info-container">
+          <h3>User Places</h3>
+          {this.props.pops.map(place => {
+            return (
+              <div>
+                <button
+                  className="lock-button"
+                  type="button"
+                  onClick={() => console.log(`IS THIS CLICKING`)}>
+                  LOCK!
+                </button>
+                {place.title}
 
-    if(this.props.pops.length > 0){
-
-     return (
-      <div className="info-container">
-        <h3>User Places</h3>
-        {this.props.pops.map(place =>{
-            return(
-        <div>
-        <button
-          className="lock-button"
-          type="button"
-          onClick={() => console.log(`IS THIS CLICKING`)}>
-          LOCK!
-        </button>
-              {place.title}
-
-              {place.address}
+                {place.address}
+              </div>
+            );
+          })}
         </div>
-        )})}
-      </div>
-    );
-  } else{
-    return (
-      <div>Blockchain UI working...</div>
-    )
+      );
+    } else {
+      return <div>Blockchain UI working...</div>;
+    }
   }
 }
-}
 const mapDispatchToProps = dispatch => ({
-  fetchUser: (uID) => dispatch(fetchUser(uID)),
-  fetchPops: (places) => dispatch(fetchPops(places))
+  fetchUser: uID => dispatch(fetchUser(uID)),
+  fetchPops: places => dispatch(fetchPops(places))
 });
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  pops: state.user.pops,
+  pops: state.user.pops
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PopCard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PopCard);
