@@ -1,16 +1,52 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchUser, fetchPops, addPop } from "../../store/user";
+import { fetchUser, fetchPops } from "../../store/user";
 import { fetchPlaces } from "../../store/places";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext, withAuthorization } from "../Session";
+import {userRef} from '../Firebase/firebase'
 
 class InfoCard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      pops : []
+    }
   }
+  //Pop function
+  async addPop(uID, locationId){
+    try {
+      const User = userRef.child(uID);
+      const popsRef = User.child('pops')
+      console.log(popsRef)
+     await popsRef.on('value', snapshot => {
+        const pops = snapshot.val();
+        this.setState({
+          pops: pops
+        })
+      })
+      let pops = (this.state.pops)
+        for (let i = 0; i < pops.length-1; i++){
+          if (pops[i].placeKey === locationId){
+          console.log('I MADE IT')
+          } else {
+            const length = pops.length.toString()
+            console.log(length)
+            let popper = popsRef.child(`${length}`)
+            popper.update({
+              'placeKey': locationId,
+              'timestamp': Date.now()
+           })
+          }
+          console.log(pops)
+        }
 
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   render() {
     //console.log(`THE OBJECT===>`, this.props);
@@ -19,7 +55,7 @@ class InfoCard extends React.Component {
       //console.log(`!!!!`, day);
     }
 
-     console.log('PROPS', this.props)
+     console.log('props', this.props)
     return (
       <AuthUserContext.Consumer>
         {authUser => (
@@ -34,8 +70,8 @@ class InfoCard extends React.Component {
           className="pop-button"
           type="button"
           onClick={() => {
-            // this.props.addPop(authUser.uid, this.props.place.locationId)
-            console.log(`${this.props}`);
+            this.addPop(authUser.uid, this.props.place.locationId)
+            // console.log(`${this.props.place.locationId}`);
           }}>
           POP
         </button>
@@ -49,7 +85,7 @@ const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
   fetchPops: places => dispatch(fetchPops(places)),
   fetchPlaces: () => dispatch(fetchPlaces()),
-  addPop: (uID, locationID) => dispatch(addPop(uID, locationID))
+  // addPop: (uID, locationID) => dispatch(addPop(uID, locationID))
 });
 
 const mapStateToProps = state => ({

@@ -25,6 +25,7 @@ class PopCard extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if (this.props.pops.length > 0) {
       return (
         <div className="info-container">
