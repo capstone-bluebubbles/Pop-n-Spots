@@ -313,53 +313,53 @@ export class Landing extends React.Component {
       "align-items": "center",
       "text-align": "center"*/
     };
+
+    const styleMapButtonDivCSS = {
+      position: 'relative',
+      zIndex: '2',
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      "width": "clientmapw",
+      "height": "clientmaph",
+      backgroundColor: '#fff',
+      border: '4px solid #fff',
+      borderRadius: '4px',
+      //boxShadow: '0 2px 6px rgba(0,0,0,.3)',
+      cursor: 'pointer',
+      marginBottom: '22px',
+      textAlign: 'center',
+      backgroundColor: 'none',
+      borderColor: 'none',
+    };
+
+    const styleMapButtonCSS = {
+      color: '#000',
+      backgroundColor: "#fff",
+      fontFamily: 'Roboto,Arial,sans-serif',
+      fontSize: '16px',
+      lineHeight: '38px',
+      marginLeft: '2px',
+      marginRight: '2px',
+      //paddingLeft: '5px',
+      //paddingRight: '5px',
+
+    };
+
     // if (this.props.currentPlaces.length > 0){
     //   debugger;}
+
+
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
     const currentRadiusInKilometers = this.state.currentRadius * KM_PER_MILE
 
-    // get the current places from redux
-    const places = currentPlaces
-    let placesFlat = places
-
-    // construct a collection of all places
-    // let placesFlat = []
-    // const categories = Object.keys(places)
-    // for (let c in categories) {
-
-    //   // get the category
-    //   const category = categories[c]
-
-    //   const placesByCategory = places[category];
-    //   for (let index = 0; index < placesByCategory.length; index++) {
-
-    //     // get the place
-    //     const place = placesByCategory[index]
-
-    //     // add metrics
-    //     place.databaseCategory = category
-    //     place.databaseCategoryIndex = index;
-
-    //     if (!place.gpsLat) {
-    //       place.gpsLat = 0
-    //     }
-
-    //     if (!place.gpsLong) {
-    //       place.gpsLong = 0
-    //     }
-
-    //     // target ready
-    //     placesFlat.push(place)
-    //   }
-    // }
-
     const markers = []
     const cards = []
 
-    for (let index = 0; index < placesFlat.length; index++) {
+    for (let index = 0; index < currentPlaces.length; index++) {
 
-      const place = placesFlat[index]
+      const place = currentPlaces[index]
       const placeGPS = { lat: Number(place.gpsLat), lng: Number(place.gpsLong) }
 
       const placeDistance = getDistance(currentPosition, placeGPS);
@@ -410,11 +410,11 @@ export class Landing extends React.Component {
               return <Marker key={index} position={item} icon={bubbleBlue} />;
             })}
             <Marker position={currentPosition} icon={bubbleRed} />
-            <div style={{ position: 'relative', zIndex: '2', display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <button onClick={(event) => { this.OnClickButton1(event) }} >0.25</button>
-              <button onClick={(event) => { this.OnClickButton2(event) }} >0.50</button>
-              <button onClick={(event) => { this.OnClickButton3(event) }} >2.00</button>
-              <button onClick={(event) => { this.OnClickButton4(event) }} >center</button>
+            <div style={styleMapButtonDivCSS}>
+              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton1(event) }} >search 0.25 mile</button>
+              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton2(event) }} >search 0.50 mile</button>
+              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton3(event) }} >search 1.00 mile</button>
+              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton4(event) }} >center</button>
             </div>
             <MapRef this={this}></MapRef>
           </Map>
