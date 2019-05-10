@@ -21,17 +21,17 @@ export const fetchPlaces = () => async dispatch => {
     let geoFire = new GeoFire(firebase)
     let geoQuery = geoFire.query({
       center: [41.90876, -87.65065],
-      radius: 1.609
+      radius: 1.609 * 2
     })
     let data = [];
 
-    geoQuery.on("key_entered", function(key, location, distance) {
+    geoQuery.once("key_entered", function(key, location, distance) {
       let word = key.replace(/[^a-zA-Z]+/g, '');
       let number = key.match(/\d/g);
       number = number.join("");
       const typeRef = placesRef.child(`${word}`)
 
-      typeRef.on('value', snapshot => {
+      typeRef.once('value', snapshot => {
         let locationSnap = snapshot.child(`${number}`)
         let locationVal = locationSnap.val()
         data.push(locationVal)
