@@ -53,12 +53,12 @@ class NavigationAuth extends React.Component {
             <SignOutButton />
           </li>
         </ul>
+        {/* Hamburger Drop Down Menue */}
         {/* <ul className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
-          </Link> */}
-        {/* Hamburger Drop Down Menue */}
-        {/* <div>
+          </Link>
+          <div>
             {this.state.showMenu ? (
               <div className="menu">
                 <li>
@@ -72,8 +72,8 @@ class NavigationAuth extends React.Component {
                 </li>
               </div>
             ) : null}
-          </div> */}
-        {/* </ul> */}
+          </div>
+        </ul> */}
       </div>
     );
   }
@@ -101,36 +101,46 @@ class NavigationNonAuth extends React.Component {
     return (
       <div className="nav-flex">
         <ul className="topnav">
-          <li className="active">
+          <li className="App-link">
             <Link className="active" to={ROUTES.HOME}>
-              HOME
+              <button className="nav-buttons">Home</button>
             </Link>
           </li>
-          <li>
-            <Link to={ROUTES.LANDING}>Map</Link>
+          <li className="App-link">
+            <Link to={ROUTES.LANDING}>
+              <button className="nav-buttons">Map</button>
+            </Link>
           </li>
-          <li>
-            <Link to={ROUTES.ACCOUNT}>POPS!</Link>
+          <li className="App-link">
+            <Link to={ROUTES.ACCOUNT}>
+              <button className="nav-buttons">POPS!</button>
+            </Link>
+          </li>
+          <li className="App-link">
+            <SignOutButton />
           </li>
         </ul>
+        {/* Hamburger Drop Down Menue */}
         {/* <ul className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
-          </Link> */}
-        {/* Hamburger Drop Down Menue */}
-        {/* <div>
+          </Link>
+          <div>
             {this.state.showMenu ? (
               <div className="menu">
                 <li>
-                  <Link to={ROUTES.LANDING}>MAP</Link>
+                  <Link to={ROUTES.LANDING}>Map</Link>
                 </li>
                 <li>
                   <Link to={ROUTES.ACCOUNT}>POPS!</Link>
                 </li>
+                <li>
+                  <SignOutButton />
+                </li>
               </div>
             ) : null}
-          </div> */}
-        {/* </ul> */}
+          </div>
+        </ul> */}
       </div>
     );
   }
