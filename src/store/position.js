@@ -4,6 +4,7 @@ import { GeoFire } from 'geofire'
 
 export const SET_CURRENT_POSITION = 'SET_CURRENT_POSITION'
 export const SET_CURRENT_PLACES = 'SET_CURRENT_PLACES'
+export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY'
 
 const defaultState = {
   currentPosition: {
@@ -11,7 +12,8 @@ const defaultState = {
     lng: -87.618944,
     timestamp: 0
   },
-  currentPlaces: []
+  currentPlaces: [],
+  currentCategory: "pizza"
 }
 
 export const setCurrentPosition = (currentPosition) => {
@@ -30,19 +32,27 @@ export const setCurrentPlaces = (currentPlaces) => {
   }
 }
 
+export const setCurrentCategory = (currentCategory) => {
+  console.log("REDUX -> home -> setCurrentCategoty");
+  return {
+    type: SET_CURRENT_CATEGORY,
+    currentCategory
+  }
+}
+
 export const getCurrentPosition = () => async dispatch => {
   console.log("REDUX -> position -> getCurrentPosition");
   try {
 
     var getCurrentPositionOptions = {
       enableHighAccuracy: true,
-      timeout: 1000,
+      timeout: 10000,
       maximumAge: 0
     };
 
     navigator.geolocation.getCurrentPosition(
       pos => {
-        
+
         console.log(
           "REDUX -> position- > getCurrentPosition -> navigator.geolocation.getCurrentPosition -> pos ->",
           pos
@@ -75,11 +85,12 @@ export const getCurrentPosition = () => async dispatch => {
   }
 }
 
-export const getCurrentPlaces = (center) => async dispatch => {
-  console.log("REDUX -> position -> getCurrentPlaces");
+export const getCurrentPlaces = (center) => async (dispatch, getState) => {
+  console.log("REDUX -> position -> getCurrentPlaces")
   console.log(center)
   try {
-    console.log("REDUX -> position -> getCurrentPlaces inside of the tru")
+    const category = getState().position.currentCategory;
+    console.log("REDUX -> position -> getCurrentPlaces -> category ->", category)
     let centerQuery = [center.lat, center.lng]
     let firebase = databaseRef.child('geoFire')
     let geoFire = new GeoFire(firebase)
@@ -88,34 +99,25 @@ export const getCurrentPlaces = (center) => async dispatch => {
       radius: 1.609 * 2
     })
     let data = [];
-    geoQuery.on("key_entered", function(key, location, distance) {
+    geoQuery.on("key_entered", function (key, location, distance) {
       let word = key.replace(/[^a-zA-Z]+/g, '');
       let number = key.match(/\d/g);
       number = number.join("");
-      const typeRef = placesRef.child(`${word}`)
 
-      typeRef.once('value', snapshot => {
-        let locationSnap = snapshot.child(`${number}`)
-        let locationVal = locationSnap.val()
-        data = data.concat([locationVal])
-        dispatch(setCurrentPlaces(data))
-      })
-      
+      if (word === category) {
+        const typeRef = placesRef.child(`${word}`)
+        typeRef.once('value', snapshot => {
+          let locationSnap = snapshot.child(`${number}`)
+          let locationVal = locationSnap.val()
+          data = data.concat([locationVal])
+          dispatch(setCurrentPlaces(data))
+        })
+      }
     });
-    //console.log(data)
-    
-
-
-
-    // placesRef.once('value', snapshot => {
-    //   const places = snapshot.val()
-    //   dispatch(setCurrentPlaces(places))
-    // })
   } catch (err) {
     console.error(err)
   }
 }
-
 
 export const positionReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -127,6 +129,11 @@ export const positionReducer = (state = defaultState, action) => {
     case SET_CURRENT_PLACES:
       {
         const newState = { ...state, currentPlaces: action.currentPlaces }
+        return newState;
+      }
+    case SET_CURRENT_CATEGORY:
+      {
+        const newState = { ...state, currentCategory: action.currentCategory }
         return newState;
       }
     default:
