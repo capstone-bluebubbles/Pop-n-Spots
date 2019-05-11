@@ -14,6 +14,12 @@ class InfoCard extends React.Component {
       pops : []
     }
     this.handleClick = this.handleClick.bind(this);
+    
+    // current day abbreviation
+    const date = new Date();
+    const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    this.currentDay = days[date.getDay()]
+    this.currentHour = date.getHours()
   }
 
   //Pop function
@@ -68,7 +74,8 @@ class InfoCard extends React.Component {
       //console.log(`!!!!`, day);
     }
 
-    //  console.log('props', this.props)
+    console.log('this being', this)
+    console.log('props', this.props)
     return (
       <AuthUserContext.Consumer>
         {authUser => (
@@ -120,4 +127,4 @@ const Infocard = connect(
   mapDispatchToProps
 )(InfoCard);
 
-export default withAuthorization(condition)(InfoCard)
+export default withAuthorization(condition)(Infocard)

@@ -461,9 +461,6 @@ export class Landing extends React.Component {
                 popDataTargetFrame = Math.max(popDataTargetFrame, 0)
                 popDataTargetFrame = Math.min(popDataTargetFrame, thisObject.bubbles.length - 1)
 
-                console.log(Marker)
-                console.log(marker)
-
                 return (
                   <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} />
                 )
