@@ -10,22 +10,24 @@ import {userRef} from '../Firebase/firebase'
 class InfoCard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      pops : []
+    }
     this.handleClick = this.handleClick.bind(this);
   }
 
   //Pop function
-  addPop(uID, locationId){
+  async addPop(uID, locationId){
     try {
       const User = userRef.child(uID);
       const popsRef = User.child('pops')
-      // console.log(popsRef)
-      popsRef.on('value', snapshot => {
+      await popsRef.on('value', snapshot => {
         const pops = snapshot.val();
         this.setState({
           pops: pops
         })
       })
-      let pops = this.state.pops
+      let pops = await this.state.pops
       let popFound = false
       let placeIndex;
       let timesPopped;
@@ -37,13 +39,11 @@ class InfoCard extends React.Component {
           break;
           }
         }
-          if (popFound === true){
+        if (popFound === true){
             let foundPlaceRef = popsRef.child(`${placeIndex}`).child('timestamp').child(`${timesPopped}`)
             foundPlaceRef.set(
               Date.now()
-            )
-
-          } else {
+            )} else {
             const length = pops.length.toString()
             let popper = popsRef.child(`${length}`)
             popper.update({
@@ -51,10 +51,6 @@ class InfoCard extends React.Component {
               'timestamp': {0: Date.now()}
            })
           }
-
-        console.log(this)
-
-
     } catch (err) {
       console.error(err)
     }
@@ -96,7 +92,6 @@ class InfoCard extends React.Component {
           type="button"
           onClick={() => {
             this.addPop(authUser.uid, this.props.place.locationId)
-            // console.log(`${this.props.place.locationId}`);
           }}>
           POP
         </button>
