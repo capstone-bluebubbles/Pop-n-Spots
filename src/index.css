@@ -23,11 +23,25 @@ body {
 /* background Picture */
 .Home-App {
   position: relative;
-  /* top: -80px; */
   text-align: center;
   background-position: center;
   background-image: url("https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1985&q=80");
   background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .home-title {
@@ -45,16 +59,15 @@ body {
 .subtitle {
   font-size: 40px;
   text-align: start;
+  margin: 30px;
 }
 
 .home-page {
   position: relative;
   top: -10px;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  color: grey;
 }
 
 /* FOOD and BEER Big Card buttons */
