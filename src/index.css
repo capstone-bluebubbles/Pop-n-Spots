@@ -273,11 +273,11 @@ body {
 .info-container {
   background-color: white;
   width: 100%;
-  height: 100px;
+  height: 120px;
   margin: 3px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0px 22px 65px 4px rgba(0, 0, 0, 0.14);
 }
@@ -297,11 +297,15 @@ body {
   list-style: none;
   font-family: "Ubuntu", sans-serif;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   width: 1000px;
   justify-content: center;
   align-items: center;
-  padding-right: 160px;
+  padding: 10px;
+}
+
+.info-card li {
+  font-size: 12px;
 }
 
 /* Resturant Info.  Small white card */
@@ -309,9 +313,8 @@ body {
   display: flex;
   width: 300px;
   font-family: "Ubuntu", sans-serif;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 20px;
+  padding: 20px;
+  font-size: 12px;
 }
 
 /* Resturant Info.  Button*/
@@ -321,22 +324,19 @@ body {
   color: yellow;
   background: linear-gradient(to right, #01cbe6, #1367e4);
   border: none;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
   padding-bottom: 5px;
   padding-top: 5px;
   font-family: "Ubuntu", sans-serif;
-  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
-  font-style: italic;
+  /* text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black; */
+  /* font-style: italic; */
   font-display: black;
-  font-size: 15px;
+  font-size: 14px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
   margin: 2%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
-  cursor: pointer;
 }
 
 .pop-button:active {
@@ -669,24 +669,14 @@ i {
   cursor: pointer;
   border-radius: 8px;
   background: #333;
-  border: none;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding: 5px;
   font-family: "Ubuntu", sans-serif;
-  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
-  font-style: italic;
   font-display: black;
-  font-size: 15px;
+  font-size: 12px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  margin: 2%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
   color: #fff;
-  text-decoration: none;
 }
 .navigate-button:active {
   background-color: #3e8e41;

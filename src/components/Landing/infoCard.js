@@ -25,8 +25,14 @@ class InfoCard extends React.Component {
         <h3 className="place-title">{this.props.place.title}</h3>
         <ul className="info-card">
           <li>{this.props.place.address}</li>
-          <li>Phone: {this.props.place.phone}</li>
-          <li>Star Rating: {this.props.place.totalScore}</li>
+          <li>PH: {this.props.place.phone}</li>
+          {/* <li className="star-rating">STARS: {this.props.place.totalScore}</li> */}
+          <br />
+          <li>
+            {Array.from({ length: this.props.place.totalScore }).map((j, i) => (
+              <span key={i}> ⭐ </span>
+            ))}
+          </li>
         </ul>
         <button
           className="navigate-button"
