@@ -234,16 +234,86 @@ export class Landing extends React.Component {
     this.state = {
       currentRadius: 0.50
     }
+
+    // set the icon for location
+    this.currentPositionIcon = {
+      url: "\\Bubble2000.png",
+      size: new window.google.maps.Size(64, 64),
+      scaledSize: new window.google.maps.Size(16, 16),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(8, 8)
+    };
+
+    // set the bubbles
+    this.bubbles = []
+
+    // bubble 0
+    this.bubbles.push({
+      url: "\\Bubble3000.png",
+      size: new window.google.maps.Size(64, 64),
+      scaledSize: new window.google.maps.Size(16, 16),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(8, 8)
+    });
+
+    // bubble 1
+    // 25%
+    this.bubbles.push({
+      url: "\\Bubble3025.png",
+      size: new window.google.maps.Size(64, 64),
+      scaledSize: new window.google.maps.Size(16, 16),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(8, 8)
+    });
+
+    // bubble 2
+    // 50%
+    this.bubbles.push({
+      url: "\\Bubble3050.png",
+      size: new window.google.maps.Size(64, 64),
+      scaledSize: new window.google.maps.Size(16, 16),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(8, 8)
+    });
+
+    // bubble 3
+    // 75%
+    this.bubbles.push({
+      url: "\\Bubble3075.png",
+      size: new window.google.maps.Size(64, 64),
+      scaledSize: new window.google.maps.Size(16, 16),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(8, 8)
+    });
+
+    // bubble 4
+    // 100%
+    this.bubbles.push({
+      url: "\\Bubble3100.png",
+      size: new window.google.maps.Size(64, 64),
+      scaledSize: new window.google.maps.Size(16, 16),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(8, 8)
+    });
+
+    // current day abbreviation
+    const date = new Date();
+    const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    this.currentDay = days[date.getDay()]
+    this.currentHour = date.getHours()
   }
 
   componentDidMount() {
-    // the default position has a timestamp of zero
-    /*    if (this.props.currentPosition.timestamp === 0) {
-          this.props.currentDispatch(getCurrentPosition())
-        }*/
+
+    // get the category from the url
     const search = queryString.parse(this.props.location.search)
     const category = search.category ? search.category : "bars"
+
+    // set the category in the redux store
     this.props.currentDispatch(setCurrentCategory(category))
+
+    // load the current position
+    // => automatically loads the current places
     this.props.currentDispatch(getCurrentPosition())
   }
 
@@ -265,70 +335,14 @@ export class Landing extends React.Component {
     }
   }
 
-  centerMoved(mapProps, map) {
-  }
-
   render() {
-    // if (this.props.currentPlaces.length > 0){
-    //   debugger;}
-    console.log("REACT -> Landing -> this.props ->", this.props.currentPlaces.length)
+    console.log("REACT -> Landing -> this.props ->", this.props)
 
     var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var clientm = Math.min(clientw, clienth)
-    let clientdivw = clientm * 0.5;
-    let clientdivh = clientm * 0.5;
     let clientmapw = "100%";
     let clientmaph = clientm * 0.80;
-
-    var bubbleRed = {
-      url: "\\Pop1100.32.png",
-      size: new window.google.maps.Size(128, 128),
-      scaledSize: new window.google.maps.Size(16, 16),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
-    };
-
-    var bubbleBlue = {
-      url: "\\Pop1000.32.png",
-      size: new window.google.maps.Size(32, 32),
-      scaledSize: new window.google.maps.Size(16, 16),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
-    };
-
-    const styleDivCSS = {
-      "width": clientmapw,
-      "height": clientmaph,
-      //"position": "absolute",
-    };
-
-    const styleMapCSS = {
-      "width": clientmapw,
-      "height": clientmaph,
-      //"position": "absolute",
-      /*      "position": "absolute",
-      "display": "flex",
-      "justify-content": "center",
-      "align-items": "center",
-      "text-align": "center"*/
-    };
-
-    const styleMapButtonDivCSS = {
-      position: 'relative',
-      //zIndex: '2',
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "clientmapw",
-      height: "clientmaph",
-      borderRadius: '4px',
-      cursor: 'pointer',
-      marginBottom: '22px',
-      textAlign: 'center',
-      backgroundColor: 'none',
-      borderColor: 'none',
-    };
 
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
@@ -346,7 +360,12 @@ export class Landing extends React.Component {
       if (placeDistance <= (currentRadiusInKilometers)) {
 
         // create a marker for this place
-        markers.push(placeGPS)
+        const marker = {
+          placeGPS,
+          place
+        }
+
+        markers.push(marker)
 
         // create a card for this place
         const card = {
@@ -360,6 +379,33 @@ export class Landing extends React.Component {
 
     // sort the cards into distance order
     cards.sort((a, b) => { return a.placeDistance - b.placeDistance })
+
+    // local css style objects
+
+    const styleDivCSS = {
+      "width": clientmapw,
+      "height": clientmaph,
+    };
+
+    const styleMapCSS = {
+      "width": clientmapw,
+      "height": clientmaph,
+    };
+
+    const styleMapButtonDivCSS = {
+      position: 'relative',
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "clientmapw",
+      height: "clientmaph",
+      borderRadius: '4px',
+      cursor: 'pointer',
+      marginBottom: '22px',
+      textAlign: 'center',
+      backgroundColor: 'none',
+      borderColor: 'none',
+    };
 
     return (
       <div>
@@ -386,10 +432,41 @@ export class Landing extends React.Component {
               center={currentPosition}
               radius={currentRadiusInKilometers * 1000}
             />
-            {markers.map((item, index) => {
-              return <Marker key={index} position={item} icon={bubbleBlue} />;
-            })}
-            <Marker position={currentPosition} icon={bubbleRed} />
+            {
+              markers.map((item, index) => {
+                const thisObject = this
+                const thisKey = index
+                const marker = item
+
+                let popDataTarget = 0
+
+                const popData = marker.place.popularTimesHistogram;
+                if (popData) {
+                  const popDataCurrentDay = popData[thisObject.currentDay]
+                  if (popDataCurrentDay) {
+                    for (let index = 0; index < popDataCurrentDay.length; index++) {
+                      const hour = popDataCurrentDay[index].hour;
+                      if (hour === thisObject.currentHour) {
+                        popDataTarget = popDataCurrentDay[index].occupancyPercent;
+                      }
+                    }
+                  }
+                }
+
+                // there are frames for 0%, 25%, 50%, 75% and 100%
+                // to round to the nearest frame -> floor(input + (25% / 2) / 25%)
+                let popDataTargetFrame = Math.floor((popDataTarget + (25 / 2.0)) / 25.0);
+
+                // safety check
+                popDataTargetFrame = Math.max(popDataTargetFrame, 0)
+                popDataTargetFrame = Math.min(popDataTargetFrame, thisObject.bubbles.length - 1)
+
+                return (
+                  <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} />
+                )
+              })
+            }
+            <Marker position={currentPosition} icon={this.currentPositionIcon} />
             <div style={styleMapButtonDivCSS}>
               <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
               <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
