@@ -96,7 +96,7 @@ body {
 /* submit Button // Change button name*/
 .submit {
   cursor: pointer;
-  border-radius: 5em;
+  border-radius: 8px;
   color: #fff;
   background: linear-gradient(to right, #3497f3, #172df0);
   border: 0;
@@ -109,7 +109,6 @@ body {
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
   margin: 10%;
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -251,7 +250,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 800px;
+  width: 600px;
   height: 600px;
   margin: 7em auto;
   border-radius: 1.5em;
@@ -858,4 +857,47 @@ i {
 
 .phone {
   font-weight: bold;
+}
+
+/* forgot password form input box */
+.forgot-pass {
+  width: 50%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  padding-left: 90px;
+  padding-right: 90px;
+}
+.forgot-pass:focus {
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.forgot-pass-button {
+  cursor: pointer;
+  border-radius: 8px;
+  background: #333;
+  font-family: "Ubuntu", sans-serif;
+  font-display: black;
+  font-size: 12px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  display: flex;
+  position: relative;
+  color: #fff;
+}
+.forgot-pass-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  border: none;
 }
