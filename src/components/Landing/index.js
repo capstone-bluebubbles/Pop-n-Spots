@@ -238,7 +238,7 @@ export class Landing extends React.Component {
     // set the icon for location
     this.currentPositionIcon = {
       url: "\\Bubble2000.png",
-      size: new window.google.maps.Size(64, 64),
+      size: new window.google.maps.Size(150, 150),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
@@ -250,7 +250,7 @@ export class Landing extends React.Component {
     // bubble 0
     this.bubbles.push({
       url: "\\Bubble3000.png",
-      size: new window.google.maps.Size(64, 64),
+      size: new window.google.maps.Size(150, 150),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
@@ -259,8 +259,8 @@ export class Landing extends React.Component {
     // bubble 1
     // 25%
     this.bubbles.push({
-      url: "\\Bubble3025.png",
-      size: new window.google.maps.Size(64, 64),
+      url: "\\Bubble5025.png",
+      size: new window.google.maps.Size(100, 100),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
@@ -269,8 +269,8 @@ export class Landing extends React.Component {
     // bubble 2
     // 50%
     this.bubbles.push({
-      url: "\\Bubble3050.png",
-      size: new window.google.maps.Size(64, 64),
+      url: "\\Bubble5050.png",
+      size: new window.google.maps.Size(100, 100),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
@@ -279,8 +279,8 @@ export class Landing extends React.Component {
     // bubble 3
     // 75%
     this.bubbles.push({
-      url: "\\Bubble3075.png",
-      size: new window.google.maps.Size(64, 64),
+      url: "\\Bubble5075.png",
+      size: new window.google.maps.Size(150, 150),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
@@ -289,8 +289,8 @@ export class Landing extends React.Component {
     // bubble 4
     // 100%
     this.bubbles.push({
-      url: "\\Bubble3100.png",
-      size: new window.google.maps.Size(64, 64),
+      url: "\\Bubble5100.png",
+      size: new window.google.maps.Size(150, 150),
       scaledSize: new window.google.maps.Size(16, 16),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
