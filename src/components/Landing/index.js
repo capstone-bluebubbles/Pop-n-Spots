@@ -232,7 +232,7 @@ export class Landing extends React.Component {
 
     // set the state
     this.state = {
-      currentRadius: 0.25
+      currentRadius: 0.50
     }
   }
 
@@ -248,15 +248,15 @@ export class Landing extends React.Component {
   }
 
   OnClickButton1(event) {
-    this.setState({ currentRadius: 0.25 });
-  }
-
-  OnClickButton2(event) {
     this.setState({ currentRadius: 0.50 });
   }
 
+  OnClickButton2(event) {
+    this.setState({ currentRadius: 1.00 });
+  }
+
   OnClickButton3(event) {
-    this.setState({ currentRadius: 2.0 });
+    this.setState({ currentRadius: 2.00 });
   }
 
   OnClickButton4(event) {
@@ -313,53 +313,33 @@ export class Landing extends React.Component {
       "align-items": "center",
       "text-align": "center"*/
     };
-    // if (this.props.currentPlaces.length > 0){
-    //   debugger;}
+
+    const styleMapButtonDivCSS = {
+      position: 'relative',
+      //zIndex: '2',
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "clientmapw",
+      height: "clientmaph",
+      borderRadius: '4px',
+      cursor: 'pointer',
+      marginBottom: '22px',
+      textAlign: 'center',
+      backgroundColor: 'none',
+      borderColor: 'none',
+    };
+
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
     const currentRadiusInKilometers = this.state.currentRadius * KM_PER_MILE
 
-    // get the current places from redux
-    const places = currentPlaces
-    let placesFlat = places
-
-    // construct a collection of all places
-    // let placesFlat = []
-    // const categories = Object.keys(places)
-    // for (let c in categories) {
-
-    //   // get the category
-    //   const category = categories[c]
-
-    //   const placesByCategory = places[category];
-    //   for (let index = 0; index < placesByCategory.length; index++) {
-
-    //     // get the place
-    //     const place = placesByCategory[index]
-
-    //     // add metrics
-    //     place.databaseCategory = category
-    //     place.databaseCategoryIndex = index;
-
-    //     if (!place.gpsLat) {
-    //       place.gpsLat = 0
-    //     }
-
-    //     if (!place.gpsLong) {
-    //       place.gpsLong = 0
-    //     }
-
-    //     // target ready
-    //     placesFlat.push(place)
-    //   }
-    // }
-
     const markers = []
     const cards = []
 
-    for (let index = 0; index < placesFlat.length; index++) {
+    for (let index = 0; index < currentPlaces.length; index++) {
 
-      const place = placesFlat[index]
+      const place = currentPlaces[index]
       const placeGPS = { lat: Number(place.gpsLat), lng: Number(place.gpsLong) }
 
       const placeDistance = getDistance(currentPosition, placeGPS);
@@ -410,11 +390,11 @@ export class Landing extends React.Component {
               return <Marker key={index} position={item} icon={bubbleBlue} />;
             })}
             <Marker position={currentPosition} icon={bubbleRed} />
-            <div style={{ position: 'relative', zIndex: '2', display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <button onClick={(event) => { this.OnClickButton1(event) }} >0.25</button>
-              <button onClick={(event) => { this.OnClickButton2(event) }} >0.50</button>
-              <button onClick={(event) => { this.OnClickButton3(event) }} >2.00</button>
-              <button onClick={(event) => { this.OnClickButton4(event) }} >center</button>
+            <div style={styleMapButtonDivCSS}>
+              <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
+              <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
+              <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
+              <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
             </div>
             <MapRef this={this}></MapRef>
           </Map>
@@ -426,6 +406,19 @@ export class Landing extends React.Component {
         </div>
       </div >
     );
+  }
+}
+
+const LandingMapButton = ({ selected, text, target }) => {
+
+  if (selected) {
+    return (
+      <button className="styleMapButtonCSSSelected" onClick={(event) => { target(event) }} >{text}</button>
+    )
+  } else {
+    return (
+      <button className="styleMapButtonCSS" onClick={(event) => { target(event) }} >{text}</button>
+    )
   }
 }
 

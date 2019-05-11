@@ -10,37 +10,49 @@ import {userRef} from '../Firebase/firebase'
 class InfoCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      pops : []
-    }
+    this.handleClick = this.handleClick.bind(this);
   }
+
   //Pop function
   async addPop(uID, locationId){
     try {
       const User = userRef.child(uID);
       const popsRef = User.child('pops')
-      console.log(popsRef)
+      // console.log(popsRef)
      await popsRef.on('value', snapshot => {
         const pops = snapshot.val();
         this.setState({
           pops: pops
         })
       })
-      let pops = (this.state.pops)
-        for (let i = 0; i < pops.length-1; i++){
+      console.log('CURRENT USER POPS', this.state.pops)
+      let pops = this.state.pops
+      let popFound = false
+      let placeIndex;
+      let timesPopped;
+        for (let i = 0; i <= pops.length-1; i++){
           if (pops[i].placeKey === locationId){
-          console.log('I MADE IT')
+          popFound = true
+          placeIndex = i.toString()
+          timesPopped = this.state.pops[i].timestamp.length
+          break;
+          }
+        }
+          if (popFound === true){
+            let foundPlaceRef = popsRef.child(`${placeIndex}`).child('timestamp')
+            let thePops = foundPlaceRef.val()
+            console.log('i was found!', foundPlaceRef)
+
           } else {
             const length = pops.length.toString()
-            console.log(length)
             let popper = popsRef.child(`${length}`)
             popper.update({
               'placeKey': locationId,
-              'timestamp': Date.now()
+              'timestamp': {0: Date.now()}
            })
           }
-          console.log(pops)
-        }
+
+        console.log(this)
 
 
     } catch (err) {
@@ -60,7 +72,7 @@ class InfoCard extends React.Component {
       //console.log(`!!!!`, day);
     }
 
-     console.log('props', this.props)
+    //  console.log('props', this.props)
     return (
       <AuthUserContext.Consumer>
         {authUser => (
@@ -74,8 +86,9 @@ class InfoCard extends React.Component {
         <button
           className="navigate-button"
           type="button"
-          raised
-          onClick={() => {this.handleClick(this.props.place.title)}} >
+          onClick={() => {
+            this.handleClick(this.props.place.title);
+          }}>
           NAVIGATE
         </button>
         <button

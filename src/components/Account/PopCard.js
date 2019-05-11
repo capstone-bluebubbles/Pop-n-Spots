@@ -28,7 +28,7 @@ class PopCard extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(event) {
     this.props.fetchUser(this.props.uID);
     // this.props.fetchPops(this.props.user.pops)
   }

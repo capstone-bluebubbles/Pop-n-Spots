@@ -34,43 +34,35 @@ class NavigationAuth extends React.Component {
     return (
       <div className="nav-flex">
         <ul className="topnav">
-          <li className="active">
+          <li className="App-link">
             <Link className="active" to={ROUTES.HOME}>
-              Home
+              <button className="nav-buttons">Home</button>
             </Link>
           </li>
-          <li>
-            <Link to={ROUTES.LANDING}>Map</Link>
+          <li className="App-link">
+            <Link to={ROUTES.LANDING}>
+              <button className="nav-buttons">Map</button>
+            </Link>
           </li>
-          <li>
-            <Link to={ROUTES.ACCOUNT}>Pops!</Link>
-          </li>
-          <li>
-            <SignOutButton />
+          <li className="App-link">
+            <Link to={ROUTES.ACCOUNT}>
+              <button className="nav-buttons">POPS!</button>
+            </Link>
           </li>
         </ul>
         {/* Hamburger Drop Down Menue */}
-        {/* <ul className="nav-flex-burger">
+        <div className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
           </Link>
           <div>
             {this.state.showMenu ? (
               <div className="menu">
-                <li>
-                  <Link to={ROUTES.LANDING}>Map</Link>
-                </li>
-                <li>
-                  <Link to={ROUTES.ACCOUNT}>Pops!</Link>
-                </li>
-                <li>
-                  <SignOutButton />
-                </li>
+                <SignOutButton />
               </div>
             ) : null}
           </div>
-
-        </ul> */}
+        </div>
       </div>
     );
   }
@@ -83,13 +75,14 @@ class NavigationNonAuth extends React.Component {
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
   }
-  showMenu() {
-    // event.preventDefault();
+  showMenu(event) {
+    event.preventDefault();
     this.setState({ showMenu: true }, () => {
       document.addEventListener("click", this.closeMenu);
     });
   }
-  closeMenu() {
+  closeMenu(event) {
+    event.preventDefault();
     this.setState({ showMenu: false }, () => {
       document.removeEventListener("click", this.closeMenu);
     });
@@ -98,39 +91,39 @@ class NavigationNonAuth extends React.Component {
     return (
       <div className="nav-flex">
         <ul className="topnav">
-          <li className="active">
+          <li className="App-link">
             <Link className="active" to={ROUTES.HOME}>
-              Home
+              <button className="nav-buttons">Home</button>
             </Link>
           </li>
-          <li>
-            <Link to={ROUTES.LANDING}>Map</Link>
+          <li className="App-link">
+            <Link to={ROUTES.LANDING}>
+              <button className="nav-buttons">Map</button>
+            </Link>
           </li>
-          <li>
-            <Link to={ROUTES.ACCOUNT}>Pops!</Link>
+          <li className="App-link">
+            <Link to={ROUTES.ACCOUNT}>
+              <button className="nav-buttons">POPS!</button>
+            </Link>
           </li>
         </ul>
-        {/* <ul className="nav-flex-burger">
+        {/* Hamburger Drop Down Menue */}
+        <div className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
-          </Link> */}
-        {/* Hamburger Drop Down Menue */}
-        {/* <div>
+          </Link>
+          <div>
             {this.state.showMenu ? (
               <div className="menu">
-                <li>
-                  <Link to={ROUTES.LANDING}>Map</Link>
-                </li>
-                <li>
-                  <Link to={ROUTES.ACCOUNT}>Pops!</Link>
-                </li>
+                <div>
+                  <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+                </div>
               </div>
             ) : null}
-          </div> */}
-        {/* </ul> */}
+          </div>
+        </div>
       </div>
     );
   }
 }
-
 export default Navigation;
