@@ -705,3 +705,36 @@ i {
   transform: translateY(4px);
   border: none;
 }
+
+.styleMapButtonCSS
+{
+  display: "inline-block";
+  color: #036fc0;
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 38px;
+  margin-top: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-color: #036fc0;
+  border-width: 2px;
+  border-radius: 8px;
+  border-style:solid;
+  outline: none;
+}
+
+.styleMapButtonCSSSelected  {
+  display: "inline-block";
+  color: #ffffff;
+  background-color: #036fc0;
+  font-size: 14px;
+  line-height: 38px;
+  margin-top: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-color: #036fc0;
+  border-width: 2px;
+  border-radius: 8px;
+  border-style:solid;
+  outline: none;
+}
