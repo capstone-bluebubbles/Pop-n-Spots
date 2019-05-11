@@ -20,21 +20,20 @@ class AccountPageComponent extends React.Component {
     // if (this.props.currentPosition.timestamp === 0) {
     //   this.props.currentDispatch(getCurrentPosition());
     // }
-
   }
 
   render() {
     return (
       <AuthUserContext.Consumer>
         {authUser => (
-          <div>
-            <h1>Account: {authUser.email}</h1>
+          <div className="account-container">
+            <h1>Welcome: {authUser.email}</h1>
             <h2 className="lock-title">Pops</h2>
             <PopCard uID={authUser.uid} />
-            <h2 className="lock-title">Locks/Favorites</h2>
+            <h2 className="lock-title">Locks</h2>
             <LockCard uID={authUser.uid} />
-            <h3 className="lock-title">Change Your Password</h3>
-            <div className="lock-title">
+            <h3 className="password-userChange">Change Your Password</h3>
+            <div className="change-password-title">
               <PasswordChangeForm />
             </div>
           </div>
