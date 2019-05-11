@@ -49,7 +49,7 @@ class PopCard extends React.Component {
             return (
               <div>
                 <div className="pops-card-title">{place.title}</div>
-                <div> {place.address}</div>
+                <div className="pops-card-address"> {place.address}</div>
                 <div className="pops-card-title">
                   <button
                     className="lock-button"
