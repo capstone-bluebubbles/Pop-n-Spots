@@ -272,7 +272,7 @@ body {
 /* Resturant card Info.  Small white card */
 .info-container {
   background-color: white;
-  width: 100%;
+  /* width: 100%; */
   height: 140px;
   margin: 3px;
   display: flex;
@@ -301,21 +301,22 @@ body {
   width: 1000px;
   justify-content: center;
   align-items: center;
-  /* padding: 60px; */
+  padding: 10px;
 }
 
 .info-card li {
   font-size: 12px;
   padding-right: 10px;
   padding-left: 10px;
+  box-sizing: border-box;
 }
 
 /* Resturant Info.  Small white card */
 .place-title {
   display: flex;
-  width: 300px;
+  width: 100px;
   font-family: "Ubuntu", sans-serif;
-  padding-left: 30px;
+  padding: 10px;
   font-size: 14px;
 }
 
@@ -677,6 +678,7 @@ i {
   flex-direction: column;
   align-items: center;
   background-color: white;
+  width: 800px;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
@@ -822,40 +824,35 @@ i {
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 800px;
-  height: 600px;
-  margin: 7em auto;
+  margin: auto;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
 .navigate-button {
   cursor: pointer;
-  border-radius: 5em;
-  color: yellow;
+  border-radius: 8px;
+  color: white;
   background: #333;
   border: none;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
   padding-bottom: 5px;
   padding-top: 5px;
   font-family: "Ubuntu", sans-serif;
-  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
-  font-style: italic;
   font-display: black;
   font-size: 15px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  margin: 2%;
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
 }
 .navigate-button:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
   border: none;
+}
+
+.phone {
+  font-weight: bold;
 }

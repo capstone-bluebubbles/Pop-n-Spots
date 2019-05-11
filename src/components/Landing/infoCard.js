@@ -78,15 +78,13 @@ class InfoCard extends React.Component {
             <h3 className="place-title">{this.props.place.title}</h3>
             <ul className="info-card">
               <li>
-                <Link
-                  target={`www.${this.props.place.website}`}
-                  to={`www.${this.props.place.website}`}>
+                <Link target="_blank" to={`www.${this.props.place.website}`}>
                   {this.props.place.website}
                 </Link>
               </li>
               <br />
               <li>{this.props.place.address}</li>
-              <li>{this.props.place.phone}</li>
+              <li className="phone">{this.props.place.phone}</li>
               {/* <li className="star-rating">STARS: {this.props.place.totalScore}</li> */}
               <br />
               <li>
