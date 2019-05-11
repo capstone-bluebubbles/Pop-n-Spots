@@ -336,7 +336,7 @@ export class Landing extends React.Component {
   }
 
   render() {
-    console.log("REACT -> Landing -> this.props ->", this.props)
+    //console.log("REACT -> Landing -> this.props ->", this.props)
 
     var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);

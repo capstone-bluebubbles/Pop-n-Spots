@@ -70,14 +70,24 @@ class InfoCard extends React.Component {
   }
 
   render() {
-    console.log(`THE OBJECT===>`, this.props);
-    const weekObject = this.props.place.popularTimesHistogram;
-    for (let day in weekObject) {
-      //console.log(`!!!!`, day);
-    }
+    console.log(`THE OBJECT===>`, this);
 
-    console.log('this being', this)
-    console.log('props', this.props)
+    let popDataTarget = 0
+    const popData = this.props.place.popularTimesHistogram;
+                if (popData) {
+                  const popDataCurrentDay = popData[this.currentDay]
+                  if (popDataCurrentDay) {
+                    for (let index = 0; index < popDataCurrentDay.length; index++) {
+                      const hour = popDataCurrentDay[index].hour;
+                      if (hour === this.currentHour) {
+                        popDataTarget = popDataCurrentDay[index].occupancyPercent;
+                      }
+                    }
+                  }
+                }
+
+    console.log(popDataTarget)
+    
     return (
       <AuthUserContext.Consumer>
         {authUser => (
@@ -91,6 +101,7 @@ class InfoCard extends React.Component {
               </li>
               <br />
               <li>{this.props.place.address}</li>
+              <li> Looks like {this.props.place.title} is poppin at the following level: {popDataTarget}% </li>
               <li className="phone">{this.props.place.phone}</li>
               {/* <li className="star-rating">STARS: {this.props.place.totalScore}</li> */}
               <br />
