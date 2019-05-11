@@ -46,6 +46,11 @@ class InfoCard extends React.Component {
     } catch (err) {
       console.error(err)
     }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(location){
+    window.open(`http://maps.google.com/?q=${location}`);
   }
 
   render() {
@@ -66,6 +71,13 @@ class InfoCard extends React.Component {
           <li>Phone: {this.props.place.phone}</li>
           <li>Star Rating: {this.props.place.totalScore}</li>
         </ul>
+        <button
+          className="navigate-button"
+          type="button"
+          raised
+          onClick={() => {this.handleClick(this.props.place.title)}} >
+          NAVIGATE
+        </button>
         <button
           className="pop-button"
           type="button"
