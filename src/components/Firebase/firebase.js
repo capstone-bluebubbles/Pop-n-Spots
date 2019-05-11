@@ -3,7 +3,6 @@ import { REACT_APP_API_KEY } from "../../secrets";
 import "firebase/auth";
 import "firebase/database";
 
-
 const config = {
   apiKey: REACT_APP_API_KEY,
   authDomain: "bluebubbles-998d5.firebaseapp.com",
@@ -35,6 +34,7 @@ class Firebase {
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 
   user = uid => this.db.ref(`users/${uid}`);
+  // userPop = () => this.db.ref(`users/${}`)
 
   users = () => this.db.ref("users");
 }
