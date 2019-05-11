@@ -238,8 +238,8 @@ export class Landing extends React.Component {
     // set the icon for location
     this.currentPositionIcon = {
       url: "\\Bubble2000.png",
-      size: new window.google.maps.Size(150, 150),
-      scaledSize: new window.google.maps.Size(16, 16),
+      size: new window.google.maps.Size(200, 200),
+      scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
     };
@@ -250,8 +250,8 @@ export class Landing extends React.Component {
     // bubble 0
     this.bubbles.push({
       url: "\\Bubble3000.png",
-      size: new window.google.maps.Size(150, 150),
-      scaledSize: new window.google.maps.Size(16, 16),
+      size: new window.google.maps.Size(200, 200),
+      scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
     });
@@ -260,8 +260,8 @@ export class Landing extends React.Component {
     // 25%
     this.bubbles.push({
       url: "\\Bubble5025.png",
-      size: new window.google.maps.Size(100, 100),
-      scaledSize: new window.google.maps.Size(16, 16),
+      size: new window.google.maps.Size(200, 200),
+      scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
     });
@@ -270,8 +270,8 @@ export class Landing extends React.Component {
     // 50%
     this.bubbles.push({
       url: "\\Bubble5050.png",
-      size: new window.google.maps.Size(100, 100),
-      scaledSize: new window.google.maps.Size(16, 16),
+      size: new window.google.maps.Size(200, 200),
+      scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
     });
@@ -280,8 +280,8 @@ export class Landing extends React.Component {
     // 75%
     this.bubbles.push({
       url: "\\Bubble5075.png",
-      size: new window.google.maps.Size(150, 150),
-      scaledSize: new window.google.maps.Size(16, 16),
+      size: new window.google.maps.Size(200, 200),
+      scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
     });
@@ -290,8 +290,8 @@ export class Landing extends React.Component {
     // 100%
     this.bubbles.push({
       url: "\\Bubble5100.png",
-      size: new window.google.maps.Size(150, 150),
-      scaledSize: new window.google.maps.Size(16, 16),
+      size: new window.google.maps.Size(200, 200),
+      scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(8, 8)
     });
@@ -461,9 +461,13 @@ export class Landing extends React.Component {
                 popDataTargetFrame = Math.max(popDataTargetFrame, 0)
                 popDataTargetFrame = Math.min(popDataTargetFrame, thisObject.bubbles.length - 1)
 
+                console.log(Marker)
+                console.log(marker)
+
                 return (
                   <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} />
                 )
+                
               })
             }
             <Marker position={currentPosition} icon={this.currentPositionIcon} />
