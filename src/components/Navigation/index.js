@@ -49,31 +49,29 @@ class NavigationAuth extends React.Component {
               <button className="nav-buttons">POPS!</button>
             </Link>
           </li>
-          <li className="App-link">
+          {/* <li className="App-link">
             <SignOutButton />
-          </li>
+          </li> */}
         </ul>
         {/* Hamburger Drop Down Menue */}
-        {/* <ul className="nav-flex-burger">
+        <div className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
           </Link>
           <div>
             {this.state.showMenu ? (
               <div className="menu">
-                <li>
+                {/* <div>
                   <Link to={ROUTES.LANDING}>Map</Link>
-                </li>
-                <li>
+                </div>
+                <div>
                   <Link to={ROUTES.ACCOUNT}>POPS!</Link>
-                </li>
-                <li>
-                  <SignOutButton />
-                </li>
+                </div> */}
+                <SignOutButton />
               </div>
             ) : null}
           </div>
-        </ul> */}
+        </div>
       </div>
     );
   }
@@ -116,31 +114,28 @@ class NavigationNonAuth extends React.Component {
               <button className="nav-buttons">POPS!</button>
             </Link>
           </li>
-          <li className="App-link">
-            <SignOutButton />
-          </li>
         </ul>
         {/* Hamburger Drop Down Menue */}
-        {/* <ul className="nav-flex-burger">
+        <div className="nav-flex-burger">
           <Link className="icon" onClick={this.showMenu}>
             <i className="fa fa-bars" />
           </Link>
           <div>
             {this.state.showMenu ? (
               <div className="menu">
-                <li>
+                {/* <div>
                   <Link to={ROUTES.LANDING}>Map</Link>
-                </li>
-                <li>
+                </div>
+                <div>
                   <Link to={ROUTES.ACCOUNT}>POPS!</Link>
-                </li>
-                <li>
-                  <SignOutButton />
-                </li>
+                </div> */}
+                <div>
+                  <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+                </div>
               </div>
             ) : null}
           </div>
-        </ul> */}
+        </div>
       </div>
     );
   }
