@@ -232,7 +232,7 @@ export class Landing extends React.Component {
 
     // set the state
     this.state = {
-      currentRadius: 0.25
+      currentRadius: 0.50
     }
   }
 
@@ -248,15 +248,15 @@ export class Landing extends React.Component {
   }
 
   OnClickButton1(event) {
-    this.setState({ currentRadius: 0.25 });
-  }
-
-  OnClickButton2(event) {
     this.setState({ currentRadius: 0.50 });
   }
 
+  OnClickButton2(event) {
+    this.setState({ currentRadius: 1.00 });
+  }
+
   OnClickButton3(event) {
-    this.setState({ currentRadius: 2.0 });
+    this.setState({ currentRadius: 2.00 });
   }
 
   OnClickButton4(event) {
@@ -316,39 +316,19 @@ export class Landing extends React.Component {
 
     const styleMapButtonDivCSS = {
       position: 'relative',
-      zIndex: '2',
+      //zIndex: '2',
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      "width": "clientmapw",
-      "height": "clientmaph",
-      backgroundColor: '#fff',
-      border: '4px solid #fff',
+      width: "clientmapw",
+      height: "clientmaph",
       borderRadius: '4px',
-      //boxShadow: '0 2px 6px rgba(0,0,0,.3)',
       cursor: 'pointer',
       marginBottom: '22px',
       textAlign: 'center',
       backgroundColor: 'none',
       borderColor: 'none',
     };
-
-    const styleMapButtonCSS = {
-      color: '#000',
-      backgroundColor: "#fff",
-      fontFamily: 'Roboto,Arial,sans-serif',
-      fontSize: '16px',
-      lineHeight: '38px',
-      marginLeft: '2px',
-      marginRight: '2px',
-      //paddingLeft: '5px',
-      //paddingRight: '5px',
-
-    };
-
-    // if (this.props.currentPlaces.length > 0){
-    //   debugger;}
-
 
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
@@ -411,10 +391,10 @@ export class Landing extends React.Component {
             })}
             <Marker position={currentPosition} icon={bubbleRed} />
             <div style={styleMapButtonDivCSS}>
-              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton1(event) }} >search 0.25 mile</button>
-              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton2(event) }} >search 0.50 mile</button>
-              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton3(event) }} >search 1.00 mile</button>
-              <button style={styleMapButtonCSS} onClick={(event) => { this.OnClickButton4(event) }} >center</button>
+              <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
+              <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
+              <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
+              <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
             </div>
             <MapRef this={this}></MapRef>
           </Map>
@@ -426,6 +406,19 @@ export class Landing extends React.Component {
         </div>
       </div >
     );
+  }
+}
+
+const LandingMapButton = ({ selected, text, target }) => {
+
+  if (selected) {
+    return (
+      <button className="styleMapButtonCSSSelected" onClick={(event) => { target(event) }} >{text}</button>
+    )
+  } else {
+    return (
+      <button className="styleMapButtonCSS" onClick={(event) => { target(event) }} >{text}</button>
+    )
   }
 }
 
