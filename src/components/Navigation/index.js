@@ -49,9 +49,6 @@ class NavigationAuth extends React.Component {
               <button className="nav-buttons">POPS!</button>
             </Link>
           </li>
-          {/* <li className="App-link">
-            <SignOutButton />
-          </li> */}
         </ul>
         {/* Hamburger Drop Down Menue */}
         <div className="nav-flex-burger">
@@ -61,12 +58,6 @@ class NavigationAuth extends React.Component {
           <div>
             {this.state.showMenu ? (
               <div className="menu">
-                {/* <div>
-                  <Link to={ROUTES.LANDING}>Map</Link>
-                </div>
-                <div>
-                  <Link to={ROUTES.ACCOUNT}>POPS!</Link>
-                </div> */}
                 <SignOutButton />
               </div>
             ) : null}
@@ -84,13 +75,14 @@ class NavigationNonAuth extends React.Component {
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
   }
-  showMenu() {
-    // event.preventDefault();
+  showMenu(event) {
+    event.preventDefault();
     this.setState({ showMenu: true }, () => {
       document.addEventListener("click", this.closeMenu);
     });
   }
-  closeMenu() {
+  closeMenu(event) {
+    event.preventDefault();
     this.setState({ showMenu: false }, () => {
       document.removeEventListener("click", this.closeMenu);
     });
@@ -123,12 +115,6 @@ class NavigationNonAuth extends React.Component {
           <div>
             {this.state.showMenu ? (
               <div className="menu">
-                {/* <div>
-                  <Link to={ROUTES.LANDING}>Map</Link>
-                </div>
-                <div>
-                  <Link to={ROUTES.ACCOUNT}>POPS!</Link>
-                </div> */}
                 <div>
                   <Link to={ROUTES.SIGN_IN}>Sign In</Link>
                 </div>
@@ -140,5 +126,4 @@ class NavigationNonAuth extends React.Component {
     );
   }
 }
-//what
 export default Navigation;

@@ -317,7 +317,7 @@ body {
 /* Resturant Info.  Button*/
 .pop-button {
   cursor: pointer;
-  border-radius: 5em;
+  border-radius: 8px;
   color: yellow;
   background: linear-gradient(to right, #01cbe6, #1367e4);
   border: none;
@@ -402,9 +402,9 @@ body {
 
 .lock-button {
   cursor: pointer;
-  border-radius: 5em;
-  color: yellow;
-  background: #4caf50;
+  border-radius: 8px;
+  color: white;
+  background: #333;
   border: none;
   padding-left: 20px;
   padding-right: 20px;
@@ -437,7 +437,7 @@ body {
   justify-content: flex-start;
   overflow: hidden;
   background-color: #333;
-  margin: 0;
+
   /* padding-inline-start: 40; */
   font-family: "Ubuntu", sans-serif;
 }
@@ -447,7 +447,7 @@ body {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 0px 4px;
   text-decoration: none;
   font-size: 25px;
 }
@@ -497,13 +497,13 @@ body {
 .App-link {
   color: #61dafb;
 }
-/* 
+
 a {
-  color: #fff;
+  color: blue;
   text-decoration: none;
-} */
+}
 a:hover {
-  color: #00f;
+  color: #333;
 }
 
 i {
@@ -523,8 +523,9 @@ i {
   border: none;
   font-family: "Ubuntu", sans-serif;
   font-display: black;
-  font-size: 18px;
+  font-size: 20px;
   display: flex;
+  justify-content: flex-start;
 }
 .nav-button:active {
   background-color: #3e8e41;
@@ -566,18 +567,17 @@ i {
 .nav-flex-burger a {
   display: block;
   color: #f2f2f2;
-  padding: 10px 100px 10px 50px;
+  padding: 10px 60px 10px 50px;
   text-decoration: none;
   font-size: 19px;
   background-color: #333;
-  border-radius: 10em;
+  border-radius: 9px;
 }
 
-/* .nav-flex-burger :hover {
+.nav-flex-burger :hover {
   background-color: #333;
-  background-color: #3e8e41;
   box-shadow: 0 5px #666;
-} */
+}
 
 .pops-card {
   display: flex;
@@ -641,17 +641,11 @@ i {
   background-color: #333;
   color: white;
   width: 100%;
-  /* border-radius: 1.5em; */
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 .password-userChange {
-  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: black;
-  padding-left: 0px;
-  padding-right: 0px;
   font-family: "Ubuntu", sans-serif;
-  font-size: 20px;
-  font-weight: bold;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -659,7 +653,6 @@ i {
   background-color: #333;
   color: white;
   width: 100%;
-  /* border-radius: 1.5em; */
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
@@ -668,17 +661,13 @@ i {
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 800px;
-  height: 600px;
-  margin: 7em auto;
-  border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
 /* Navigate to gogole button */
 .navigate-button {
   cursor: pointer;
-  border-radius: 5em;
+  border-radius: 8px;
   background: #333;
   border: none;
   padding-left: 20px;
@@ -706,8 +695,7 @@ i {
   border: none;
 }
 
-.styleMapButtonCSS
-{
+.styleMapButtonCSS {
   display: "inline-block";
   color: #036fc0;
   background-color: #fff;
@@ -719,11 +707,11 @@ i {
   border-color: #036fc0;
   border-width: 2px;
   border-radius: 8px;
-  border-style:solid;
+  border-style: solid;
   outline: none;
 }
 
-.styleMapButtonCSSSelected  {
+.styleMapButtonCSSSelected {
   display: "inline-block";
   color: #ffffff;
   background-color: #036fc0;
@@ -735,6 +723,6 @@ i {
   border-color: #036fc0;
   border-width: 2px;
   border-radius: 8px;
-  border-style:solid;
+  border-style: solid;
   outline: none;
 }
