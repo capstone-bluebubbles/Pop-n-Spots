@@ -14,7 +14,6 @@ class PopCard extends React.Component {
   }
 
   numberOfPops(popsObj) {
-    console.log(popsObj);
     const userPops = this.props.user.pops;
     if (!userPops) {
       return "No Pops!";
@@ -41,20 +40,20 @@ class PopCard extends React.Component {
   }
 
   render() {
-    if (this.props.pops.length > 0) {
+    if (this.props.pops.length >= 1) {
       return (
         <div className="pops-card">
           <h3 className="user-places-title">Your Popped Places</h3>
           {this.props.pops.map(place => {
             return (
-              <div>
+              <div key= {place.locationId}>
                 <div className="pops-card-title">{place.title}</div>
                 <div> {place.address}</div>
                 <div className="pops-card-title">
                   <button
                     className="lock-button"
                     type="button"
-                    onClick={() => console.log(`IS THIS CLICKING`)}>
+                    onClick={() => console.log(` CLICK`)}>
                     LOCK!
                   </button>
                 </div>
@@ -63,9 +62,9 @@ class PopCard extends React.Component {
           })}
         </div>
       );
-    } else {
-      return <div>Blockchain UI working...</div>;
     }
+      return <div>Blockchain UI working...</div>;
+
   }
 }
 const mapDispatchToProps = dispatch => ({

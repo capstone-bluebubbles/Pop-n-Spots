@@ -8,68 +8,71 @@ import { AuthUserContext, withAuthorization } from "../Session";
 import {userRef} from '../Firebase/firebase'
 
 class InfoCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pops : []
+    constructor(props) {
+      super(props);
+      this.state = {
+        pops: []
+      }
+      this.handleClick = this.handleClick.bind(this);
     }
-    this.handleClick = this.handleClick.bind(this);
-  }
 
-  //Pop function
-  async addPop(uID, locationId){
-    try {
-      const User = userRef.child(uID);
-      const popsRef = User.child('pops')
-      await popsRef.on('value', snapshot => {
-        const pops = snapshot.val();
-        this.setState({
-          pops: pops
+    //Pop function
+    async addPop(uID, locationId) {
+      try {
+        const User = userRef.child(uID);
+        const popsRef = User.child('pops')
+        await popsRef.on('value', snapshot => {
+          const pops = snapshot.val();
+          this.setState({
+            pops: pops
+          })
         })
-      })
-      let pops = await this.state.pops
-      let popFound = false
-      let placeIndex;
-      let timesPopped;
-        for (let i = 0; i <= pops.length-1; i++){
-          if (pops[i].placeKey === locationId){
-          popFound = true
-          placeIndex = i.toString()
-          timesPopped = this.state.pops[i].timestamp.length
-          break;
+        let pops = await this.state.pops
+        let popFound = false
+        let placeIndex;
+        let timesPopped;
+        for (let i = 0; i <= pops.length - 1; i++) {
+          if (pops[i].placeKey === locationId) {
+            popFound = true
+            placeIndex = i.toString()
+            timesPopped = this.state.pops[i].timestamp.length
+            break;
           }
         }
-        if (popFound === true){
-            let foundPlaceRef = popsRef.child(`${placeIndex}`).child('timestamp').child(`${timesPopped}`)
-            foundPlaceRef.set(
-              Date.now()
-            )} else {
-            const length = pops.length.toString()
-            let popper = popsRef.child(`${length}`)
-            popper.update({
-              'placeKey': locationId,
-              'timestamp': {0: Date.now()}
-           })
-          }
-    } catch (err) {
-      console.error(err)
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick(location){
-    window.open(`http://maps.google.com/?q=${location}`);
-  }
-
-  render() {
-    //console.log(`THE OBJECT===>`, this.props);
-    const weekObject = this.props.place.popularTimesHistogram;
-    for (let day in weekObject) {
-      //console.log(`!!!!`, day);
+        if (popFound === true) {
+          let foundPlaceRef = popsRef.child(`${placeIndex}`).child('timestamp').child(`${timesPopped}`)
+          foundPlaceRef.set(
+            Date.now()
+          )
+        } else {
+          const length = pops.length.toString()
+          let popper = popsRef.child(`${length}`)
+          popper.update({
+            'placeKey': locationId,
+            'timestamp': {
+              0: Date.now()
+            }
+          })
+        }
+      } catch (err) {
+        console.error(err)
+      }
+      this.handleClick = this.handleClick.bind(this)
     }
 
-    //  console.log('props', this.props)
-    return (
+    handleClick(location) {
+      window.open(`http://maps.google.com/?q=${location}`);
+    }
+
+    render() {
+        //console.log(`THE OBJECT===>`, this.props);
+        const weekObject = this.props.place.popularTimesHistogram;
+        for (let day in weekObject) {
+          //console.log(`!!!!`, day);
+        }
+
+        //  console.log('props', this.props)
+        return (
       <AuthUserContext.Consumer>
         {authUser => (
       <div className="info-container">
