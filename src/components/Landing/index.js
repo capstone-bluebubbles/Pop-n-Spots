@@ -232,16 +232,31 @@ export class Landing extends React.Component {
 
     // set the state
     this.state = {
-      currentRadius: 0.50
+      currentRadius: 0.50,
+      currentSelection: []
     }
+
+    const iconDim = 32;
+    const iconScale = 32;
+    const iconScaleOrigin = 0;
+    const iconScaleAnchor = 16;
 
     // set the icon for location
     this.currentPositionIcon = {
       url: "\\Bubble0000.png",
-      size: new window.google.maps.Size(200, 200),
-      scaledSize: new window.google.maps.Size(24, 24),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
+      size: new window.google.maps.Size(iconDim, iconDim),
+      scaledSize: new window.google.maps.Size(iconScale, iconScale),
+      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
+      anchor: new window.google.maps.Point(iconScaleAnchor, iconScaleAnchor)
+    };
+
+    // set the icon for selection
+    this.currentSelectionIcon = {
+      url: "\\Bubble0001.png",
+      size: new window.google.maps.Size(iconDim * 1.5, iconDim * 1.5),
+      scaledSize: new window.google.maps.Size(iconScale * 1.5, iconScale * 1.5),
+      origin: new window.google.maps.Point(iconScaleOrigin * 1.5, iconScaleOrigin * 1.5),
+      anchor: new window.google.maps.Point(iconScaleAnchor * 1.5, iconScaleAnchor * 1.5)
     };
 
     // set the bubbles
@@ -250,50 +265,50 @@ export class Landing extends React.Component {
     // bubble 0
     this.bubbles.push({
       url: "\\Bubble6000.png",
-      size: new window.google.maps.Size(200, 200),
-      scaledSize: new window.google.maps.Size(24, 24),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
+      size: new window.google.maps.Size(iconDim, iconDim),
+      scaledSize: new window.google.maps.Size(iconScale, iconScale),
+      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
+      anchor: new window.google.maps.Point(iconScaleAnchor, iconScaleAnchor)
     });
 
     // bubble 1
     // 25%
     this.bubbles.push({
       url: "\\Bubble6025.png",
-      size: new window.google.maps.Size(200, 200),
-      scaledSize: new window.google.maps.Size(24, 24),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
+      size: new window.google.maps.Size(iconDim, iconDim),
+      scaledSize: new window.google.maps.Size(iconScale, iconScale),
+      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
+      anchor: new window.google.maps.Point(iconScaleAnchor, iconScaleAnchor)
     });
 
     // bubble 2
     // 50%
     this.bubbles.push({
       url: "\\Bubble6050.png",
-      size: new window.google.maps.Size(200, 200),
-      scaledSize: new window.google.maps.Size(24, 24),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
+      size: new window.google.maps.Size(iconDim, iconDim),
+      scaledSize: new window.google.maps.Size(iconScale, iconScale),
+      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
+      anchor: new window.google.maps.Point(iconScaleAnchor, iconScaleAnchor)
     });
 
     // bubble 3
     // 75%
     this.bubbles.push({
       url: "\\Bubble6075.png",
-      size: new window.google.maps.Size(200, 200),
-      scaledSize: new window.google.maps.Size(24, 24),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
+      size: new window.google.maps.Size(iconDim, iconDim),
+      scaledSize: new window.google.maps.Size(iconScale, iconScale),
+      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
+      anchor: new window.google.maps.Point(iconScaleAnchor, iconScaleAnchor)
     });
 
     // bubble 4
     // 100%
     this.bubbles.push({
       url: "\\Bubble6100.png",
-      size: new window.google.maps.Size(200, 200),
-      scaledSize: new window.google.maps.Size(24, 24),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(8, 8)
+      size: new window.google.maps.Size(iconDim, iconDim),
+      scaledSize: new window.google.maps.Size(iconScale, iconScale),
+      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
+      anchor: new window.google.maps.Point(0, 0)
     });
 
     // current day abbreviation
@@ -318,21 +333,26 @@ export class Landing extends React.Component {
   }
 
   OnClickButton1(event) {
-    this.setState({ currentRadius: 0.50 });
+    this.setState({ currentRadius: 0.50, currentSelection: [] });
   }
 
   OnClickButton2(event) {
-    this.setState({ currentRadius: 1.00 });
+    this.setState({ currentRadius: 1.00, currentSelection: [] });
   }
 
   OnClickButton3(event) {
-    this.setState({ currentRadius: 2.00 });
+    this.setState({ currentRadius: 2.00, currentSelection: [] });
   }
 
   OnClickButton4(event) {
     if (this.googleMap) {
       this.googleMap.setCenter(this.props.currentPosition)
     }
+  }
+
+  OnClickMarker(event, marker) {
+    //debugger;
+    this.setState({ currentSelection: [marker] })
   }
 
   render() {
@@ -361,8 +381,9 @@ export class Landing extends React.Component {
 
         // create a marker for this place
         const marker = {
+          placeDistance,
+          place,
           placeGPS,
-          place
         }
 
         markers.push(marker)
@@ -370,7 +391,8 @@ export class Landing extends React.Component {
         // create a card for this place
         const card = {
           placeDistance,
-          place
+          place,
+          placeGPS,
         }
 
         cards.push(card)
@@ -462,9 +484,17 @@ export class Landing extends React.Component {
                 popDataTargetFrame = Math.min(popDataTargetFrame, thisObject.bubbles.length - 1)
 
                 return (
-                  <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} />
+                  <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} onClick={(event) => { this.OnClickMarker(event, marker) }} />
                 )
 
+              })
+            }
+            {
+              // add a marker for the current selection (an array of either 0 or 1 elements)
+              this.state.currentSelection.map((item, index) => {
+                return (
+                  <Marker key={`selection.${index}`} position={item.placeGPS} icon={this.currentSelectionIcon} />
+                )
               })
             }
             <Marker position={currentPosition} icon={this.currentPositionIcon} />
@@ -477,6 +507,16 @@ export class Landing extends React.Component {
             <MapRef this={this}></MapRef>
           </Map>
         </div >
+        <div>
+          {
+            // add a card for the current selection (an array of either 0 or 1 elements)
+            this.state.currentSelection.map((item, index) => {
+              return (
+                <InfoCard key={`card.selection.${index}`} place={item.place} />
+              )
+            })
+          }
+        </div>
         <div>
           {cards.map((item, index) => {
             return <InfoCard key={index} place={item.place} />;
