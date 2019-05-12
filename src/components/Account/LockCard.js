@@ -31,7 +31,7 @@ class LockCard extends React.Component {
   }
   render() {
     console.log(`THE OBJECT===>`, this.props);
-    if(this.props.user.pops !== undefined){
+    if(this.props.user.pops !== undefined || this.props.pops.length !== 0){
     const locks = this.props.user.pops.filter(pop => pop.locked)
     let result = this.props.pops.filter(o1 => locks.some(o2 => o1.locationId === o2.placeKey));
     return (
