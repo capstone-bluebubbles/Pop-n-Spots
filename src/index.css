@@ -307,7 +307,6 @@ body {
 }
 
 .info-card li {
-  font-size: 12px;
   padding-right: 10px;
   padding-left: 10px;
   box-sizing: border-box;
@@ -316,10 +315,28 @@ body {
 /* Resturant Info.  Small white card */
 .place-title {
   display: flex;
-  width: 100px;
+  align-items: flex-start;
+  width: 60px;
   font-family: "Ubuntu", sans-serif;
-  padding: 10px;
   font-size: 14px;
+}
+.poppin-title {
+  font-size: 14;
+  color: rgb(173, 59, 59);
+  font-weight: bold;
+  font-family: "Baloo Bhai", cursive;
+  /* text-shadow: 0px 0 black, 0 1px black, 1px 0 black, 0 0px black; */
+}
+.place-address {
+  font-size: 8px;
+}
+
+.place-website {
+  font-size: 12px;
+}
+
+.place-box {
+  padding-left: 30px;
 }
 
 /* Resturant Info.  Button*/
@@ -834,18 +851,12 @@ i {
 .navigate-button {
   cursor: pointer;
   border-radius: 8px;
-  color: white;
+  color: yellow;
   background: #333;
   border: none;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  padding-top: 5px;
   font-family: "Ubuntu", sans-serif;
   font-display: black;
-  font-size: 15px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-
   display: flex;
 }
 .navigate-button:active {
