@@ -27,12 +27,16 @@ class PopCard extends React.Component {
     }
   }
 
-  lockPlace(locationId, index){
-    const popsRef = userRef.child(this.props.uID).child('pops').child(index)
+  lockPlace(locationId){
+    const popsRef = userRef.child(this.props.uID).child('pops')
+    console.log(popsRef)
     popsRef.update({locked: true})
-    console.log(this.props.uID, locationId)
   }
 
+  dropPlace(index){
+    const place = userRef.child(this.props.uID).child('pops').child(index)
+    console.log(place)
+  }
   componentDidMount(event) {
     this.props.fetchUser(this.props.uID);
     // this.props.fetchPops(this.props.user.pops)
@@ -46,6 +50,7 @@ class PopCard extends React.Component {
   }
 
   render() {
+    console.log(this)
     if (this.props.pops.length >= 1) {
       return (
         <div className="pops-card">
@@ -59,8 +64,14 @@ class PopCard extends React.Component {
                   <button
                     className="lock-button"
                     type="button"
-                    onClick={() => this.lockPlace(place.locationId, index)}>
+                    onClick={() => this.lockPlace(place.locationId)}>
                     LOCK!
+                  </button>
+                  <button
+                    className="lock-button"
+                    type="button"
+                    onClick={() => this.dropPlace(place.locationId)}>
+                    DROP!
                   </button>
                 </div>
               </div>
