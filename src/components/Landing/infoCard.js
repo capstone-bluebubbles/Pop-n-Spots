@@ -5,7 +5,7 @@ import { fetchPlaces } from "../../store/places";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext, withAuthorization } from "../Session";
-import {userRef} from '../Firebase/firebase'
+import { userRef } from "../Firebase/firebase";
 
 class InfoCard extends React.Component {
   constructor(props) {
@@ -22,12 +22,11 @@ class InfoCard extends React.Component {
     this.currentHour = date.getHours();
   }
 
-    //Pop function
+  //Pop function
   async addPop(uID, locationId) {
     try {
       const User = userRef.child(uID);
       const popsRef = User.child('pops')
-      console.log('POPSREF',popsRef)
       await popsRef.on('value', snapshot => {
         const pops = snapshot.val();
         this.setState({
@@ -44,14 +43,14 @@ class InfoCard extends React.Component {
       if(pops !== null){
       for (let i = 0; i <= pops.length-1; i++) {
         if (pops[i].placeKey === locationId) {
-          popFound = true
-          placeIndex = i.toString()
-          timesPopped = this.state.pops[i].timestamp.length
+          popFound = true;
+          placeIndex = i.toString();
+          timesPopped = this.state.pops[i].timestamp.length;
           break;
         }
       }}
       if (popFound === true) {
-        let foundPlaceRef = popsRef.child(`${placeIndex}`)
+        let foundPlaceRef = popsRef.child(`${placeIndex}`);
         foundPlaceRef.update({
           'dropped': false
         })
@@ -66,35 +65,35 @@ class InfoCard extends React.Component {
         const length = pops.length.toString()
         let popper = popsRef.child(`${length}`)
         popper.update({
-          'popIndex': length,
-          'placeKey': locationId,
-          'timestamp': {
+          popIndex: length,
+          placeKey: locationId,
+          timestamp: {
             0: Date.now()
           }
-        })
+        });
       }
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
-handleClick(location) {
-  window.open(`http://maps.google.com/?q=${location}`);
-}
+  handleClick(location) {
+    window.open(`http://maps.google.com/?q=${location}`);
+  }
   render() {
-      let popDataTarget = 0;
-      const popData = this.props.place.popularTimesHistogram;
-      if (popData) {
-        const popDataCurrentDay = popData[this.currentDay];
-        if (popDataCurrentDay) {
-          for (let index = 0; index < popDataCurrentDay.length; index++) {
-            const hour = popDataCurrentDay[index].hour;
-            if (hour === this.currentHour) {
-              popDataTarget = popDataCurrentDay[index].occupancyPercent;
-            }
+    let popDataTarget = 0;
+    const popData = this.props.place.popularTimesHistogram;
+    if (popData) {
+      const popDataCurrentDay = popData[this.currentDay];
+      if (popDataCurrentDay) {
+        for (let index = 0; index < popDataCurrentDay.length; index++) {
+          const hour = popDataCurrentDay[index].hour;
+          if (hour === this.currentHour) {
+            popDataTarget = popDataCurrentDay[index].occupancyPercent;
           }
         }
       }
+    }
 
     return (
       <AuthUserContext.Consumer>
@@ -105,7 +104,9 @@ handleClick(location) {
               <div className="place-title">
                 {Array.from({ length: this.props.place.totalScore }).map(
                   (j, i) => (
-                    <span key={i}> ⭐ </span>
+                    <span key={i} className="stars">
+                      ⭐
+                    </span>
                   )
                 )}
               </div>
@@ -142,15 +143,14 @@ handleClick(location) {
           </div>
         )}
       </AuthUserContext.Consumer>
-    )
-  };
+    );
+  }
 }
-
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
   fetchPops: places => dispatch(fetchPops(places)),
-  fetchPlaces: () => dispatch(fetchPlaces()),
+  fetchPlaces: () => dispatch(fetchPlaces())
   // addPop: (uID, locationID) => dispatch(addPop(uID, locationID))
 });
 
