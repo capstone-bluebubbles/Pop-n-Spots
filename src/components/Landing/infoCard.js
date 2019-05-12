@@ -151,6 +151,7 @@ const mapStateToProps = state => ({
   pops: state.user.pops,
   places: state.places
 });
+
 const condition = authUser => !!authUser;
 
 const Infocard = connect(
