@@ -237,7 +237,7 @@ export class Landing extends React.Component {
 
     // set the icon for location
     this.currentPositionIcon = {
-      url: "\\Bubble2000.png",
+      url: "\\Bubble0000.png",
       size: new window.google.maps.Size(200, 200),
       scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
@@ -249,7 +249,7 @@ export class Landing extends React.Component {
 
     // bubble 0
     this.bubbles.push({
-      url: "\\Bubble3000.png",
+      url: "\\Bubble6000.png",
       size: new window.google.maps.Size(200, 200),
       scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
@@ -259,7 +259,7 @@ export class Landing extends React.Component {
     // bubble 1
     // 25%
     this.bubbles.push({
-      url: "\\Bubble5025.png",
+      url: "\\Bubble6025.png",
       size: new window.google.maps.Size(200, 200),
       scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
@@ -269,7 +269,7 @@ export class Landing extends React.Component {
     // bubble 2
     // 50%
     this.bubbles.push({
-      url: "\\Bubble5050.png",
+      url: "\\Bubble6050.png",
       size: new window.google.maps.Size(200, 200),
       scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
@@ -279,7 +279,7 @@ export class Landing extends React.Component {
     // bubble 3
     // 75%
     this.bubbles.push({
-      url: "\\Bubble5075.png",
+      url: "\\Bubble6075.png",
       size: new window.google.maps.Size(200, 200),
       scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
@@ -289,7 +289,7 @@ export class Landing extends React.Component {
     // bubble 4
     // 100%
     this.bubbles.push({
-      url: "\\Bubble5100.png",
+      url: "\\Bubble6100.png",
       size: new window.google.maps.Size(200, 200),
       scaledSize: new window.google.maps.Size(24, 24),
       origin: new window.google.maps.Point(0, 0),
@@ -464,7 +464,7 @@ export class Landing extends React.Component {
                 return (
                   <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} />
                 )
-                
+
               })
             }
             <Marker position={currentPosition} icon={this.currentPositionIcon} />
