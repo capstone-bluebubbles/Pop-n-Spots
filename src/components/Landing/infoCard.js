@@ -14,12 +14,12 @@ class InfoCard extends React.Component {
       pops: []
     };
     this.handleClick = this.handleClick.bind(this);
-    
+
     // current day abbreviation
     const date = new Date();
-    const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-    this.currentDay = days[date.getDay()]
-    this.currentHour = date.getHours()
+    const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+    this.currentDay = days[date.getDay()];
+    this.currentHour = date.getHours();
   }
 
   //Pop function
@@ -72,27 +72,36 @@ class InfoCard extends React.Component {
   render() {
     console.log(`THE OBJECT===>`, this);
 
-    let popDataTarget = 0
+    let popDataTarget = 0;
     const popData = this.props.place.popularTimesHistogram;
-                if (popData) {
-                  const popDataCurrentDay = popData[this.currentDay]
-                  if (popDataCurrentDay) {
-                    for (let index = 0; index < popDataCurrentDay.length; index++) {
-                      const hour = popDataCurrentDay[index].hour;
-                      if (hour === this.currentHour) {
-                        popDataTarget = popDataCurrentDay[index].occupancyPercent;
-                      }
-                    }
-                  }
-                }
+    if (popData) {
+      const popDataCurrentDay = popData[this.currentDay];
+      if (popDataCurrentDay) {
+        for (let index = 0; index < popDataCurrentDay.length; index++) {
+          const hour = popDataCurrentDay[index].hour;
+          if (hour === this.currentHour) {
+            popDataTarget = popDataCurrentDay[index].occupancyPercent;
+          }
+        }
+      }
+    }
 
-    console.log(popDataTarget)
-    
+    console.log(popDataTarget);
+
     return (
       <AuthUserContext.Consumer>
         {authUser => (
           <div className="info-container">
-            <h3 className="place-title">{this.props.place.title}</h3>
+            <ul>
+              <h3 className="place-title">{this.props.place.title}</h3>
+              <div className="place-title">
+                {Array.from({ length: this.props.place.totalScore }).map(
+                  (j, i) => (
+                    <span key={i}> ⭐ </span>
+                  )
+                )}
+              </div>
+            </ul>
             <ul className="info-card">
               <li>
                 <Link target="_blank" to={`www.${this.props.place.website}`}>
@@ -101,17 +110,9 @@ class InfoCard extends React.Component {
               </li>
               <br />
               <li>{this.props.place.address}</li>
-              <li> Looks like {this.props.place.title} is poppin at the following level: {popDataTarget}% </li>
               <li className="phone">{this.props.place.phone}</li>
-              {/* <li className="star-rating">STARS: {this.props.place.totalScore}</li> */}
               <br />
-              <li>
-                {Array.from({ length: this.props.place.totalScore }).map(
-                  (j, i) => (
-                    <span key={i}> ⭐ </span>
-                  )
-                )}
-              </li>
+              <li className="poppin-title">{popDataTarget}% POPPIN</li>
             </ul>
             <button
               className="navigate-button"
@@ -119,7 +120,7 @@ class InfoCard extends React.Component {
               onClick={() => {
                 this.handleClick(this.props.place.title);
               }}>
-              NAVIGATE
+              NAV
             </button>
             <button
               className="pop-button"
@@ -154,4 +155,4 @@ const Infocard = connect(
   mapDispatchToProps
 )(InfoCard);
 
-export default withAuthorization(condition)(Infocard)
+export default withAuthorization(condition)(Infocard);
