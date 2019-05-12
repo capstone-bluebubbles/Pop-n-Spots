@@ -92,7 +92,7 @@ class InfoCard extends React.Component {
       <AuthUserContext.Consumer>
         {authUser => (
           <div className="info-container">
-            <ul>
+            <ul className="place-box">
               <h3 className="place-title">{this.props.place.title}</h3>
               <div className="place-title">
                 {Array.from({ length: this.props.place.totalScore }).map(
@@ -103,13 +103,13 @@ class InfoCard extends React.Component {
               </div>
             </ul>
             <ul className="info-card">
-              <li>
+              <li className="place-website">
                 <Link target="_blank" to={`www.${this.props.place.website}`}>
                   {this.props.place.website}
                 </Link>
               </li>
               <br />
-              <li>{this.props.place.address}</li>
+              <li className="place-address">{this.props.place.address}</li>
               <li className="phone">{this.props.place.phone}</li>
               <br />
               <li className="poppin-title">{popDataTarget}% POPPIN</li>

@@ -307,7 +307,6 @@ body {
 }
 
 .info-card li {
-  font-size: 12px;
   padding-right: 10px;
   padding-left: 10px;
   box-sizing: border-box;
@@ -323,10 +322,21 @@ body {
 }
 .poppin-title {
   font-size: 14;
-  color: red;
+  color: rgb(173, 59, 59);
   font-weight: bold;
   font-family: "Baloo Bhai", cursive;
   /* text-shadow: 0px 0 black, 0 1px black, 1px 0 black, 0 0px black; */
+}
+.place-address {
+  font-size: 8px;
+}
+
+.place-website {
+  font-size: 12px;
+}
+
+.place-box {
+  padding-left: 30px;
 }
 
 /* Resturant Info.  Button*/
