@@ -42,11 +42,12 @@ export const fetchUser = uID => async dispatch => {
 export const fetchPops = places => async dispatch => {
   try {
     let pops = [];
-    console.log(places)
     if (places.length !== 0 || places !== undefined) {
       for (let i = 0; i <= places.length - 1; i++) {
         let current = places[i];
-        console.log(current)
+        if (current.dropped === true){
+          continue
+        }
         let location = current.placeKey;
         let word = location.replace(/[^a-zA-Z]+/g, '');
         let number = location.match(/\d/g);
@@ -57,7 +58,6 @@ export const fetchPops = places => async dispatch => {
         typeRef.on('value', snapshot => {
           let locationSnap = snapshot.child(`${number}`);
           let locationVal = locationSnap.val();
-          console.log(locationVal)
           pops.push(locationVal);
         });
       }
