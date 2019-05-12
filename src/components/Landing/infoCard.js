@@ -101,7 +101,7 @@ class InfoCard extends React.Component {
               </li>
               <br />
               <li>{this.props.place.address}</li>
-              <li> Looks like {this.props.place.title} is poppin at the following level: {popDataTarget}% </li>
+              <li> Poppin' Level: {popDataTarget}% </li>
               <li className="phone">{this.props.place.phone}</li>
               {/* <li className="star-rating">STARS: {this.props.place.totalScore}</li> */}
               <br />
