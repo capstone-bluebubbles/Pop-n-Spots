@@ -71,8 +71,8 @@ class InfoCard extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this)
   }
-handleClick(location) {
-  window.open(`http://maps.google.com/?q=${location}`);
+handleClick(location, address) {
+  window.open(`http://maps.google.com/?q=${location},${address}`);
 }
   render() {
       let popDataTarget = 0;
@@ -119,7 +119,7 @@ handleClick(location) {
               className="navigate-button"
               type="button"
               onClick={() => {
-                this.handleClick(this.props.place.title);
+                this.handleClick(this.props.place.title, this.props.place.address);
               }}>
               NAV
             </button>
