@@ -36,7 +36,7 @@ class SignUpFormBase extends Component {
         // Create a user in your Firebase realtime database
         return this.props.firebase.user(authUser.user.uid).set({
           username,
-          email
+          email,
         });
       })
       .then(authUser => {

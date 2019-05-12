@@ -27,6 +27,7 @@ class InfoCard extends React.Component {
     try {
       const User = userRef.child(uID);
       const popsRef = User.child('pops')
+      console.log('POPSREF',popsRef)
       await popsRef.on('value', snapshot => {
         const pops = snapshot.val();
         this.setState({
@@ -34,28 +35,34 @@ class InfoCard extends React.Component {
         })
       })
       let pops = await this.state.pops
+      if(pops === undefined){
+        pops = []
+      }
       let popFound = false
       let placeIndex;
       let timesPopped;
-      for (let i = 0; i <= pops.length - 1; i++) {
+      if(pops !== null){
+      for (let i = 0; i <= pops.length-1; i++) {
         if (pops[i].placeKey === locationId) {
           popFound = true
           placeIndex = i.toString()
           timesPopped = this.state.pops[i].timestamp.length
           break;
         }
-      }
+      }}
       if (popFound === true) {
         let foundPlaceRef = popsRef.child(`${placeIndex}`)
         foundPlaceRef.update({
           'dropped': false
         })
         let popRef = foundPlaceRef.child('timestamp').child(`${timesPopped}`)
-
         popRef.set(
           Date.now()
         )
       } else {
+        if (pops === null){
+          pops = []
+        }
         const length = pops.length.toString()
         let popper = popsRef.child(`${length}`)
         popper.update({
@@ -123,6 +130,7 @@ handleClick(location) {
               }}>
               NAV
             </button>
+
             <button
               className="pop-button"
               type="button"
