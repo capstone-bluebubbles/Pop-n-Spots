@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops, getPops } from "../../store/user";
-import { placesRef } from "../Firebase/firebase";
+import { placesRef, userRef } from "../Firebase/firebase";
 import { number } from "prop-types";
 
 class PopCard extends React.Component {
@@ -11,6 +11,18 @@ class PopCard extends React.Component {
     this.state = {
       pops: []
     };
+  }
+
+  lockPlace(place){
+    const match = this.props.user.pops.find(user => user.placeKey === place)
+    const popsRef = userRef.child(this.props.uID).child('pops').child(match.popIndex)
+    popsRef.update({'locked': true})
+  }
+
+  dropPlace(place){
+    const match = this.props.user.pops.find(user => user.placeKey === place)
+    const popsRef = userRef.child(this.props.uID).child('pops').child(match.popIndex)
+    popsRef.update({'dropped': true})
   }
 
   numberOfPops(popsObj) {
@@ -44,7 +56,7 @@ class PopCard extends React.Component {
       return (
         <div className="pops-card">
           <h3 className="user-places-title">Your Popped Places</h3>
-          {this.props.pops.map(place => {
+          {this.props.pops.map((place) => {
             return (
               <div key= {place.locationId}>
                 <div className="pops-card-title">{place.title}</div>
@@ -53,8 +65,16 @@ class PopCard extends React.Component {
                   <button
                     className="lock-button"
                     type="button"
-                    onClick={() => console.log(` CLICK`)}>
+                    onClick={() =>
+                    this.lockPlace(place.locationId)
+                    }>
                     LOCK!
+                  </button>
+                  <button
+                    className="lock-button"
+                    type="button"
+                    onClick={() => this.dropPlace(place.locationId)}>
+                    DROP!
                   </button>
                 </div>
               </div>

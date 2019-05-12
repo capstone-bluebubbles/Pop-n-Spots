@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops, getPops } from "../../store/user";
-import { placesRef } from "../Firebase/firebase";
+import { placesRef, userRef } from "../Firebase/firebase";
 import { number } from "prop-types";
 
 class LockCard extends React.Component {
@@ -11,6 +11,13 @@ class LockCard extends React.Component {
       lockedPlaces : []
     };
   }
+
+  dropPlace(place){
+    const match = this.props.user.pops.find(user => user.placeKey === place.locationId)
+    const popsRef = userRef.child(this.props.uID).child('pops').child(match.popIndex)
+    popsRef.update({'locked': false})
+  }
+
   componentDidMount(event) {
     this.props.fetchUser(this.props.uID);
     // this.props.fetchPops(this.props.user.pops)
@@ -30,7 +37,7 @@ class LockCard extends React.Component {
     return (
       <div className="pops-card">
         <h3 className="user-places-title">Your Favorite Places</h3>
-        {result.map(places => {
+        {result.map((places, index) => {
           return(
         <div key= {places.locationId}>
         <div className="pops-card-title">
@@ -38,7 +45,7 @@ class LockCard extends React.Component {
           <button
             className="lock-button"
             type="button"
-            onClick={() => console.log(` CLICK`)}>
+            onClick={() => this.dropPlace(places)}>
             DROP!
           </button>
         </div>

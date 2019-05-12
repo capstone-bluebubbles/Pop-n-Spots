@@ -40,14 +40,20 @@ class InfoCard extends React.Component {
           }
         }
         if (popFound === true) {
-          let foundPlaceRef = popsRef.child(`${placeIndex}`).child('timestamp').child(`${timesPopped}`)
-          foundPlaceRef.set(
+          let foundPlaceRef = popsRef.child(`${placeIndex}`)
+          foundPlaceRef.update({
+            'dropped' : false
+          })
+          let popRef = foundPlaceRef.child('timestamp').child(`${timesPopped}`)
+
+          popRef.set(
             Date.now()
           )
         } else {
           const length = pops.length.toString()
           let popper = popsRef.child(`${length}`)
           popper.update({
+            'popIndex': length,
             'placeKey': locationId,
             'timestamp': {
               0: Date.now()

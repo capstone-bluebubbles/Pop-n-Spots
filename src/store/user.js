@@ -45,6 +45,9 @@ export const fetchPops = places => async dispatch => {
     if (places.length !== 0 || places !== undefined) {
       for (let i = 0; i <= places.length - 1; i++) {
         let current = places[i];
+        if (current.dropped === true){
+          continue
+        }
         let location = current.placeKey;
         let word = location.replace(/[^a-zA-Z]+/g, '');
         let number = location.match(/\d/g);
