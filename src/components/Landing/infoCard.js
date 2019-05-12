@@ -77,9 +77,11 @@ class InfoCard extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(location) {
-    window.open(`http://maps.google.com/?q=${location}`);
+  
+  handleClick(location, address) {
+  window.open(`http://maps.google.com/?q=${location},${address}`);
   }
+  
   render() {
     let popDataTarget = 0;
     const popData = this.props.place.popularTimesHistogram;
@@ -127,7 +129,7 @@ class InfoCard extends React.Component {
               className="navigate-button"
               type="button"
               onClick={() => {
-                this.handleClick(this.props.place.title);
+                this.handleClick(this.props.place.title, this.props.place.address);
               }}>
               NAV
             </button>
@@ -159,6 +161,7 @@ const mapStateToProps = state => ({
   pops: state.user.pops,
   places: state.places
 });
+
 const condition = authUser => !!authUser;
 
 const Infocard = connect(
