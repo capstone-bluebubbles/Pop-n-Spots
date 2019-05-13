@@ -5,7 +5,6 @@ import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
 import { setCurrentCategory, getCurrentPosition } from "../../store/position"
-import { longStackSupport } from "q";
 import queryString from "query-string"
 
 const styleMapSilver = [
