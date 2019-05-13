@@ -263,7 +263,7 @@ export class Landing extends React.Component {
 
     // bubble 0
     this.bubbles.push({
-      url: "\\Bubble6000.png",
+      url: "\\NewBubble00.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -271,9 +271,9 @@ export class Landing extends React.Component {
     });
 
     // bubble 1
-    // 25%
+    // 33%
     this.bubbles.push({
-      url: "\\Bubble8025.png",
+      url: "\\NewBubble33.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -281,9 +281,9 @@ export class Landing extends React.Component {
     });
 
     // bubble 2
-    // 50%
+    // 66%
     this.bubbles.push({
-      url: "\\Bubble8050.png",
+      url: "\\NewBubble66.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -291,23 +291,13 @@ export class Landing extends React.Component {
     });
 
     // bubble 3
-    // 75%
+    // 99%
     this.bubbles.push({
-      url: "\\Bubble8075.png",
+      url: "\\NewBubble99.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
       anchor: new window.google.maps.Point(iconScaleAnchor, iconScaleAnchor)
-    });
-
-    // bubble 4
-    // 100%
-    this.bubbles.push({
-      url: "\\Bubble8100.png",
-      size: new window.google.maps.Size(iconDim, iconDim),
-      scaledSize: new window.google.maps.Size(iconScale, iconScale),
-      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
-      anchor: new window.google.maps.Point(0, 0)
     });
 
     // current day abbreviation
@@ -428,6 +418,8 @@ export class Landing extends React.Component {
       borderColor: 'none',
     };
 
+    console.log(this.props)
+
     return (
       <div>
         <div style={styleDivCSS} >
@@ -474,9 +466,18 @@ export class Landing extends React.Component {
                   }
                 }
 
-                // there are frames for 0%, 25%, 50%, 75% and 100%
-                // to round to the nearest frame -> floor(input + (25% / 2) / 25%)
-                let popDataTargetFrame = Math.floor((popDataTarget + (25 / 2.0)) / 25.0);
+                let popDataTargetFrame = 0;
+
+                // we have chosen to adopt the following ranges for our bubbles
+                // white -> 0 ... 10%
+                // green -> 11% ... 50%
+                // yellow -> 51% ... 75%
+                // red -> 76% ... 100%
+
+                if (0 < popDataTarget && popDataTarget <= 10) { popDataTargetFrame = 0 }
+                if (10 < popDataTarget && popDataTarget <= 50) { popDataTargetFrame = 1 }
+                if (50 < popDataTarget && popDataTarget <= 75) { popDataTargetFrame = 2 }
+                if (75 < popDataTarget) { popDataTargetFrame = 3 }
 
                 // safety check
                 popDataTargetFrame = Math.max(popDataTargetFrame, 0)
@@ -547,7 +548,8 @@ const mapStateToProps = state => {
   return {
     currentPosition: state.position.currentPosition,
     currentPlaces: state.position.currentPlaces,
-    currentCategory: state.position.currentCategory
+    currentCategory: state.position.currentCategory,
+    user: state.user
   };
 };
 

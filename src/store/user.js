@@ -1,5 +1,4 @@
 import { userRef, placesRef } from '../components/Firebase/firebase';
-import store from '.';
 
 export const GET_USER = 'GET_USER';
 export const GET_POPS = 'GET_POPS';
@@ -17,7 +16,6 @@ export const getUser = user => {
 };
 
 export const getPops = pops => {
-  //console.log(pops)
   return {
     type: GET_POPS,
     pops,
