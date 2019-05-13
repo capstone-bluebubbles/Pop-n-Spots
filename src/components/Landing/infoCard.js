@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { fetchUser, fetchPops } from "../../store/user";
 import { fetchPlaces } from "../../store/places";
 import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
 import { AuthUserContext, withAuthorization } from "../Session";
 import { userRef } from "../Firebase/firebase";
 
@@ -79,7 +78,8 @@ class InfoCard extends React.Component {
   }
   
   handleClick(location, address) {
-  window.open(`http://maps.google.com/?q=${location},${address}`);
+    //window.open(`http://maps.google.com/?q=${location},${address}`);
+    window.open(`http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${this.props.currentPosition.lng}&daddr=${location},${address}`);
   }
   
   render() {
@@ -96,8 +96,9 @@ class InfoCard extends React.Component {
         }
       }
     }
-
+    console.log(this.props.currentPosition.lat, this.props.currentPosition.lng)
     return (
+      
       <AuthUserContext.Consumer>
         {authUser => (
           <div className="info-container">
@@ -159,7 +160,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   user: state.user.user,
   pops: state.user.pops,
-  places: state.places
+  places: state.places,
+  currentPosition: state.position.currentPosition,
 });
 
 const condition = authUser => !!authUser;
