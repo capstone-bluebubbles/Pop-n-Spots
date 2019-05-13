@@ -418,6 +418,8 @@ export class Landing extends React.Component {
       borderColor: 'none',
     };
 
+    console.log(this.props)
+
     return (
       <div>
         <div style={styleDivCSS} >
@@ -546,7 +548,8 @@ const mapStateToProps = state => {
   return {
     currentPosition: state.position.currentPosition,
     currentPlaces: state.position.currentPlaces,
-    currentCategory: state.position.currentCategory
+    currentCategory: state.position.currentCategory,
+    user: state.user
   };
 };
 

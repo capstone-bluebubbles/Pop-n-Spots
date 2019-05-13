@@ -9,7 +9,7 @@ import { withAuthorization } from "../Session";
 import { withFirebase } from "../Firebase";
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom"
-import { fetchPlaces } from '../../store/places'
+import { getCurrentPosition } from '../../store/position'
 import { connect } from "react-redux"
 
 class Home extends Component {
@@ -21,8 +21,6 @@ class Home extends Component {
   componentDidMount() {
     this.props.fetchAllPlaces();
   }
-
-
 
   render() {
     console.log(this.props)
@@ -47,11 +45,12 @@ class Home extends Component {
 const condition = authUser => !!authUser;
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllPlaces: () => dispatch(fetchPlaces())
+  fetchAllPlaces: () => dispatch(getCurrentPosition())
+
 });
 
 const mapStateToProps = state => ({
-  places: state.places
+
 });
 
 const homePage = compose(
