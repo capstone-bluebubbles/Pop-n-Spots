@@ -39,7 +39,7 @@ export const fetchUser = uID => async dispatch => {
 
 export const fetchPops = places => async dispatch => {
   try {
-    let pops = [];
+    let popPromises = [];
     if (places.length !== 0 || places !== undefined) {
       for (let i = 0; i <= places.length - 1; i++) {
         let current = places[i];
@@ -50,18 +50,16 @@ export const fetchPops = places => async dispatch => {
         let word = location.replace(/[^a-zA-Z]+/g, '');
         let number = location.match(/\d/g);
         number = number.join('');
-
         const typeRef = placesRef.child(`${word}`);
-
-        typeRef.on('value', snapshot => {
-          let locationSnap = snapshot.child(`${number}`);
-          let locationVal = locationSnap.val();
-          pops.push(locationVal);
-        });
-      }
+        const popPromise = new Promise((resolve, reject) => {
+          typeRef.once('value', snapshot => {
+            let locationSnap = snapshot.child(`${number}`);
+            resolve(locationSnap.val())
+          })});
+          popPromises.push(popPromise);
+        }}
+      const pops = await Promise.all(popPromises)
       dispatch(getPops(pops));
-      return pops
-    }
   } catch (error) {
     console.log(error);
   }

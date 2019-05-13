@@ -40,18 +40,14 @@ class PopCard extends React.Component {
   }
 
   componentDidMount(event) {
+    // let promise =
     this.props.fetchUser(this.props.uID);
-    // this.props.fetchPops(this.props.user.pops)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user) {
-      this.count++;
-      this.props.fetchPops(this.props.user.pops);
-    }
+      // promise.then(this.props.fetchPops(this.props.user.pops))
   }
 
   render() {
+    // console.log('RENDER', JSON.stringify(this.props))
+    // console.log(this.props.pops.length)
     if (this.props.pops.length >= 1) {
       return (
         <div className="pops-card">
