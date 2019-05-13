@@ -464,9 +464,18 @@ export class Landing extends React.Component {
                   }
                 }
 
-                // there are frames for 0%, 33%, 66%, 99%
-                // to round to the nearest frame -> floor(input + (33% / 2) / 33%)
-                let popDataTargetFrame = Math.floor((popDataTarget + (33 / 2.0)) / 33.0);
+                let popDataTargetFrame = 0;
+
+                // we have chosen to adopt the following ranges for our bubbles
+                // white -> 0 ... 10%
+                // green -> 11% ... 50%
+                // yellow -> 51% ... 75%
+                // red -> 76% ... 100%
+
+                if (0 < popDataTarget && popDataTarget <= 10) { popDataTargetFrame = 0 }
+                if (10 < popDataTarget && popDataTarget <= 50) { popDataTargetFrame = 1 }
+                if (50 < popDataTarget && popDataTarget <= 75) { popDataTargetFrame = 2 }
+                if (75 < popDataTarget) { popDataTargetFrame = 3 }
 
                 // safety check
                 popDataTargetFrame = Math.max(popDataTargetFrame, 0)
