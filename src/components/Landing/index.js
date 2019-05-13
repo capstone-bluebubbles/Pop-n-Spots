@@ -5,7 +5,6 @@ import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
 import { setCurrentCategory, getCurrentPosition } from "../../store/position"
-import { longStackSupport } from "q";
 import queryString from "query-string"
 
 const styleMapSilver = [
@@ -274,7 +273,7 @@ export class Landing extends React.Component {
     // bubble 1
     // 25%
     this.bubbles.push({
-      url: "\\Bubble6025.png",
+      url: "\\Bubble8025.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -284,7 +283,7 @@ export class Landing extends React.Component {
     // bubble 2
     // 50%
     this.bubbles.push({
-      url: "\\Bubble6050.png",
+      url: "\\Bubble8050.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -294,7 +293,7 @@ export class Landing extends React.Component {
     // bubble 3
     // 75%
     this.bubbles.push({
-      url: "\\Bubble6075.png",
+      url: "\\Bubble8075.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -304,7 +303,7 @@ export class Landing extends React.Component {
     // bubble 4
     // 100%
     this.bubbles.push({
-      url: "\\Bubble6100.png",
+      url: "\\Bubble8100.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
