@@ -731,7 +731,7 @@ i {
   color: #036fc0;
   background-color: #fff;
   font-size: 14px;
-  line-height: 38px;
+  line-height: 32px;
   margin-top: 8px;
   margin-left: 4px;
   margin-right: 4px;
@@ -747,7 +747,7 @@ i {
   color: #ffffff;
   background-color: #036fc0;
   font-size: 14px;
-  line-height: 38px;
+  line-height: 32px;
   margin-top: 8px;
   margin-left: 4px;
   margin-right: 4px;
@@ -757,6 +757,37 @@ i {
   border-style: solid;
   outline: none;
 }
+
+.styleMapContextCSS {
+  display: "inline-block";
+  color: #ffffff;
+  background-color: #036fc0;
+  font-size: 14px;
+  line-height: 32px;
+  margin-top: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-color: #036fc0;
+  border-width: 2px;
+  border-radius: 8px;
+  border-style: solid;
+  outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .styleMapButtonCSS {
+    font-size: 8px;
+  }
+
+  .styleMapButtonCSSSelected {
+    font-size: 8px;
+  }
+
+  .styleMapContextCSS {
+    font-size: 8px;
+  }
+}
+
 
 .pops-card {
   display: flex;

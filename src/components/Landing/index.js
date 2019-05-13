@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
 import { connect } from "react-redux";
-import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, Circle, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
 import { setCurrentCategory, getCurrentPosition } from "../../store/position"
@@ -404,19 +404,49 @@ export class Landing extends React.Component {
     };
 
     const styleMapButtonDivCSS = {
-      position: 'relative',
+      position: 'absolute',
+      top: "0px",
+      right: "4px",
       display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+      //justifyContent: "center",
+      //alignItems: "flex-start",
       width: "clientmapw",
       height: "clientmaph",
       borderRadius: '4px',
       cursor: 'pointer',
       marginBottom: '22px',
       textAlign: 'center',
-      backgroundColor: 'none',
-      borderColor: 'none',
+      backgroundColor: 0x000000,
+      borderColor: 0x000000,
     };
+
+    const styleMapContextDivCSS = {
+      position: 'absolute',
+      top: "0px",
+      left: "4px",
+      display: "flex",
+      //justifyContent: "flex-end",
+      //alignItems: "flex-end",
+      width: "clientmapw",
+      height: "clientmaph",
+      borderRadius: '4px',
+      cursor: 'pointer',
+      marginBottom: '22px',
+      textAlign: 'center',
+      backgroundColor: 0x000000,
+      borderColor: 0x000000,
+    };
+
+    let currentCategoryText = "";
+    switch (this.props.currentCategory) {
+      case "bars": currentCategoryText = "BEER"; break;
+      case "coffeeshop": currentCategoryText = "COFFEE"; break;
+      case "burgers": currentCategoryText = "BURGERS"; break;
+      case "cocktails": currentCategoryText = "COCKTAILS"; break;
+      case "pizza": currentCategoryText = "PIZZA"; break;
+      case "tacos": currentCategoryText = "TACOS"; break;
+      default: currentCategoryText = "MISC."
+    }
 
     console.log(this.props)
 
@@ -504,6 +534,14 @@ export class Landing extends React.Component {
               <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
               <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
             </div>
+            <div style={styleMapContextDivCSS}>
+              <LandingMapContext text={currentCategoryText} />
+            </div>
+            <InfoWindow >
+              <div>
+                <h1>HELLO</h1>
+              </div>
+            </InfoWindow>
             <MapRef this={this}></MapRef>
           </Map>
         </div >
@@ -525,6 +563,12 @@ export class Landing extends React.Component {
       </div >
     );
   }
+}
+
+const LandingMapContext = ({ text }) => {
+  return (
+    <button className="styleMapContextCSS" >{text}</button>
+  )
 }
 
 const LandingMapButton = ({ selected, text, target }) => {
