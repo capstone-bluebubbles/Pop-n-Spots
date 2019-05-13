@@ -71,9 +71,12 @@ class InfoCard extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this)
   }
-handleClick(location) {
-  window.open(`http://maps.google.com/?q=${location}`);
-}
+
+  handleClick(location, address) {
+    //window.open(`http://maps.google.com/?q=${location},${address}`);
+    window.open(`http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${this.props.currentPosition.lng}&daddr=${location},${address}`);
+  }
+
   render() {
       let popDataTarget = 0;
       const popData = this.props.place.popularTimesHistogram;
@@ -88,8 +91,8 @@ handleClick(location) {
           }
         }
       }
-
     return (
+
       <AuthUserContext.Consumer>
         {authUser => (authUser ? (
           <div className="info-container">
@@ -188,7 +191,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   user: state.user.user,
   pops: state.user.pops,
-  places: state.places
+  places: state.places,
+  currentPosition: state.position.currentPosition,
 });
 const condition = authUser => !!authUser;
 
