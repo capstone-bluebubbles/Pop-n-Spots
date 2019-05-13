@@ -19,7 +19,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAllPlaces();
+
   }
 
   render() {

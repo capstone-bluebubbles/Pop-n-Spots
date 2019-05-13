@@ -190,6 +190,7 @@ const mapStateToProps = state => ({
   places: state.places,
   currentPosition: state.position.currentPosition,
 });
+
 const condition = authUser => !!authUser;
 
 const Infocard = connect(
