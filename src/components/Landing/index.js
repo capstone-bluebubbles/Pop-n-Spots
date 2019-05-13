@@ -264,7 +264,7 @@ export class Landing extends React.Component {
 
     // bubble 0
     this.bubbles.push({
-      url: "\\Bubble6000.png",
+      url: "\\NewBubble00.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -272,9 +272,9 @@ export class Landing extends React.Component {
     });
 
     // bubble 1
-    // 25%
+    // 33%
     this.bubbles.push({
-      url: "\\Bubble6025.png",
+      url: "\\NewBubble33.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -282,9 +282,9 @@ export class Landing extends React.Component {
     });
 
     // bubble 2
-    // 50%
+    // 66%
     this.bubbles.push({
-      url: "\\Bubble6050.png",
+      url: "\\NewBubble66.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
@@ -292,23 +292,13 @@ export class Landing extends React.Component {
     });
 
     // bubble 3
-    // 75%
+    // 99%
     this.bubbles.push({
-      url: "\\Bubble6075.png",
+      url: "\\NewBubble99.png",
       size: new window.google.maps.Size(iconDim, iconDim),
       scaledSize: new window.google.maps.Size(iconScale, iconScale),
       origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
       anchor: new window.google.maps.Point(iconScaleAnchor, iconScaleAnchor)
-    });
-
-    // bubble 4
-    // 100%
-    this.bubbles.push({
-      url: "\\Bubble6100.png",
-      size: new window.google.maps.Size(iconDim, iconDim),
-      scaledSize: new window.google.maps.Size(iconScale, iconScale),
-      origin: new window.google.maps.Point(iconScaleOrigin, iconScaleOrigin),
-      anchor: new window.google.maps.Point(0, 0)
     });
 
     // current day abbreviation
@@ -475,9 +465,9 @@ export class Landing extends React.Component {
                   }
                 }
 
-                // there are frames for 0%, 25%, 50%, 75% and 100%
-                // to round to the nearest frame -> floor(input + (25% / 2) / 25%)
-                let popDataTargetFrame = Math.floor((popDataTarget + (25 / 2.0)) / 25.0);
+                // there are frames for 0%, 33%, 66%, 99%
+                // to round to the nearest frame -> floor(input + (33% / 2) / 33%)
+                let popDataTargetFrame = Math.floor((popDataTarget + (33 / 2.0)) / 33.0);
 
                 // safety check
                 popDataTargetFrame = Math.max(popDataTargetFrame, 0)
