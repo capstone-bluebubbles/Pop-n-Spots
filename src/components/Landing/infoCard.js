@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops } from "../../store/user";
-import { fetchPlaces } from "../../store/places";
 import { Link, Redirect} from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext, withAuthorization } from "../Session";
@@ -69,11 +68,9 @@ class InfoCard extends React.Component {
     } catch (err) {
       console.error(err)
     }
-    this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(location, address) {
-    //window.open(`http://maps.google.com/?q=${location},${address}`);
     window.open(`http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${this.props.currentPosition.lng}&daddr=${location},${address}`);
   }
 
@@ -108,7 +105,7 @@ class InfoCard extends React.Component {
             </ul>
             <ul className="info-card">
               <li className="place-website">
-                <Link target="_blank" to={`www.${this.props.place.website}`}>
+                <Link target="_blank" onClick={()=>window.open(`https://www.${this.props.place.website}`)}>
                   {this.props.place.website}
                 </Link>
               </li>
@@ -184,7 +181,6 @@ class InfoCard extends React.Component {
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
   fetchPops: places => dispatch(fetchPops(places)),
-  fetchPlaces: () => dispatch(fetchPlaces()),
   // addPop: (uID, locationID) => dispatch(addPop(uID, locationID))
 });
 
