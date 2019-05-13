@@ -43,3 +43,5 @@ export const databaseRef = firebase.database().ref();
 export const placesRef = databaseRef.child("places");
 export const userRef = databaseRef.child("users");
 export default Firebase;
+
+
