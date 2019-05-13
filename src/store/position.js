@@ -1,4 +1,3 @@
-import store from ".";
 import { placesRef, databaseRef } from "../components/Firebase/firebase"
 import { GeoFire } from 'geofire'
 
