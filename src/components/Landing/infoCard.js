@@ -1,13 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops } from "../../store/user";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-=======
-import { fetchPlaces } from "../../store/places";
 import { Link, Redirect} from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
->>>>>>> d6a838705c71389680490df443103a54463339be
 import { AuthUserContext, withAuthorization } from "../Session";
 import {userRef} from '../Firebase/firebase'
 
@@ -73,10 +68,6 @@ class InfoCard extends React.Component {
     } catch (err) {
       console.error(err)
     }
-<<<<<<< HEAD
-=======
-    this.handleClick = this.handleClick.bind(this)
->>>>>>> d6a838705c71389680490df443103a54463339be
   }
 
   handleClick(location, address) {
@@ -97,11 +88,6 @@ class InfoCard extends React.Component {
           }
         }
       }
-<<<<<<< HEAD
-    }
-
-=======
->>>>>>> d6a838705c71389680490df443103a54463339be
     return (
 
       <AuthUserContext.Consumer>
@@ -195,10 +181,6 @@ class InfoCard extends React.Component {
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
   fetchPops: places => dispatch(fetchPops(places)),
-<<<<<<< HEAD
-=======
-  fetchPlaces: () => dispatch(fetchPlaces()),
->>>>>>> d6a838705c71389680490df443103a54463339be
   // addPop: (uID, locationID) => dispatch(addPop(uID, locationID))
 });
 
