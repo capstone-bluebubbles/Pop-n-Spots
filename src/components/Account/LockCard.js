@@ -112,6 +112,7 @@ class LockCard extends React.Component {
                         style={{ height: "30px", width: "30px" }}
                         src="NewBubble33.png"
                       />
+                      <div />
                     </div>
                   </div>
                   <ul className="pops-card-address-container">
