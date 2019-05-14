@@ -1019,3 +1019,6 @@ i {
   flex: 65%;
   /* overflow: hidden; */
 }
+.no-saves {
+  color: white;
+}
