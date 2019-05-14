@@ -344,11 +344,12 @@ body {
   font-size: 14;
   color: rgb(173, 59, 59);
   font-weight: bold;
-  font-family: "Baloo Bhai", cursive;
+  font-family: "Ubuntu", sans-serif;
+  /* font-family: "Baloo Bhai", cursive; */
   /* text-shadow: 0px 0 black, 0 1px black, 1px 0 black, 0 0px black; */
 }
 .place-address {
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .place-website {
