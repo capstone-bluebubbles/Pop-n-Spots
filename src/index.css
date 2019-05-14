@@ -78,11 +78,17 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 350px;
+  width: 700px;
   height: 400px;
-  margin: 7em auto;
+  margin: 6em auto;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+@media screen and (max-width: 600px) {
+  .signin-container {
+    width: 320px;
+  }
 }
 
 /* Centering items on form */
@@ -145,48 +151,43 @@ body {
 
 /* input labels */
 .email {
-  width: 76%;
+  width: 80%;
   color: rgb(38, 50, 56);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1px;
   background: rgba(136, 126, 126, 0.04);
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
+  padding: 10px 10px;
+  border-radius: 80px;
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.02);
   margin-bottom: 50px;
-  margin-left: 46px;
+  margin-left: 40px;
+  margin-right: 100px;
   text-align: center;
-  margin-bottom: 27px;
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
 }
 
 /*  */
 .pass {
-  width: 76%;
+  width: 80%;
   color: rgb(38, 50, 56);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1px;
   background: rgba(136, 126, 126, 0.04);
-  padding: 10px 20px;
-  border: none;
+  padding: 10px 10px;
   border-radius: 20px;
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.02);
-  margin-bottom: 50px;
-  margin-left: 46px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  margin-right: 100px;
   text-align: center;
-  margin-bottom: 27px;
+
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
 }
 
 .email:focus,
@@ -203,18 +204,14 @@ body {
   letter-spacing: 1px;
   background: rgba(136, 126, 126, 0.04);
   padding: 10px 20px;
-  border: none;
   border-radius: 20px;
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.02);
   margin-bottom: 50px;
   text-align: center;
-  margin-bottom: 27px;
   margin: 30px;
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
 }
 /* sign up form input box */
 .sign-up-pass {
@@ -235,12 +232,29 @@ body {
   margin-bottom: 27px;
   margin: 30px;
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
+}
+
+.forgot-pass-email {
+  width: 100%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  text-align: center;
+  margin: 100px;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .sign-up-email:focus,
-.sign-up-pass:focus {
+.sign-up-pass:focus,
+.forgot-pass-email:focus {
   border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
 
@@ -250,11 +264,17 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 350px;
+  width: 750px;
   height: 600px;
-  margin: 3em auto;
+  margin: 1em auto;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+@media screen and (max-width: 600px) {
+  .sign-up-container {
+    width: 320px;
+  }
 }
 
 .sign-up-title {
@@ -464,8 +484,6 @@ body {
   justify-content: flex-start;
   overflow: hidden;
   background-color: #333;
-
-  /* padding-inline-start: 40; */
   font-family: "Ubuntu", sans-serif;
 }
 
@@ -474,14 +492,15 @@ body {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 0px 4px;
+  padding: 4px 4px;
   text-decoration: none;
   font-size: 25px;
 }
 
-.topnav li:hover {
+.topnav button:hover {
   background-color: #4caf50;
-  color: black;
+  border: 1px solid #4caf50;
+  color: white;
 }
 
 .topnav .icon {
@@ -594,7 +613,7 @@ i {
 .nav-flex-burger a {
   display: block;
   color: #f2f2f2;
-  padding: 10px 60px 10px 50px;
+  padding: 10px 30px 10px 10px;
   text-decoration: none;
   font-size: 19px;
   background-color: #333;
@@ -788,7 +807,6 @@ i {
     font-size: 8px;
   }
 }
-
 
 .pops-card {
   display: flex;
