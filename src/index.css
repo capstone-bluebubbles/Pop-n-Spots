@@ -596,6 +596,11 @@ i {
   box-shadow: 0 5px #666;
 }
 
+.user-welcome {
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+}
+
 .user-page-card {
   display: flex;
   flex-direction: row;
