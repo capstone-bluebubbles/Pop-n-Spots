@@ -730,8 +730,8 @@ i {
   display: "inline-block";
   color: #036fc0;
   background-color: #fff;
-  font-size: 14px;
-  line-height: 38px;
+  font-size: 12px;
+  line-height: 32px;
   margin-top: 8px;
   margin-left: 4px;
   margin-right: 4px;
@@ -746,8 +746,8 @@ i {
   display: "inline-block";
   color: #ffffff;
   background-color: #036fc0;
-  font-size: 14px;
-  line-height: 38px;
+  font-size: 12px;
+  line-height: 32px;
   margin-top: 8px;
   margin-left: 4px;
   margin-right: 4px;
@@ -757,6 +757,37 @@ i {
   border-style: solid;
   outline: none;
 }
+
+.styleMapContextCSS {
+  display: "inline-block";
+  color: #ffffff;
+  background-color: #036fc0;
+  font-size: 12px;
+  line-height: 32px;
+  margin-top: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-color: #036fc0;
+  border-width: 2px;
+  border-radius: 8px;
+  border-style: solid;
+  outline: none;
+}
+
+@media only screen and (max-width: 512px) {
+  .styleMapButtonCSS {
+    font-size: 8px;
+  }
+
+  .styleMapButtonCSSSelected {
+    font-size: 8px;
+  }
+
+  .styleMapContextCSS {
+    font-size: 8px;
+  }
+}
+
 
 .pops-card {
   display: flex;
@@ -919,3 +950,40 @@ i {
   transform: translateY(4px);
   border: none;
 }
+
+.LandingTop {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.LandingLeft {
+  flex : 65%;
+  overflow: hidden;
+}
+
+.LandingRight {
+  flex: 35%;
+  overflow: scroll;
+}
+
+@media only screen and (max-width: 1024px) {
+  .LandingTop {
+    display: block;
+    height: 100%;
+    overflow: scroll;
+  }
+
+  .LandingLeft {
+    display: block;
+    height: 100%;
+    overflow: scroll;
+  }
+
+  .LandingRight {
+    display: block;
+    height: 100%;
+    overflow: scroll;
+  }
+}
+

@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
 import { connect } from "react-redux";
-import { Map, Marker, Circle, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, Circle, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
 import { setCurrentCategory, getCurrentPosition } from "../../store/position"
@@ -350,8 +350,6 @@ export class Landing extends React.Component {
     var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var clientm = Math.min(clientw, clienth)
-    let clientmapw = "100%";
-    let clientmaph = clientm * 0.80;
 
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
@@ -392,49 +390,60 @@ export class Landing extends React.Component {
     cards.sort((a, b) => { return a.placeDistance - b.placeDistance })
 
     // local css style objects
-
-    const styleDivCSS = {
-      "width": clientmapw,
-      "height": clientmaph,
-    };
-
     const styleMapCSS = {
-      "width": clientmapw,
-      "height": clientmaph,
+      width: clientw >= 1024 ? clientw * .65 : clientw,
+      height: clientw >= 1024 ? clienth * 0.80 : clienth * 0.80
     };
 
     const styleMapButtonDivCSS = {
-      position: 'relative',
+      position: 'absolute',
+      top: "0px",
       display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "clientmapw",
-      height: "clientmaph",
+      justifyContent: "flex-end",
+      alignItems: "flex-start",
+      width: styleMapCSS.width,
       borderRadius: '4px',
       cursor: 'pointer',
-      marginBottom: '22px',
-      textAlign: 'center',
-      backgroundColor: 'none',
-      borderColor: 'none',
     };
+
+    const styleMapContextDivCSS = {
+      position: 'absolute',
+      top: "0px",
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "flex-end",
+      width: styleMapCSS.width,
+      borderRadius: '4px',
+      cursor: 'pointer',
+    };
+
+    let currentCategoryText = "";
+    switch (this.props.currentCategory) {
+      case "bars": currentCategoryText = "BEER"; break;
+      case "coffeeshop": currentCategoryText = "COFFEE"; break;
+      case "burgers": currentCategoryText = "BURGERS"; break;
+      case "cocktails": currentCategoryText = "COCKTAILS"; break;
+      case "pizza": currentCategoryText = "PIZZA"; break;
+      case "tacos": currentCategoryText = "TACOS"; break;
+      default: currentCategoryText = "MISC."
+    }
 
     console.log(this.props)
 
     return (
-      <div>
-        <div style={styleDivCSS} >
-          <Map
+      <div className="LandingTop">
+        <div className="LandingLeft" style={styleMapCSS}>
+          < Map
+            style={styleMapCSS}
             google={this.props.google}
             zoom={15}
             initialCenter={currentPosition}
             center={currentPosition}
             setCenter={currentPosition}
-            style={styleMapCSS}
             streetViewControl={false}
             mapTypeControl={false}
             fullscreenControl={false}
             gestureHandling={"cooperative"}
-            onDragend={this.centerMoved}
             styles={styleMapSilver}>
             <Circle
               strokeColor={"#036fc0"}
@@ -498,33 +507,44 @@ export class Landing extends React.Component {
               })
             }
             <Marker position={currentPosition} icon={this.currentPositionIcon} />
+            <div style={styleMapContextDivCSS}>
+              <LandingMapContext text={currentCategoryText} />
+            </div>
             <div style={styleMapButtonDivCSS}>
               <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
               <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
               <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
               <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
             </div>
-            <MapRef this={this}></MapRef>
+            <MapRef style={styleMapCSS} this={this}></MapRef>
           </Map>
         </div >
-        <div>
-          {
-            // add a card for the current selection (an array of either 0 or 1 elements)
-            this.state.currentSelection.map((item, index) => {
-              return (
-                <InfoCard key={`card.selection.${index}`} place={item.place} />
-              )
-            })
-          }
-        </div>
-        <div>
-          {cards.map((item, index) => {
-            return <InfoCard key={index} place={item.place} />;
-          })}
+        <div className="LandingRight" >
+          <div>
+            {
+              // add a card for the current selection (an array of either 0 or 1 elements)
+              this.state.currentSelection.map((item, index) => {
+                return (
+                  <InfoCard key={`card.selection.${index}`} place={item.place} />
+                )
+              })
+            }
+          </div>
+          <div>
+            {cards.map((item, index) => {
+              return <InfoCard key={index} place={item.place} />;
+            })}
+          </div>
         </div>
       </div >
     );
   }
+}
+
+const LandingMapContext = ({ text }) => {
+  return (
+    <button className="styleMapContextCSS" >{text}</button>
+  )
 }
 
 const LandingMapButton = ({ selected, text, target }) => {
