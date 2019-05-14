@@ -30,11 +30,7 @@ class NavigationAuth extends React.Component {
       document.removeEventListener("click", this.closeMenu);
     });
   }
-
-  
-
   render() {
-    console.log(this.props)
     return (
       <div className="nav-flex">
         <ul className="topnav">

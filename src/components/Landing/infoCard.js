@@ -140,7 +140,6 @@ class InfoCard extends React.Component {
           }
         }
       }
-
     return (
 
       <AuthUserContext.Consumer>
@@ -176,7 +175,7 @@ class InfoCard extends React.Component {
               className="navigate-button"
               type="button"
               onClick={() => {
-                this.handleClick(this.props.place.title, this.props.place.address);
+                this.handleClick(this.props.place.title);
               }}>
               NAV
             </button>
@@ -212,7 +211,6 @@ class InfoCard extends React.Component {
           <li className="phone">{this.props.place.phone}</li>
           <br />
           <li className="poppin-title">{popDataTarget}% POPPIN</li>
-          <img className = "poppin-time-image" src = 'NewBubble33.png' />
         </ul>
         <button
           className="navigate-button"
@@ -248,7 +246,6 @@ const mapStateToProps = state => ({
   places: state.places,
   currentPosition: state.position.currentPosition,
 });
-
 const condition = authUser => !!authUser;
 
 const Infocard = connect(
