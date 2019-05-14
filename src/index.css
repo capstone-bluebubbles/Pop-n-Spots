@@ -479,8 +479,10 @@ body {
 
 /* NAVEBAR / HAMBURGER MENU */
 .topnav {
+  height: 30px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   overflow: hidden;
   background-color: #333;
   font-family: "Ubuntu", sans-serif;
@@ -491,14 +493,13 @@ body {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 4px 4px;
+  padding: 4px 5px;
   text-decoration: none;
   font-size: 25px;
 }
 
 .topnav button:hover {
   background-color: #4caf50;
-  border: 1px solid #4caf50;
   color: white;
 }
 
@@ -506,7 +507,8 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 600px) {
+/* OLD WAY */
+/* @media screen and (max-width: 600px) {
   .topnav li:not(:first-child) {
     display: relative;
   }
@@ -515,7 +517,7 @@ body {
     display: block;
   }
 }
-/*
+
 @media screen and (min-width: 600px) {
   .nav-flex-burger {
     display: none;
@@ -585,7 +587,6 @@ i {
   background: #333;
   border: none;
   font-family: "Ubuntu", sans-serif;
-  font-display: black;
   font-size: 18px;
   display: flex;
 }
@@ -626,30 +627,24 @@ i {
 
 .pops-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin: 0px;
   font-family: "Ubuntu", sans-serif;
   background-color: white;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
-  padding-bottom: 10px;
 }
 
 .pops-card-title {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: black;
   padding-top: 15px;
-  padding-left: 50px;
-  padding-right: 50px;
-  font-family: "Ubuntu", sans-serif;
   font-size: 18px;
   font-weight: bold;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px;
 }
+
 .pops-card-address {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: black;
@@ -976,7 +971,7 @@ i {
 }
 
 .LandingLeft {
-  flex : 65%;
+  flex: 65%;
   overflow: hidden;
 }
 
@@ -1004,4 +999,3 @@ i {
     overflow: scroll;
   }
 }
-
