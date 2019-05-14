@@ -119,7 +119,7 @@ class InfoCard extends React.Component {
               className="navigate-button"
               type="button"
               onClick={() => {
-                this.handleClick(this.props.place.title);
+                this.handleClick(this.props.place.title, this.props.place.address);
               }}>
               NAV
             </button>
@@ -190,6 +190,7 @@ const mapStateToProps = state => ({
   places: state.places,
   currentPosition: state.position.currentPosition,
 });
+
 const condition = authUser => !!authUser;
 
 const Infocard = connect(

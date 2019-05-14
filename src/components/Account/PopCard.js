@@ -13,16 +13,22 @@ class PopCard extends React.Component {
     };
   }
 
-  lockPlace(place){
-    const match = this.props.user.pops.find(user => user.placeKey === place)
-    const popsRef = userRef.child(this.props.uID).child('pops').child(match.popIndex)
-    popsRef.update({'locked': true})
+  lockPlace(place) {
+    const match = this.props.user.pops.find(user => user.placeKey === place);
+    const popsRef = userRef
+      .child(this.props.uID)
+      .child("pops")
+      .child(match.popIndex);
+    popsRef.update({ locked: true });
   }
 
-  dropPlace(place){
-    const match = this.props.user.pops.find(user => user.placeKey === place)
-    const popsRef = userRef.child(this.props.uID).child('pops').child(match.popIndex)
-    popsRef.update({'dropped': true})
+  dropPlace(place) {
+    const match = this.props.user.pops.find(user => user.placeKey === place);
+    const popsRef = userRef
+      .child(this.props.uID)
+      .child("pops")
+      .child(match.popIndex);
+    popsRef.update({ dropped: true });
   }
 
   numberOfPops(popsObj) {
@@ -42,7 +48,7 @@ class PopCard extends React.Component {
   componentDidMount(event) {
     // let promise =
     this.props.fetchUser(this.props.uID);
-      // promise.then(this.props.fetchPops(this.props.user.pops))
+    // promise.then(this.props.fetchPops(this.props.user.pops))
   }
 
   render() {
@@ -50,28 +56,28 @@ class PopCard extends React.Component {
     // console.log(this.props.pops.length)
     if (this.props.pops.length >= 1) {
       return (
-        <div className="pops-card">
+        <div>
           <h3 className="user-places-title">Your Popped Places</h3>
-          {this.props.pops.map((place) => {
+          {this.props.pops.map(place => {
             return (
-              <div key= {place.locationId}>
-                <div className="pops-card-title">{place.title}</div>
-                <div> {place.address}</div>
-                <div className="pops-card-title">
-                  <button
-                    className="lock-button"
-                    type="button"
-                    onClick={() =>
-                    this.lockPlace(place.locationId)
-                    }>
-                    LOCK!
-                  </button>
-                  <button
-                    className="lock-button"
-                    type="button"
-                    onClick={() => this.dropPlace(place.locationId)}>
-                    DROP!
-                  </button>
+              <div>
+                <div className="pops-card" key={place.locationId}>
+                  <div className="pops-card-title">{place.title}</div>
+                  <div> {place.address}</div>
+                  <div className="pops-card-title">
+                    <button
+                      className="lock-button"
+                      type="button"
+                      onClick={() => this.lockPlace(place.locationId)}>
+                      LOCK!
+                    </button>
+                    <button
+                      className="lock-button"
+                      type="button"
+                      onClick={() => this.dropPlace(place.locationId)}>
+                      DROP!
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -79,8 +85,7 @@ class PopCard extends React.Component {
         </div>
       );
     }
-      return <div>Blockchain UI working...</div>;
-
+    return <div>Blockchain UI working...</div>;
   }
 }
 const mapDispatchToProps = dispatch => ({
