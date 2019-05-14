@@ -295,7 +295,7 @@ body {
 .info-container {
   background-color: white;
   /* width: 100%; */
-  height: 140px;
+  height: 200px;
   margin: 3px;
   display: flex;
   flex-direction: row;
@@ -480,7 +480,7 @@ body {
 
 /* NAVEBAR / HAMBURGER MENU */
 .topnav {
-  height: 30px;
+  height: 50px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -967,36 +967,16 @@ i {
 
 .LandingTop {
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  height: calc(100vh - 50px);
+  /* overflow: hidden; */
 }
 
 .LandingLeft {
-  flex: 65%;
-  overflow: hidden;
-}
-
-.LandingRight {
   flex: 35%;
   overflow: scroll;
 }
 
-@media only screen and (max-width: 1024px) {
-  .LandingTop {
-    display: block;
-    height: 100%;
-    overflow: scroll;
-  }
-
-  .LandingLeft {
-    display: block;
-    height: 100%;
-    overflow: scroll;
-  }
-
-  .LandingRight {
-    display: block;
-    height: 100%;
-    overflow: scroll;
-  }
+.LandingRight {
+  flex: 65%;
+  /* overflow: hidden; */
 }

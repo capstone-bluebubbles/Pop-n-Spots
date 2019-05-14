@@ -316,9 +316,23 @@ export class Landing extends React.Component {
     // set the category in the redux store
     this.props.currentDispatch(setCurrentCategory(category))
 
-    // load the current position
+    // load the current position if necessary
     // => automatically loads the current places
-    this.props.currentDispatch(getCurrentPosition())
+    if (this.props.currentPosition.timestamp === 0) {
+      this.props.currentDispatch(getCurrentPosition())
+    }
+
+    // add listener for window resize
+    window.addEventListener('resize', this.resize)
+  }
+
+  componentWillUnmount() {
+    // remove listener for window resize
+    window.removeEventListener('resize', this.resize)
+  }
+
+  resize = () => {
+    this.forceUpdate()
   }
 
   OnClickButton1(event) {
@@ -345,13 +359,11 @@ export class Landing extends React.Component {
   }
 
   render() {
-    //console.log("REACT -> Landing -> this.props ->", this.props)
 
-    const navbar = document.getElementById("navigation-nav-flex")
-    //
-    debugger;
     var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    //
+    const narrowDisplay = clientw < 1024 ? true : false
 
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
@@ -393,16 +405,23 @@ export class Landing extends React.Component {
 
     // local css style objects
     const styleMapCSS = {
-      width: clientw >= 1024 ? clientw * .65 : clientw,
-      height: clientw >= 1024 ? clienth - 30 : clienth - 30 - 100
+      position: 'relative',
+      width: "100%",
+      height: narrowDisplay === false ? "100%" : clienth - 50 - 200,
     };
-
+    /*
+        // local css style objects
+        const styleCardsCSS = {
+          display: "inline",
+          position: 'relative',
+          width: "100%",
+          height: "100%"
+        };
+    */
     const styleMapButtonDivCSS = {
       display: "flex",
       position: 'absolute',
-      //left: "4px",
       top: "0px",
-      //display: "flex",
       justifyContent: "center",
       alignItems: "center",
       width: styleMapCSS.width,
@@ -411,22 +430,8 @@ export class Landing extends React.Component {
       border: "none",
       borderRadius: '0px',
       cursor: 'pointer',
-      //backgroundColor: "#000000"
     };
-    /*
-        const styleMapContextDivCSS = {
-          display: "flex",
-          position: 'absolute',
-          top: "0px",
-          //display: "flex",
-          //justifyContent: "flex-start",
-          //alignItems: "flex-end",
-          //width: styleMapCSS.width,
-          borderRadius: '4px',
-          cursor: 'pointer',
-          backgroundColor: "#000000"
-        };
-    */
+
     let currentCategoryText = "";
     switch (this.props.currentCategory) {
       case "bars": currentCategoryText = "BEER"; break;
@@ -440,115 +445,221 @@ export class Landing extends React.Component {
 
     console.log(this.props)
 
-    return (
-      <div className="LandingTop">
-        <div className="LandingLeft" style={styleMapCSS} >
-          < Map
-            style={styleMapCSS}
-            google={this.props.google}
-            zoom={15}
-            initialCenter={currentPosition}
-            center={currentPosition}
-            setCenter={currentPosition}
-            streetViewControl={false}
-            mapTypeControl={false}
-            fullscreenControl={false}
-            gestureHandling={"cooperative"}
-            styles={styleMapSilver}>
-            <Circle
-              strokeColor={"#036fc0"}
-              strokeOpacity={1.0}
-              strokeWeight={2}
-              fillColor={"#036fc0"}
-              fillOpacity={0.0625}
+    if (narrowDisplay === false) {
+      return (
+        <div className="LandingTop">
+          <div className="LandingLeft" style={styleMapCSS} >
+            <div>
+              {
+                // add a card for the current selection (an array of either 0 or 1 elements)
+                this.state.currentSelection.map((item, index) => {
+                  return (
+                    <InfoCard key={`card.selection.${index}`} place={item.place} />
+                  )
+                })
+              }
+            </div>
+            <div>
+              {cards.map((item, index) => {
+                return <InfoCard key={index} place={item.place} />;
+              })}
+            </div>
+          </div>
+          <div className="LandingRight" style={styleMapCSS} >
+            < Map
+              style={styleMapCSS}
+              google={this.props.google}
+              zoom={15}
+              initialCenter={currentPosition}
               center={currentPosition}
-              radius={currentRadiusInKilometers * 1000}
-            />
-            {
-              markers.map((item, index) => {
-                const thisObject = this
-                const thisKey = index
-                const marker = item
+              setCenter={currentPosition}
+              streetViewControl={false}
+              mapTypeControl={false}
+              fullscreenControl={false}
+              gestureHandling={"cooperative"}
+              styles={styleMapSilver}>
+              <Circle
+                strokeColor={"#036fc0"}
+                strokeOpacity={1.0}
+                strokeWeight={2}
+                fillColor={"#036fc0"}
+                fillOpacity={0.0625}
+                center={currentPosition}
+                radius={currentRadiusInKilometers * 1000}
+              />
+              {
+                markers.map((item, index) => {
+                  const thisObject = this
+                  const thisKey = index
+                  const marker = item
 
-                let popDataTarget = 0
+                  let popDataTarget = 0
 
-                const popData = marker.place.popularTimesHistogram;
-                if (popData) {
-                  const popDataCurrentDay = popData[thisObject.currentDay]
-                  if (popDataCurrentDay) {
-                    for (let index = 0; index < popDataCurrentDay.length; index++) {
-                      const hour = popDataCurrentDay[index].hour;
-                      if (hour === thisObject.currentHour) {
-                        popDataTarget = popDataCurrentDay[index].occupancyPercent;
+                  const popData = marker.place.popularTimesHistogram;
+                  if (popData) {
+                    const popDataCurrentDay = popData[thisObject.currentDay]
+                    if (popDataCurrentDay) {
+                      for (let index = 0; index < popDataCurrentDay.length; index++) {
+                        const hour = popDataCurrentDay[index].hour;
+                        if (hour === thisObject.currentHour) {
+                          popDataTarget = popDataCurrentDay[index].occupancyPercent;
+                        }
                       }
                     }
                   }
-                }
 
-                let popDataTargetFrame = 0;
+                  let popDataTargetFrame = 0;
 
-                // we have chosen to adopt the following ranges for our bubbles
-                // white -> 0 ... 10%
-                // green -> 11% ... 50%
-                // yellow -> 51% ... 75%
-                // red -> 76% ... 100%
+                  // we have chosen to adopt the following ranges for our bubbles
+                  // white -> 0 ... 10%
+                  // green -> 11% ... 50%
+                  // yellow -> 51% ... 75%
+                  // red -> 76% ... 100%
 
-                if (0 < popDataTarget && popDataTarget <= 10) { popDataTargetFrame = 0 }
-                if (10 < popDataTarget && popDataTarget <= 50) { popDataTargetFrame = 1 }
-                if (50 < popDataTarget && popDataTarget <= 75) { popDataTargetFrame = 2 }
-                if (75 < popDataTarget) { popDataTargetFrame = 3 }
+                  if (0 < popDataTarget && popDataTarget <= 10) { popDataTargetFrame = 0 }
+                  if (10 < popDataTarget && popDataTarget <= 50) { popDataTargetFrame = 1 }
+                  if (50 < popDataTarget && popDataTarget <= 75) { popDataTargetFrame = 2 }
+                  if (75 < popDataTarget) { popDataTargetFrame = 3 }
 
-                // safety check
-                popDataTargetFrame = Math.max(popDataTargetFrame, 0)
-                popDataTargetFrame = Math.min(popDataTargetFrame, thisObject.bubbles.length - 1)
+                  // safety check
+                  popDataTargetFrame = Math.max(popDataTargetFrame, 0)
+                  popDataTargetFrame = Math.min(popDataTargetFrame, thisObject.bubbles.length - 1)
 
-                return (
-                  <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} onClick={(event) => { this.OnClickMarker(event, marker) }} />
-                )
+                  return (
+                    <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} onClick={(event) => { this.OnClickMarker(event, marker) }} />
+                  )
 
-              })
-            }
-            {
-              // add a marker for the current selection (an array of either 0 or 1 elements)
-              this.state.currentSelection.map((item, index) => {
-                return (
-                  <Marker key={`selection.${index}`} position={item.placeGPS} icon={this.currentSelectionIcon} />
-                )
-              })
-            }
-            <Marker position={currentPosition} icon={this.currentPositionIcon} />
-            {/* <div style={styleMapContextDivCSS}>
-              <LandingMapContext text={currentCategoryText} />
-            </div> */}
-            <div style={styleMapButtonDivCSS}>
-              <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
-              <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
-              <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
-              <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
-              <LandingMapContext text={currentCategoryText} />
-            </div>
-            <MapRef style={styleMapCSS} this={this}></MapRef>
-          </Map>
+                })
+              }
+              {
+                // add a marker for the current selection (an array of either 0 or 1 elements)
+                this.state.currentSelection.map((item, index) => {
+                  return (
+                    <Marker key={`selection.${index}`} position={item.placeGPS} icon={this.currentSelectionIcon} />
+                  )
+                })
+              }
+              <Marker position={currentPosition} icon={this.currentPositionIcon} />
+              <div style={styleMapButtonDivCSS}>
+                <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
+                <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
+                <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
+                <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
+                <LandingMapContext text={currentCategoryText} />
+              </div>
+              <MapRef style={styleMapCSS} this={this}></MapRef>
+            </Map>
+          </div >
         </div >
-        <div className="LandingRight" >
-          <div>
-            {
-              // add a card for the current selection (an array of either 0 or 1 elements)
-              this.state.currentSelection.map((item, index) => {
-                return (
-                  <InfoCard key={`card.selection.${index}`} place={item.place} />
-                )
-              })
-            }
+      );
+    } else {
+      return (
+        <div>
+          <div style={styleMapCSS} >
+            < Map
+              style={styleMapCSS}
+              google={this.props.google}
+              zoom={15}
+              initialCenter={currentPosition}
+              center={currentPosition}
+              setCenter={currentPosition}
+              streetViewControl={false}
+              mapTypeControl={false}
+              fullscreenControl={false}
+              gestureHandling={"cooperative"}
+              styles={styleMapSilver}>
+              <Circle
+                strokeColor={"#036fc0"}
+                strokeOpacity={1.0}
+                strokeWeight={2}
+                fillColor={"#036fc0"}
+                fillOpacity={0.0625}
+                center={currentPosition}
+                radius={currentRadiusInKilometers * 1000}
+              />
+              {
+                markers.map((item, index) => {
+                  const thisObject = this
+                  const thisKey = index
+                  const marker = item
+
+                  let popDataTarget = 0
+
+                  const popData = marker.place.popularTimesHistogram;
+                  if (popData) {
+                    const popDataCurrentDay = popData[thisObject.currentDay]
+                    if (popDataCurrentDay) {
+                      for (let index = 0; index < popDataCurrentDay.length; index++) {
+                        const hour = popDataCurrentDay[index].hour;
+                        if (hour === thisObject.currentHour) {
+                          popDataTarget = popDataCurrentDay[index].occupancyPercent;
+                        }
+                      }
+                    }
+                  }
+
+                  let popDataTargetFrame = 0;
+
+                  // we have chosen to adopt the following ranges for our bubbles
+                  // white -> 0 ... 10%
+                  // green -> 11% ... 50%
+                  // yellow -> 51% ... 75%
+                  // red -> 76% ... 100%
+
+                  if (0 < popDataTarget && popDataTarget <= 10) { popDataTargetFrame = 0 }
+                  if (10 < popDataTarget && popDataTarget <= 50) { popDataTargetFrame = 1 }
+                  if (50 < popDataTarget && popDataTarget <= 75) { popDataTargetFrame = 2 }
+                  if (75 < popDataTarget) { popDataTargetFrame = 3 }
+
+                  // safety check
+                  popDataTargetFrame = Math.max(popDataTargetFrame, 0)
+                  popDataTargetFrame = Math.min(popDataTargetFrame, thisObject.bubbles.length - 1)
+
+                  return (
+                    <Marker key={thisKey} position={marker.placeGPS} icon={this.bubbles[popDataTargetFrame]} onClick={(event) => { this.OnClickMarker(event, marker) }} />
+                  )
+
+                })
+              }
+              {
+                // add a marker for the current selection (an array of either 0 or 1 elements)
+                this.state.currentSelection.map((item, index) => {
+                  return (
+                    <Marker key={`selection.${index}`} position={item.placeGPS} icon={this.currentSelectionIcon} />
+                  )
+                })
+              }
+              <Marker position={currentPosition} icon={this.currentPositionIcon} />
+              <div style={styleMapButtonDivCSS}>
+                <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
+                <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
+                <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
+                <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
+                <LandingMapContext text={currentCategoryText} />
+              </div>
+              <MapRef style={styleMapCSS} this={this}></MapRef>
+            </Map>
           </div>
-          <div>
-            {cards.map((item, index) => {
-              return <InfoCard key={index} place={item.place} />;
-            })}
+          <div className="LandingRight" style={styleMapCSS} >
+            <div>
+              {
+                // add a card for the current selection (an array of either 0 or 1 elements)
+                this.state.currentSelection.map((item, index) => {
+                  return (
+                    <InfoCard key={`card.selection.${index}`} place={item.place} />
+                  )
+                })
+              }
+            </div>
+            <div>
+              {cards.map((item, index) => {
+                return <InfoCard key={index} place={item.place} />;
+              })}
+            </div>
           </div>
-        </div>
-      </div >
-    );
+        </div >
+      )
+    }
   }
 }
 
