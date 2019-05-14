@@ -80,9 +80,6 @@ class PopCard extends React.Component {
   }
 
   render() {
-    // console.log('RENDER', JSON.stringify(this.props))
-    // console.log(this.props.pops.length)
-    console.log(this.props);
     if (this.props.pops.length >= 1) {
       return (
         <div>
@@ -105,6 +102,7 @@ class PopCard extends React.Component {
                         <span key={i}> ⭐ </span>
                       ))}
                     </div>
+                    <img src="NewBubble33.png" />
                   </ul>
                   <div className="buttons">
                     <ul>
