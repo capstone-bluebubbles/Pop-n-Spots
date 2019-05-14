@@ -78,7 +78,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: white;
-  width: 600px;
+  width: 700px;
   height: 400px;
   margin: 6em auto;
   border-radius: 1.5em;
@@ -151,48 +151,43 @@ body {
 
 /* input labels */
 .email {
-  width: 76%;
+  width: 80%;
   color: rgb(38, 50, 56);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1px;
   background: rgba(136, 126, 126, 0.04);
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
+  padding: 10px 10px;
+  border-radius: 80px;
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.02);
   margin-bottom: 50px;
-  margin-left: 46px;
+  margin-left: 40px;
+  margin-right: 100px;
   text-align: center;
-  margin-bottom: 27px;
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
 }
 
 /*  */
 .pass {
-  width: 76%;
+  width: 80%;
   color: rgb(38, 50, 56);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1px;
   background: rgba(136, 126, 126, 0.04);
-  padding: 10px 20px;
-  border: none;
+  padding: 10px 10px;
   border-radius: 20px;
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.02);
-  margin-bottom: 50px;
-  margin-left: 46px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  margin-right: 100px;
   text-align: center;
-  margin-bottom: 27px;
+
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
 }
 
 .email:focus,
@@ -209,18 +204,14 @@ body {
   letter-spacing: 1px;
   background: rgba(136, 126, 126, 0.04);
   padding: 10px 20px;
-  border: none;
   border-radius: 20px;
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.02);
   margin-bottom: 50px;
   text-align: center;
-  margin-bottom: 27px;
   margin: 30px;
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
 }
 /* sign up form input box */
 .sign-up-pass {
@@ -241,12 +232,29 @@ body {
   margin-bottom: 27px;
   margin: 30px;
   font-family: "Ubuntu", sans-serif;
-  padding-left: 90px;
-  padding-right: 90px;
+}
+
+.forgot-pass-email {
+  width: 100%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  text-align: center;
+  margin: 100px;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .sign-up-email:focus,
-.sign-up-pass:focus {
+.sign-up-pass:focus,
+.forgot-pass-email:focus {
   border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
 
