@@ -15,7 +15,10 @@ class PopCard extends React.Component {
     const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
     this.currentDay = days[date.getDay()];
     this.currentHour = date.getHours();
+    this.bubbles=['NewBubble00.png', 'NewBubble33.png', 'NewBubble66.png', 'NewBubble99.png']
   }
+
+  
 
   handleClick(location, address) {
     window.open(
@@ -70,7 +73,35 @@ class PopCard extends React.Component {
         }
       }
     }
-    return <div> {popDataTarget}% POPPIN</div>;
+    let popDataTargetFrame = 0;
+
+    // we have chosen to adopt the following ranges for our bubbles
+    // white -> 0 ... 10%
+    // green -> 11% ... 50%
+    // yellow -> 51% ... 75%
+    // red -> 76% ... 100%
+
+    if (0 < popDataTarget && popDataTarget <= 10) {
+      popDataTargetFrame = 0;
+    }
+    if (10 < popDataTarget && popDataTarget <= 50) {
+      popDataTargetFrame = 1;
+    }
+    if (50 < popDataTarget && popDataTarget <= 75) {
+      popDataTargetFrame = 2;
+    }
+    if (75 < popDataTarget) {
+      popDataTargetFrame = 3;
+    }
+
+    // safety check
+    popDataTargetFrame = Math.max(popDataTargetFrame, 0);
+    popDataTargetFrame = Math.min(
+      popDataTargetFrame,
+      this.bubbles.length - 1
+    );
+
+    // return <div> {popDataTarget}% POPPIN</div>;
   };
 
   componentDidMount(event) {
@@ -80,9 +111,6 @@ class PopCard extends React.Component {
   }
 
   render() {
-    // console.log('RENDER', JSON.stringify(this.props))
-    // console.log(this.props.pops.length)
-    console.log(this.props);
     if (this.props.pops.length >= 1) {
       return (
         <div>
@@ -105,6 +133,7 @@ class PopCard extends React.Component {
                         <span key={i}> ⭐ </span>
                       ))}
                     </div>
+                    <img src="NewBubble33.png" />
                   </ul>
                   <div className="buttons">
                     <ul>
