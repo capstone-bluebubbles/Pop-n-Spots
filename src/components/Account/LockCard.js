@@ -58,6 +58,7 @@ class LockCard extends React.Component {
                         <span key={i}> ⭐ </span>
                       ))}
                     </div>
+                    <img src="NewBubble33.png" />
                   </ul>
                   <div className="buttons">
                     <button
