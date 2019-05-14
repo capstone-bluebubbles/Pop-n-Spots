@@ -1,24 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchUser, fetchPops, getPops } from '../../store/user';
-import { placesRef, userRef } from '../Firebase/firebase';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchUser, fetchPops, getPops } from "../../store/user";
+import { placesRef, userRef } from "../Firebase/firebase";
 
 class PopCard extends React.Component {
   constructor(props) {
     super();
     this.count = 0;
     this.state = {
-      pops: [],
+      pops: []
     };
     // current day abbreviation
     const date = new Date();
-    const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     this.currentDay = days[date.getDay()];
     this.currentHour = date.getHours();
-    this.bubbles=['NewBubble00.png', 'NewBubble33.png', 'NewBubble66.png', 'NewBubble99.png']
+    this.bubbles = [
+      "NewBubble00.png",
+      "NewBubble33.png",
+      "NewBubble66.png",
+      "NewBubble99.png"
+    ];
   }
-
-  
 
   handleClick(location, address) {
     window.open(
@@ -32,7 +35,7 @@ class PopCard extends React.Component {
     const match = this.props.user.pops.find(user => user.placeKey === place);
     const popsRef = userRef
       .child(this.props.uID)
-      .child('pops')
+      .child("pops")
       .child(match.popIndex);
     popsRef.update({ locked: true });
   }
@@ -41,7 +44,7 @@ class PopCard extends React.Component {
     const match = this.props.user.pops.find(user => user.placeKey === place);
     const popsRef = userRef
       .child(this.props.uID)
-      .child('pops')
+      .child("pops")
       .child(match.popIndex);
     popsRef.update({ dropped: true });
   }
@@ -49,7 +52,7 @@ class PopCard extends React.Component {
   numberOfPops(popsObj) {
     const userPops = this.props.user.pops;
     if (!userPops) {
-      return 'No Pops!';
+      return "No Pops!";
     } else {
       for (let i = 0; i < userPops.length; i++) {
         // console.log('POPSOBJ',popsObj.locationId, 'USERKEYS', userPops[i].placeKey)
@@ -96,18 +99,18 @@ class PopCard extends React.Component {
 
     // safety check
     popDataTargetFrame = Math.max(popDataTargetFrame, 0);
-    popDataTargetFrame = Math.min(
-      popDataTargetFrame,
-      this.bubbles.length - 1
-    );
+    popDataTargetFrame = Math.min(popDataTargetFrame, this.bubbles.length - 1);
 
-    return(
-      <div>
-        <div> {popDataTarget}% POPPIN</div>
-        <img src = {`${this.bubbles[popDataTargetFrame]}`} />
+    return (
+      <div className="pops-card-title-icon-container">
+        <div> {`${popDataTarget}% Poppin`} </div>
+        <img
+          className="pops-card-title_icon"
+          style={{ height: "30px", width: "30px" }}
+          src={`${this.bubbles[popDataTargetFrame]}`}
+        />
       </div>
-      
-    ) 
+    );
   };
 
   componentDidMount(event) {
@@ -124,48 +127,51 @@ class PopCard extends React.Component {
             {this.props.pops.map(place => {
               return (
                 <div className="pops-card" key={place.locationId}>
-                  <ul>
+                  <div className="pops-card-title-container">
                     <div className="pops-card-title">{place.title}</div>
-                    <br />
-                    <div className="pops-card-address"> {place.address}</div>
-                    <div className="phone">{place.phone}</div>
-                    <div className="pops-card-mile">1.5 Miles</div>
-                    <div className="popular-time-percent">
-                      {' '}
-                      {this.historyData(place.popularTimesHistogram)}{' '}
+                    <div className="pops-card-title-icon">
+                      {this.historyData(place.popularTimesHistogram)}
                     </div>
+                  </div>
+                  <ul className="pops-card-address-container">
+                    <br />
+                    <div className="pops-card-address">{place.address}</div>
+                    <div className="pops-card-phone">
+                      {`${place.phone.slice(2, 5)}-${place.phone.slice(
+                        5,
+                        8
+                      )}-${place.phone.slice(8)}`}
+                    </div>
+                    <div className="pops-card-mile">1.5 Miles</div>
                     <div className="place-title">
                       {Array.from({ length: place.totalScore }).map((j, i) => (
                         <span key={i}> ⭐ </span>
                       ))}
                     </div>
                   </ul>
-                  <div className="buttons">
-                    <ul>
+                  <div className="pops-card-buttons-container">
+                    <button
+                      className="pops-card-button"
+                      type="button"
+                      onClick={() => {
+                        this.handleClick(place.title, place.address);
+                      }}>
+                      NAV
+                    </button>
+                    <div className="pops-card-button-container-right">
                       <button
-                        className="lock-button"
+                        className="pops-card-button"
                         type="button"
-                        onClick={() => this.lockPlace(place.locationId)}
-                      >
+                        onClick={() => this.lockPlace(place.locationId)}>
                         LOCK!
                       </button>
                       <button
-                        className="lock-button"
+                        className="pops-card-button-right"
                         type="button"
-                        onClick={() => this.dropPlace(place.locationId)}
-                      >
+                        onClick={() => this.dropPlace(place.locationId)}>
                         DROP!
                       </button>
-                      <button
-                        className="lock-button"
-                        type="button"
-                        onClick={() => {
-                          this.handleClick(place.title, place.address);
-                        }}
-                      >
-                        NAV
-                      </button>
-                    </ul>
+                    </div>
                   </div>
                 </div>
               );
@@ -179,13 +185,13 @@ class PopCard extends React.Component {
 }
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
-  fetchPops: places => dispatch(fetchPops(places)),
+  fetchPops: places => dispatch(fetchPops(places))
 });
 
 const mapStateToProps = state => ({
   user: state.user.user,
   pops: state.user.pops,
-  currentPosition: state.position.currentPosition,
+  currentPosition: state.position.currentPosition
 });
 
 export default connect(

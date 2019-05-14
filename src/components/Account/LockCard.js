@@ -42,22 +42,36 @@ class LockCard extends React.Component {
         locks.some(o2 => o1.locationId === o2.placeKey)
       );
       return (
-        <div className="pops-card">
-          {result.map((places, index) => {
-            return (
-              <div key={places.locationId}>
-                <div className="pops-card-title">
-                  {places.title}
-                  <button
-                    className="lock-button"
-                    type="button"
-                    onClick={() => this.dropPlace(places)}>
-                    DROP!
-                  </button>
+        <div>
+          <div className="user-page-card">
+            {result.map((places, index) => {
+              return (
+                <div className="pops-card" key={places.locationId}>
+                  <ul>
+                    <div className="pops-card-title">{places.title}</div>
+                    <br />
+                    <div className="pops-card-address"> {places.address}</div>
+                    <div className="phone">{places.phone}</div>
+                    <div className="pops-card-mile">1.5 Miles</div>
+                    <div className="place-title">
+                      {Array.from({ length: places.totalScore }).map((j, i) => (
+                        <span key={i}> ⭐ </span>
+                      ))}
+                    </div>
+                    <img src="NewBubble33.png" />
+                  </ul>
+                  <div className="buttons">
+                    <button
+                      className="lock-button"
+                      type="button"
+                      onClick={() => this.dropPlace(places)}>
+                      DROP!
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       );
     } else {
