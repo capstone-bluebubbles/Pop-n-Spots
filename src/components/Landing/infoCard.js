@@ -88,7 +88,7 @@ class InfoCard extends React.Component {
           }
         }
       }
-      
+
     return (
 
       <AuthUserContext.Consumer>
@@ -115,6 +115,7 @@ class InfoCard extends React.Component {
               <li className="phone">{this.props.place.phone}</li>
               <br />
               <li className="poppin-title">{popDataTarget}% POPPIN</li>
+              <img className = "poppin-time-image" src = 'NewBubble33.png' />
             </ul>
             <button
               className="navigate-button"
@@ -156,6 +157,7 @@ class InfoCard extends React.Component {
           <li className="phone">{this.props.place.phone}</li>
           <br />
           <li className="poppin-title">{popDataTarget}% POPPIN</li>
+          <img className = "poppin-time-image" src = 'NewBubble33.png' />
         </ul>
         <button
           className="navigate-button"
