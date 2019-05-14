@@ -101,7 +101,13 @@ class PopCard extends React.Component {
       this.bubbles.length - 1
     );
 
-    // return <div> {popDataTarget}% POPPIN</div>;
+    return(
+      <div>
+        <div> {popDataTarget}% POPPIN</div>
+        <img src = {`${this.bubbles[popDataTargetFrame]}`} />
+      </div>
+      
+    ) 
   };
 
   componentDidMount(event) {
@@ -133,7 +139,6 @@ class PopCard extends React.Component {
                         <span key={i}> ⭐ </span>
                       ))}
                     </div>
-                    <img src="NewBubble33.png" />
                   </ul>
                   <div className="buttons">
                     <ul>

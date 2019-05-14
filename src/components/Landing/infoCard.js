@@ -19,6 +19,7 @@ class InfoCard extends React.Component {
     const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     this.currentDay = days[date.getDay()];
     this.currentHour = date.getHours();
+    this.bubbles=['NewBubble00.png', 'NewBubble33.png', 'NewBubble66.png', 'NewBubble99.png']
   }
 
     //Pop function
@@ -70,6 +71,57 @@ class InfoCard extends React.Component {
     }
   }
 
+
+  historyData = popData => {
+    let popDataTarget = 0;
+    if (popData) {
+      const popDataCurrentDay = popData[this.currentDay];
+      if (popDataCurrentDay) {
+        for (let index = 0; index < popDataCurrentDay.length; index++) {
+          const hour = popDataCurrentDay[index].hour;
+          if (hour === this.currentHour) {
+            popDataTarget = popDataCurrentDay[index].occupancyPercent;
+          }
+        }
+      }
+    }
+    let popDataTargetFrame = 0;
+
+    // we have chosen to adopt the following ranges for our bubbles
+    // white -> 0 ... 10%
+    // green -> 11% ... 50%
+    // yellow -> 51% ... 75%
+    // red -> 76% ... 100%
+
+    if (0 < popDataTarget && popDataTarget <= 10) {
+      popDataTargetFrame = 0;
+    }
+    if (10 < popDataTarget && popDataTarget <= 50) {
+      popDataTargetFrame = 1;
+    }
+    if (50 < popDataTarget && popDataTarget <= 75) {
+      popDataTargetFrame = 2;
+    }
+    if (75 < popDataTarget) {
+      popDataTargetFrame = 3;
+    }
+
+    // safety check
+    popDataTargetFrame = Math.max(popDataTargetFrame, 0);
+    popDataTargetFrame = Math.min(
+      popDataTargetFrame,
+      this.bubbles.length - 1
+    );
+
+    return(
+      <div>
+        <div> {popDataTarget}% POPPIN</div>
+        <img src = {`${this.bubbles[popDataTargetFrame]}`} />
+      </div>
+      
+    ) 
+  };
+
   handleClick(location, address) {
     window.open(`http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${this.props.currentPosition.lng}&daddr=${location},${address}`);
   }
@@ -114,6 +166,10 @@ class InfoCard extends React.Component {
               <li className="phone">{this.props.place.phone}</li>
               <br />
               <li className="poppin-title">{popDataTarget}% POPPIN</li>
+              <div className="popular-time-percent">
+                      {' '}
+                      {this.historyData(this.props.place.popularTimesHistogram)}{' '}
+                    </div>
             </ul>
             <button
               className="navigate-button"
