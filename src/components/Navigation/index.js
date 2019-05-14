@@ -32,7 +32,7 @@ class NavigationAuth extends React.Component {
   }
   render() {
     return (
-      <div className="nav-flex">
+      <div id="navigation-nav-flex" className="nav-flex">
         <ul className="topnav">
           <li className="App-link">
             <Link className="active" to={ROUTES.HOME}>

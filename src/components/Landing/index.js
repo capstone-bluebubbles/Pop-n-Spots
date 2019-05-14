@@ -347,9 +347,11 @@ export class Landing extends React.Component {
   render() {
     //console.log("REACT -> Landing -> this.props ->", this.props)
 
+    const navbar = document.getElementById("navigation-nav-flex")
+    //
+    debugger;
     var clientw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var clienth = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    var clientm = Math.min(clientw, clienth)
 
     const currentPosition = this.props.currentPosition
     const currentPlaces = this.props.currentPlaces
@@ -392,31 +394,39 @@ export class Landing extends React.Component {
     // local css style objects
     const styleMapCSS = {
       width: clientw >= 1024 ? clientw * .65 : clientw,
-      height: clientw >= 1024 ? clienth * 0.80 : clienth * 0.80
+      height: clientw >= 1024 ? clienth - 30 : clienth - 30 - 100
     };
 
     const styleMapButtonDivCSS = {
-      position: 'absolute',
-      top: "0px",
       display: "flex",
-      justifyContent: "flex-end",
-      alignItems: "flex-start",
-      width: styleMapCSS.width,
-      borderRadius: '4px',
-      cursor: 'pointer',
-    };
-
-    const styleMapContextDivCSS = {
       position: 'absolute',
+      //left: "4px",
       top: "0px",
-      display: "flex",
-      justifyContent: "flex-start",
-      alignItems: "flex-end",
+      //display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       width: styleMapCSS.width,
-      borderRadius: '4px',
+      padding: "0px",
+      margin: "0px",
+      border: "none",
+      borderRadius: '0px',
       cursor: 'pointer',
+      //backgroundColor: "#000000"
     };
-
+    /*
+        const styleMapContextDivCSS = {
+          display: "flex",
+          position: 'absolute',
+          top: "0px",
+          //display: "flex",
+          //justifyContent: "flex-start",
+          //alignItems: "flex-end",
+          //width: styleMapCSS.width,
+          borderRadius: '4px',
+          cursor: 'pointer',
+          backgroundColor: "#000000"
+        };
+    */
     let currentCategoryText = "";
     switch (this.props.currentCategory) {
       case "bars": currentCategoryText = "BEER"; break;
@@ -432,7 +442,7 @@ export class Landing extends React.Component {
 
     return (
       <div className="LandingTop">
-        <div className="LandingLeft" style={styleMapCSS}>
+        <div className="LandingLeft" style={styleMapCSS} >
           < Map
             style={styleMapCSS}
             google={this.props.google}
@@ -507,14 +517,15 @@ export class Landing extends React.Component {
               })
             }
             <Marker position={currentPosition} icon={this.currentPositionIcon} />
-            <div style={styleMapContextDivCSS}>
+            {/* <div style={styleMapContextDivCSS}>
               <LandingMapContext text={currentCategoryText} />
-            </div>
+            </div> */}
             <div style={styleMapButtonDivCSS}>
               <LandingMapButton selected={this.state.currentRadius === 0.5} text={"0.5 MILES"} target={this.OnClickButton1.bind(this)} />
               <LandingMapButton selected={this.state.currentRadius === 1.0} text={"1.0 MILES"} target={this.OnClickButton2.bind(this)} />
               <LandingMapButton selected={this.state.currentRadius === 2.0} text={"2.0 MILES"} target={this.OnClickButton3.bind(this)} />
               <LandingMapButton selected={false} text={"RE-CENTER"} target={this.OnClickButton4.bind(this)} />
+              <LandingMapContext text={currentCategoryText} />
             </div>
             <MapRef style={styleMapCSS} this={this}></MapRef>
           </Map>
