@@ -13,14 +13,6 @@ import { getCurrentPosition } from '../../store/position'
 import { connect } from "react-redux"
 
 class Home extends Component {
-  // eslint-disable-next-line no-useless-constructor
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-
-  }
 
   render() {
     console.log(this.props)

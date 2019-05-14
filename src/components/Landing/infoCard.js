@@ -119,7 +119,7 @@ class InfoCard extends React.Component {
               className="navigate-button"
               type="button"
               onClick={() => {
-                this.handleClick(this.props.place.title);
+                this.handleClick(this.props.place.title, this.props.place.address);
               }}>
               NAV
             </button>

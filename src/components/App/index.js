@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
-import { fetchUser } from '../../store/user'
-import { connect } from 'react-redux'
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
@@ -15,15 +13,6 @@ import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
 class App extends React.Component {
-  constructor() {
-    super();
-  }
-
-  async componentDidMount(){
-    if (this.props.firebase.auth.currentUser!==null){
-      await this.props.fetchUser(this.props.firebase.auth.currentUser.uid);
-    }
-  }
 
   render() {
     console.log(this.props)
@@ -46,14 +35,4 @@ class App extends React.Component {
   }
 }
 
-const mapState = state => ({
-  user: state.user.user
-})
-
-const mapDispatch = dispatch => ({
-  fetchUser: uID => dispatch(fetchUser(uID))
-})
-
-const app = withAuthentication(App)
-
-export default connect (mapState, mapDispatch)(app);
+export default withAuthentication(App)
