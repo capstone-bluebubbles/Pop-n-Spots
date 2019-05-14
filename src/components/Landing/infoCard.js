@@ -88,6 +88,7 @@ class InfoCard extends React.Component {
           }
         }
       }
+      
     return (
 
       <AuthUserContext.Consumer>
