@@ -27,7 +27,7 @@ class AccountPageComponent extends React.Component {
       <AuthUserContext.Consumer>
         {authUser => (
           <div className="account-container">
-            <h1 className="user-welcome">Welcome: {authUser.email}</h1>
+            <h1 className="user-welcome">{authUser.email}</h1>
             <h2 className="lock-title">Pops</h2>
             <h3 className="user-places-title">Your Popped Places</h3>
             <PopCard uID={authUser.uid} />

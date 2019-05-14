@@ -599,6 +599,9 @@ i {
 .user-welcome {
   font-family: "Ubuntu", sans-serif;
   color: white;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px;
 }
 
 .user-page-card {
@@ -620,7 +623,6 @@ i {
   }
 }
 .pops-card {
-  border-radius: 0.5em;
   display: flex;
   flex-direction: row;
   align-items: center;
