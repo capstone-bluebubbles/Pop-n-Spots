@@ -730,7 +730,7 @@ i {
   display: "inline-block";
   color: #036fc0;
   background-color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 32px;
   margin-top: 8px;
   margin-left: 4px;
@@ -746,7 +746,7 @@ i {
   display: "inline-block";
   color: #ffffff;
   background-color: #036fc0;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 32px;
   margin-top: 8px;
   margin-left: 4px;
@@ -762,7 +762,7 @@ i {
   display: "inline-block";
   color: #ffffff;
   background-color: #036fc0;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 32px;
   margin-top: 8px;
   margin-left: 4px;
@@ -774,7 +774,7 @@ i {
   outline: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 512px) {
   .styleMapButtonCSS {
     font-size: 8px;
   }
@@ -950,3 +950,40 @@ i {
   transform: translateY(4px);
   border: none;
 }
+
+.LandingTop {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.LandingLeft {
+  flex : 65%;
+  overflow: hidden;
+}
+
+.LandingRight {
+  flex: 35%;
+  overflow: scroll;
+}
+
+@media only screen and (max-width: 1024px) {
+  .LandingTop {
+    display: block;
+    height: 100%;
+    overflow: scroll;
+  }
+
+  .LandingLeft {
+    display: block;
+    height: 100%;
+    overflow: scroll;
+  }
+
+  .LandingRight {
+    display: block;
+    height: 100%;
+    overflow: scroll;
+  }
+}
+
