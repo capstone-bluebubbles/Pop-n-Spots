@@ -57,14 +57,23 @@ class PopCard extends React.Component {
     if (this.props.pops.length >= 1) {
       return (
         <div>
-          <h3 className="user-places-title">Your Popped Places</h3>
-          {this.props.pops.map(place => {
-            return (
-              <div>
+          <div className="user-page-card">
+            {this.props.pops.map(place => {
+              return (
                 <div className="pops-card" key={place.locationId}>
-                  <div className="pops-card-title">{place.title}</div>
-                  <div> {place.address}</div>
-                  <div className="pops-card-title">
+                  <ul>
+                    <div className="pops-card-title">{place.title}</div>
+                    <br />
+                    <div className="pops-card-address"> {place.address}</div>
+                    <div className="phone">{place.phone}</div>
+                    <div className="pops-card-mile">1.5 Miles</div>
+                    <div className="place-title">
+                      {Array.from({ length: place.totalScore }).map((j, i) => (
+                        <span key={i}> ⭐ </span>
+                      ))}
+                    </div>
+                  </ul>
+                  <div className="buttons">
                     <button
                       className="lock-button"
                       type="button"
@@ -79,9 +88,9 @@ class PopCard extends React.Component {
                     </button>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       );
     }
