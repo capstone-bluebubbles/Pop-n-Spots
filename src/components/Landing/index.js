@@ -392,7 +392,7 @@ export class Landing extends React.Component {
     // local css style objects
     const styleMapCSS = {
       width: clientw >= 1024 ? clientw * .65 : clientw,
-      height: clientw >= 1024 ? clienth * 0.80 : clienth * 0.80
+      height: clientw >= 1024 ? clienth * 0.95 : clienth * 0.8
     };
 
     const styleMapButtonDivCSS = {
