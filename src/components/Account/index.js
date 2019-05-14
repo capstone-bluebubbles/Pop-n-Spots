@@ -29,8 +29,10 @@ class AccountPageComponent extends React.Component {
           <div className="account-container">
             <h1>Welcome: {authUser.email}</h1>
             <h2 className="lock-title">Pops</h2>
+            <h3 className="user-places-title">Your Popped Places</h3>
             <PopCard uID={authUser.uid} />
             <h2 className="lock-title">Locks</h2>
+            <h3 className="user-places-title">Your Favorite Places</h3>
             <LockCard uID={authUser.uid} />
             <h3 className="password-userChange">Change Your Password</h3>
             <div className="change-password-title">

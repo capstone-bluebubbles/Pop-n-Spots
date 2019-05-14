@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops } from "../../store/user";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext, withAuthorization } from "../Session";
-import { userRef } from '../Firebase/firebase'
+import {userRef} from '../Firebase/firebase'
 
 class InfoCard extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class InfoCard extends React.Component {
     this.currentHour = date.getHours();
   }
 
-  //Pop function
+    //Pop function
   async addPop(uID, locationId) {
     try {
       const User = userRef.child(uID);
@@ -75,19 +75,19 @@ class InfoCard extends React.Component {
   }
 
   render() {
-    let popDataTarget = 0;
-    const popData = this.props.place.popularTimesHistogram;
-    if (popData) {
-      const popDataCurrentDay = popData[this.currentDay];
-      if (popDataCurrentDay) {
-        for (let index = 0; index < popDataCurrentDay.length; index++) {
-          const hour = popDataCurrentDay[index].hour;
-          if (hour === this.currentHour) {
-            popDataTarget = popDataCurrentDay[index].occupancyPercent;
+      let popDataTarget = 0;
+      const popData = this.props.place.popularTimesHistogram;
+      if (popData) {
+        const popDataCurrentDay = popData[this.currentDay];
+        if (popDataCurrentDay) {
+          for (let index = 0; index < popDataCurrentDay.length; index++) {
+            const hour = popDataCurrentDay[index].hour;
+            if (hour === this.currentHour) {
+              popDataTarget = popDataCurrentDay[index].occupancyPercent;
+            }
           }
         }
       }
-    }
     return (
 
       <AuthUserContext.Consumer>
@@ -105,7 +105,7 @@ class InfoCard extends React.Component {
             </ul>
             <ul className="info-card">
               <li className="place-website">
-                <Link target="_blank" onClick={() => window.open(`https://www.${this.props.place.website}`)}>
+                <Link target="_blank" onClick={()=>window.open(`https://www.${this.props.place.website}`)}>
                   {this.props.place.website}
                 </Link>
               </li>
@@ -119,7 +119,7 @@ class InfoCard extends React.Component {
               className="navigate-button"
               type="button"
               onClick={() => {
-                this.handleClick(this.props.place.title, this.props.place.address);
+                this.handleClick(this.props.place.title);
               }}>
               NAV
             </button>
@@ -132,45 +132,45 @@ class InfoCard extends React.Component {
               POP
             </button>
           </div>
-        ) : (
-            <div className="info-container">
-              <ul className="place-box">
-                <h3 className="place-title">{this.props.place.title}</h3>
-                <div className="place-title">
-                  {Array.from({ length: this.props.place.totalScore }).map(
-                    (j, i) => (
-                      <span key={i}> ⭐ </span>
-                    )
-                  )}
-                </div>
-              </ul>
-              <ul className="info-card">
-                <li className="place-website">
-                  <Link target="_blank" to={`www.${this.props.place.website}`}>
-                    {this.props.place.website}
-                  </Link>
-                </li>
-                <br />
-                <li className="place-address">{this.props.place.address}</li>
-                <li className="phone">{this.props.place.phone}</li>
-                <br />
-                <li className="poppin-title">{popDataTarget}% POPPIN</li>
-              </ul>
-              <button
-                className="navigate-button"
-                type="button"
-                onClick={() => {
-                  this.handleClick(this.props.place.title);
-                }}>
-                NAV
+        ): (
+        <div className="info-container">
+        <ul className="place-box">
+          <h3 className="place-title">{this.props.place.title}</h3>
+          <div className="place-title">
+            {Array.from({ length: this.props.place.totalScore }).map(
+              (j, i) => (
+                <span key={i}> ⭐ </span>
+              )
+            )}
+          </div>
+        </ul>
+        <ul className="info-card">
+          <li className="place-website">
+            <Link target="_blank" to={`www.${this.props.place.website}`}>
+              {this.props.place.website}
+            </Link>
+          </li>
+          <br />
+          <li className="place-address">{this.props.place.address}</li>
+          <li className="phone">{this.props.place.phone}</li>
+          <br />
+          <li className="poppin-title">{popDataTarget}% POPPIN</li>
+        </ul>
+        <button
+          className="navigate-button"
+          type="button"
+          onClick={() => {
+            this.handleClick(this.props.place.title);
+          }}>
+          NAV
         </button>
-              <Link to={ROUTES.SIGN_IN}
-                className="pop-button"
-                type="button">
-                POP
+        <Link to={ROUTES.SIGN_IN}
+          className="pop-button"
+          type="button">
+          POP
         </Link>
-            </div>
-          ))
+      </div>
+        ))
         }
       </AuthUserContext.Consumer>
     )
@@ -190,7 +190,6 @@ const mapStateToProps = state => ({
   places: state.places,
   currentPosition: state.position.currentPosition,
 });
-
 const condition = authUser => !!authUser;
 
 const Infocard = connect(

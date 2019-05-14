@@ -1,23 +1,38 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchUser, fetchPops, getPops } from "../../store/user";
-import { placesRef, userRef } from "../Firebase/firebase";
-import { number } from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchUser, fetchPops, getPops } from '../../store/user';
+import { placesRef, userRef } from '../Firebase/firebase';
 
 class PopCard extends React.Component {
   constructor(props) {
     super();
     this.count = 0;
     this.state = {
-      pops: []
+      pops: [],
     };
+    // current day abbreviation
+    const date = new Date();
+    const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    this.currentDay = days[date.getDay()];
+    this.currentHour = date.getHours();
+    this.bubbles=['NewBubble00.png', 'NewBubble33.png', 'NewBubble66.png', 'NewBubble99.png']
+  }
+
+  
+
+  handleClick(location, address) {
+    window.open(
+      `http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${
+        this.props.currentPosition.lng
+      }&daddr=${location},${address}`
+    );
   }
 
   lockPlace(place) {
     const match = this.props.user.pops.find(user => user.placeKey === place);
     const popsRef = userRef
       .child(this.props.uID)
-      .child("pops")
+      .child('pops')
       .child(match.popIndex);
     popsRef.update({ locked: true });
   }
@@ -26,7 +41,7 @@ class PopCard extends React.Component {
     const match = this.props.user.pops.find(user => user.placeKey === place);
     const popsRef = userRef
       .child(this.props.uID)
-      .child("pops")
+      .child('pops')
       .child(match.popIndex);
     popsRef.update({ dropped: true });
   }
@@ -34,7 +49,7 @@ class PopCard extends React.Component {
   numberOfPops(popsObj) {
     const userPops = this.props.user.pops;
     if (!userPops) {
-      return "No Pops!";
+      return 'No Pops!';
     } else {
       for (let i = 0; i < userPops.length; i++) {
         // console.log('POPSOBJ',popsObj.locationId, 'USERKEYS', userPops[i].placeKey)
@@ -45,6 +60,50 @@ class PopCard extends React.Component {
     }
   }
 
+  historyData = popData => {
+    let popDataTarget = 0;
+    if (popData) {
+      const popDataCurrentDay = popData[this.currentDay];
+      if (popDataCurrentDay) {
+        for (let index = 0; index < popDataCurrentDay.length; index++) {
+          const hour = popDataCurrentDay[index].hour;
+          if (hour === this.currentHour) {
+            popDataTarget = popDataCurrentDay[index].occupancyPercent;
+          }
+        }
+      }
+    }
+    let popDataTargetFrame = 0;
+
+    // we have chosen to adopt the following ranges for our bubbles
+    // white -> 0 ... 10%
+    // green -> 11% ... 50%
+    // yellow -> 51% ... 75%
+    // red -> 76% ... 100%
+
+    if (0 < popDataTarget && popDataTarget <= 10) {
+      popDataTargetFrame = 0;
+    }
+    if (10 < popDataTarget && popDataTarget <= 50) {
+      popDataTargetFrame = 1;
+    }
+    if (50 < popDataTarget && popDataTarget <= 75) {
+      popDataTargetFrame = 2;
+    }
+    if (75 < popDataTarget) {
+      popDataTargetFrame = 3;
+    }
+
+    // safety check
+    popDataTargetFrame = Math.max(popDataTargetFrame, 0);
+    popDataTargetFrame = Math.min(
+      popDataTargetFrame,
+      this.bubbles.length - 1
+    );
+
+    // return <div> {popDataTarget}% POPPIN</div>;
+  };
+
   componentDidMount(event) {
     // let promise =
     this.props.fetchUser(this.props.uID);
@@ -52,36 +111,61 @@ class PopCard extends React.Component {
   }
 
   render() {
-    // console.log('RENDER', JSON.stringify(this.props))
-    // console.log(this.props.pops.length)
     if (this.props.pops.length >= 1) {
       return (
         <div>
-          <h3 className="user-places-title">Your Popped Places</h3>
-          {this.props.pops.map(place => {
-            return (
-              <div>
+          <div className="user-page-card">
+            {this.props.pops.map(place => {
+              return (
                 <div className="pops-card" key={place.locationId}>
-                  <div className="pops-card-title">{place.title}</div>
-                  <div> {place.address}</div>
-                  <div className="pops-card-title">
-                    <button
-                      className="lock-button"
-                      type="button"
-                      onClick={() => this.lockPlace(place.locationId)}>
-                      LOCK!
-                    </button>
-                    <button
-                      className="lock-button"
-                      type="button"
-                      onClick={() => this.dropPlace(place.locationId)}>
-                      DROP!
-                    </button>
+                  <ul>
+                    <div className="pops-card-title">{place.title}</div>
+                    <br />
+                    <div className="pops-card-address"> {place.address}</div>
+                    <div className="phone">{place.phone}</div>
+                    <div className="pops-card-mile">1.5 Miles</div>
+                    <div className="popular-time-percent">
+                      {' '}
+                      {this.historyData(place.popularTimesHistogram)}{' '}
+                    </div>
+                    <div className="place-title">
+                      {Array.from({ length: place.totalScore }).map((j, i) => (
+                        <span key={i}> ⭐ </span>
+                      ))}
+                    </div>
+                    <img src="NewBubble33.png" />
+                  </ul>
+                  <div className="buttons">
+                    <ul>
+                      <button
+                        className="lock-button"
+                        type="button"
+                        onClick={() => this.lockPlace(place.locationId)}
+                      >
+                        LOCK!
+                      </button>
+                      <button
+                        className="lock-button"
+                        type="button"
+                        onClick={() => this.dropPlace(place.locationId)}
+                      >
+                        DROP!
+                      </button>
+                      <button
+                        className="lock-button"
+                        type="button"
+                        onClick={() => {
+                          this.handleClick(place.title, place.address);
+                        }}
+                      >
+                        NAV
+                      </button>
+                    </ul>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       );
     }
@@ -90,12 +174,13 @@ class PopCard extends React.Component {
 }
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
-  fetchPops: places => dispatch(fetchPops(places))
+  fetchPops: places => dispatch(fetchPops(places)),
 });
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  pops: state.user.pops
+  pops: state.user.pops,
+  currentPosition: state.position.currentPosition,
 });
 
 export default connect(
