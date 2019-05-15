@@ -137,10 +137,12 @@ class PopCard extends React.Component {
                     <br />
                     <div className="pops-card-address">{place.address}</div>
                     <div className="pops-card-phone">
+                      <a href="tel:${place.phone}" >
                       {`${place.phone.slice(2, 5)}-${place.phone.slice(
                         5,
                         8
                       )}-${place.phone.slice(8)}`}
+                      </a>
                     </div>
                     <div className="pops-card-mile">1.5 Miles</div>
                     <div className="place-title">
