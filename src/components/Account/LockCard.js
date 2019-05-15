@@ -149,7 +149,7 @@ class LockCard extends React.Component {
                       NAV
                     </button>
                     <button
-                      className="pops-card-button"
+                      className="pops-card-button-right"
                       type="button"
                       onClick={() => this.dropPlace(places)}>
                       DROP!
@@ -164,7 +164,7 @@ class LockCard extends React.Component {
     } else {
       return (
         <div className="pops-card">
-          <div className="pops-card-title" />
+          {/* <div className="pops-card-title" /> */}
           <h5>You have no Saves Places....</h5>
         </div>
       );
