@@ -145,7 +145,7 @@ class PopCard extends React.Component {
                     <div className="pops-card-mile">1.5 Miles</div>
                     <div className="place-title">
                       {Array.from({ length: place.totalScore }).map((j, i) => (
-                        <span key={i}> ⭐ </span>
+                        <span key={i}> 🌟 </span>
                       ))}
                     </div>
                   </ul>
