@@ -16,7 +16,7 @@ class LockCard extends React.Component {
   handleClick(location, address) {
     window.open(
       `http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${
-        this.props.currentPosition.lng
+      this.props.currentPosition.lng
       }&daddr=${location},${address}`
     );
   }
@@ -92,6 +92,24 @@ class LockCard extends React.Component {
       this.props.fetchPops(this.props.user.pops);
     }
   }
+
+  locationData = address => {
+    let result = address;
+    let located = result.indexOf("Located");
+    if (located !== -1) {
+      result = result.slice(0, located);
+    }
+    let usa = result.indexOf(", USA");
+    if (usa !== -1) {
+      result = result.slice(0, usa);
+    }
+    let eua = result.indexOf(", EUA");
+    if (eua !== -1) {
+      result = result.slice(0, eua);
+    }
+    return result;
+  };
+
   render() {
     console.log(`THE OBJECT===>`, this.props);
     if (this.props.user.pops !== undefined || this.props.pops.length !== 0) {
@@ -117,14 +135,16 @@ class LockCard extends React.Component {
                   </div>
                   <ul className="pops-card-address-container">
                     <br />
-                    <div className="pops-card-address"> {places.address}</div>
+                    <div className="pops-card-address">  {this.locationData(places.address)}</div>
                     <div className="pops-card-phone">
                       {`${places.phone.slice(2, 5)}-${places.phone.slice(
                         5,
                         8
                       )}-${places.phone.slice(8)}`}
                     </div>
-                    <div className="pops-card-mile">1.5 Miles</div>
+                    <div className="pops-card-mile">
+                      {`Distance : ${distanceText(this.props.currentPosition, places)} miles`}
+                    </div>
                     <div className="place-title">
                       {Array.from({ length: places.totalScore }).map((j, i) => (
                         <span key={i}> 🌟 </span>
@@ -133,7 +153,7 @@ class LockCard extends React.Component {
                   </ul>
                   <div className="pops-card-buttons-container">
                     <button
-                      className="navigate-button"
+                      className="pops-card-button"
                       type="button"
                       onClick={() => {
                         this.handleClick(places.title, places.address);
@@ -163,6 +183,16 @@ class LockCard extends React.Component {
     }
   }
 }
+
+const distanceText = (currentPosition, place) => {
+  let result = calculateDistance(currentPosition, { lat: Number(place.gpsLat), lng: Number(place.gpsLong) })
+  result = result / calculateDistanceMetrics.KM_PER_MILE
+  result = result.toFixed(1)
+  return result
+}
+
+
+
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
   fetchPops: places => dispatch(fetchPops(places))

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUser, fetchPops } from '../../store/user';
@@ -7,15 +6,10 @@ import * as ROUTES from '../../constants/routes';
 import { AuthUserContext, withAuthorization } from '../Session';
 import { userRef } from '../Firebase/firebase';
 import { setCurrentCategory, getCurrentPosition, calculateDistanceMetrics, calculateDistance } from "../../store/position"
-=======
-import React from "react";
-import { connect } from "react-redux";
-import { fetchUser, fetchPops } from "../../store/user";
-import { Link, Redirect } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
-import { AuthUserContext, withAuthorization } from "../Session";
-import { userRef } from "../Firebase/firebase";
->>>>>>> c5a4d18dfb12f996ca25d0f1a25c3924b04b28f3
+// import bubble00 from '../../../public/NewBubble00.png'
+// import bubble33 from '../../../public/NewBubble33.png'
+// import bubble66 from '../../../public/NewBubble66.png'
+// import bubble99 from '../../../public/NewBubble99.png'
 
 class InfoCard extends React.Component {
   constructor(props) {
@@ -31,10 +25,10 @@ class InfoCard extends React.Component {
     this.currentDay = days[date.getDay()];
     this.currentHour = date.getHours();
     this.bubbles = [
-      "NewBubble00.png",
-      "NewBubble33.png",
-      "NewBubble66.png",
-      "NewBubble99.png"
+      "/NewBubble00.png",
+      "/NewBubble33.png",
+      "/NewBubble66.png",
+      "/NewBubble99.png"
     ];
   }
 
@@ -123,13 +117,17 @@ class InfoCard extends React.Component {
     popDataTargetFrame = Math.max(popDataTargetFrame, 0);
     popDataTargetFrame = Math.min(popDataTargetFrame, this.bubbles.length - 1);
 
+    const image = this.bubbles[popDataTargetFrame]
+
+    console.log(image)
+
     return (
       <div className="pops-card-title-icon-container">
         <div> {`${popDataTarget}% Poppin`} </div>
         <img
           className="pops-card-title_icon"
           style={{ height: "30px", width: "30px" }}
-          src={`${this.bubbles[popDataTargetFrame]}`}
+          src={this.bubbles[popDataTargetFrame]}
         />
       </div>
     );
@@ -201,11 +199,12 @@ class InfoCard extends React.Component {
                     )}-${place.phone.slice(8)}`}
                   </div>
                 ) : (
-                  <div />
-                )}
+                    <div />
+                  )}
 
-                <br />
-                <div className="pops-card-mile">1.5 Miles</div>
+                <div className="pops-card-mile">
+                  {`Distance : ${distanceText(this.props.currentPosition, place)} miles`}
+                </div>
                 <div className="place-title">
                   {Array.from({ length: place.totalScore }).map((j, i) => (
                     <span key={i}>🌟</span>
@@ -239,16 +238,15 @@ class InfoCard extends React.Component {
                     {this.historyData(place.popularTimesHistogram)}
                   </div>
                 </div>
-<<<<<<< HEAD
                 <ul className="map-card-address-container">
                   <br />
                   <div className="map-card-address">{place.address}</div>
-                  {/* <div className="map-card-phone">
-                      {`${place.phone.slice(2, 5)}-${place.phone.slice(
-                        5,
-                        8
-                      )}-${place.phone.slice(8)}`}
-                    </div> */}
+                  <div className="map-card-phone">
+                    {`${place.phone.slice(2, 5)}-${place.phone.slice(
+                      5,
+                      8
+                    )}-${place.phone.slice(8)}`}
+                  </div>
                   <div className="map-card-mile">1.5 Miles</div>
                   <div className="place-title">
                     {Array.from({ length: place.totalScore }).map((j, i) => (
@@ -258,40 +256,12 @@ class InfoCard extends React.Component {
                 </ul>
                 <div className="map-card-buttons-container">
                   <button
-                    className="map-card-button"
+                    className="navigate-button"
                     type="button"
                     onClick={() => {
                       this.handleClick(place.title, place.address);
-                    }}
-                  >
+                    }}>
                     NAV
-=======
-              </div>
-              <ul className="map-card-address-container">
-                <br />
-                <div className="map-card-address">{place.address}</div>
-                <div className="map-card-phone">
-                  {`${place.phone.slice(2, 5)}-${place.phone.slice(
-                    5,
-                    8
-                  )}-${place.phone.slice(8)}`}
-                </div>
-                <div className="map-card-mile">1.5 Miles</div>
-                <div className="place-title">
-                  {Array.from({ length: place.totalScore }).map((j, i) => (
-                    <span key={i}> ⭐ </span>
-                  ))}
-                </div>
-              </ul>
-              <div className="map-card-buttons-container">
-                <button
-                  className="navigate-button"
-                  type="button"
-                  onClick={() => {
-                    this.handleClick(place.title, place.address);
-                  }}>
-                  NAV
->>>>>>> c5a4d18dfb12f996ca25d0f1a25c3924b04b28f3
                 </button>
 
                   <Link to={ROUTES.SIGN_IN} className="pop-button" type="button">
@@ -304,6 +274,13 @@ class InfoCard extends React.Component {
       </AuthUserContext.Consumer>
     );
   }
+}
+
+const distanceText = (currentPosition, place) => {
+  let result = calculateDistance(currentPosition, { lat: Number(place.gpsLat), lng: Number(place.gpsLong) })
+  result = result / calculateDistanceMetrics.KM_PER_MILE
+  result = result.toFixed(1)
+  return result
 }
 
 const mapDispatchToProps = dispatch => ({

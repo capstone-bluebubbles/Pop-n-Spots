@@ -16,11 +16,14 @@ class AccountPageComponent extends React.Component {
   }
 
   componentDidMount() {
-    // load the current position if necessary
-    // => do not load the current places
-    if (this.props.currentPosition.timestamp === 0) {
-      this.props.currentDispatch(getCurrentPosition(false))
-    }
+    /*
+        // load the current position if necessary
+        // => load the current places
+        if (this.props.currentPosition.timestamp === 0) {
+          this.props.currentDispatch(getCurrentPosition(true))
+        }
+    */
+    this.props.currentDispatch(getCurrentPosition(false))
   }
 
   render() {

@@ -119,6 +119,22 @@ class PopCard extends React.Component {
     this.props.fetchUser(this.props.uID);
     // promise.then(this.props.fetchPops(this.props.user.pops))
   }
+  locationData = address => {
+    let result = address;
+    let located = result.indexOf("Located");
+    if (located !== -1) {
+      result = result.slice(0, located);
+    }
+    let usa = result.indexOf(", USA");
+    if (usa !== -1) {
+      result = result.slice(0, usa);
+    }
+    let eua = result.indexOf(", EUA");
+    if (eua !== -1) {
+      result = result.slice(0, eua);
+    }
+    return result;
+  };
 
   render() {
     console.log("REACT -> PopCard -> this.props.currentPosition", this.props.currentPosition)
@@ -138,14 +154,16 @@ class PopCard extends React.Component {
                   </div>
                   <ul className="pops-card-address-container">
                     <br />
-                    <div className="pops-card-address">{place.address}</div>
+                    <div className="pops-card-address">{this.locationData(place.address)}</div>
                     <div className="pops-card-phone">
                       {`${place.phone.slice(2, 5)}-${place.phone.slice(
                         5,
                         8
                       )}-${place.phone.slice(8)}`}
                     </div>
-                    <div className="pops-card-mile">1.5 Miles</div>
+                    <div className="pops-card-mile">
+                      {`Distance : ${distanceText(this.props.currentPosition, place)} miles`}
+                    </div>
                     <div className="place-title">
                       {Array.from({ length: place.totalScore }).map((j, i) => (
                         <span key={i}> 🌟 </span>
@@ -186,6 +204,14 @@ class PopCard extends React.Component {
     return <div>Blockchain UI working...</div>;
   }
 }
+
+const distanceText = (currentPosition, place) => {
+  let result = calculateDistance(currentPosition, { lat: Number(place.gpsLat), lng: Number(place.gpsLong) })
+  result = result / calculateDistanceMetrics.KM_PER_MILE
+  result = result.toFixed(1)
+  return result
+}
+
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
   fetchPops: places => dispatch(fetchPops(places))
