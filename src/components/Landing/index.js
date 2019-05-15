@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { Map, Marker, Circle, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
-import { setCurrentCategory, getCurrentPosition } from "../../store/position"
+import { setCurrentCategory, getCurrentPosition, calculateDistanceMetrics, calculateDistance } from "../../store/position"
 import queryString from "query-string"
 
 const styleMapSilver = [
   {
-    elementType: "geometry",
+    // elementType: "geometry",
     stylers: [
       {
         color: "#f5f5f5"
