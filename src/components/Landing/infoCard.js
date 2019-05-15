@@ -228,7 +228,7 @@ class InfoCard extends React.Component {
                   className="pop-button"
                   type="button"
                   onClick={() => {
-                    this.addPop(authUser.uid, this.props.place.locationId);
+                    this.addPop(authUser.uid, this.props.place.locationId)
                   }}>
                   POP
                 </button>
