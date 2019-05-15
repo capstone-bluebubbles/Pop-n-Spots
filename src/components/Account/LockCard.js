@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchUser, fetchPops, getPops } from "../../store/user";
 import { placesRef, userRef } from "../Firebase/firebase";
 import { number } from "prop-types";
+import { calculateDistanceMetrics, calculateDistance } from "../../store/position"
 
 class LockCard extends React.Component {
   constructor(props) {
@@ -99,7 +100,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  pops: state.user.pops
+  pops: state.user.pops,
+  currentPosition: state.position.currentPosition
 });
 
 export default connect(

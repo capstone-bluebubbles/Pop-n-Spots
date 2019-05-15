@@ -317,9 +317,9 @@ export class Landing extends React.Component {
     this.props.currentDispatch(setCurrentCategory(category))
 
     // load the current position if necessary
-    // => automatically loads the current places
+    // => load the current places
     if (this.props.currentPosition.timestamp === 0) {
-      this.props.currentDispatch(getCurrentPosition())
+      this.props.currentDispatch(getCurrentPosition(true))
     }
 
     // add listener for window resize

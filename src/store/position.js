@@ -79,7 +79,7 @@ export const setCurrentCategory = (currentCategory) => {
   }
 }
 
-export const getCurrentPosition = () => async dispatch => {
+export const getCurrentPosition = (loadPlaces = true) => async dispatch => {
   console.log("REDUX -> position -> getCurrentPosition");
   try {
 
@@ -102,7 +102,9 @@ export const getCurrentPosition = () => async dispatch => {
           timestamp: pos.timestamp
         }
         dispatch(setCurrentPosition(center))
-        dispatch(getCurrentPlaces(center))
+        if (loadPlaces === true) {
+          dispatch(getCurrentPlaces(center))
+        }
       },
       err => {
         console.log(

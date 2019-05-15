@@ -5,7 +5,7 @@ import LockCard from "../Account/LockCard";
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 import { AuthUserContext, withAuthorization } from "../Session";
-import { getCurrentPosition } from "../../store/position";
+import { setCurrentCategory, getCurrentPosition, calculateDistanceMetrics, calculateDistance } from "../../store/position"
 import { fetchUser } from "../../store/user";
 
 class AccountPageComponent extends React.Component {
@@ -16,10 +16,11 @@ class AccountPageComponent extends React.Component {
   }
 
   componentDidMount() {
-    // the default position has a timestamp of zero
-    // if (this.props.currentPosition.timestamp === 0) {
-    //   this.props.currentDispatch(getCurrentPosition());
-    // }
+    // load the current position if necessary
+    // => do not load the current places
+    if (this.props.currentPosition.timestamp === 0) {
+      this.props.currentDispatch(getCurrentPosition(false))
+    }
   }
 
   render() {

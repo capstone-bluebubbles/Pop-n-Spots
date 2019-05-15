@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops, getPops } from "../../store/user";
 import { placesRef, userRef } from "../Firebase/firebase";
+import { calculateDistanceMetrics, calculateDistance } from "../../store/position"
 
 class PopCard extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class PopCard extends React.Component {
   handleClick(location, address) {
     window.open(
       `http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${
-        this.props.currentPosition.lng
+      this.props.currentPosition.lng
       }&daddr=${location},${address}`
     );
   }
@@ -120,6 +121,8 @@ class PopCard extends React.Component {
   }
 
   render() {
+    console.log("REACT -> PopCard -> this.props.currentPosition", this.props.currentPosition)
+
     if (this.props.pops.length >= 1) {
       return (
         <div>
