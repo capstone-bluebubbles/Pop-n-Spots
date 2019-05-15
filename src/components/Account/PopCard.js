@@ -167,7 +167,7 @@ class PopCard extends React.Component {
                     <div className="pops-card-phone">
                       {place.phone ? (
                         <div className="map-card-phone">
-                          <a href="tel:{place.phone}">
+                          <a href={`tel:${place.phone}`}>
                             {`${place.phone.slice(2, 5)}-${place.phone.slice(
                               5,
                               8
