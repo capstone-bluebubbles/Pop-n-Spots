@@ -164,12 +164,18 @@ class PopCard extends React.Component {
                       {this.locationData(place.address)}
                     </div>
                     <div className="pops-card-phone">
-                      <a href="tel:${place.phone}">
-                        {`${place.phone.slice(2, 5)}-${place.phone.slice(
-                          5,
-                          8
-                        )}-${place.phone.slice(8)}`}
-                      </a>
+                      {place.phone ? (
+                        <div className="map-card-phone">
+                          <a href="tel:${place.phone}">
+                            {`${place.phone.slice(2, 5)}-${place.phone.slice(
+                              5,
+                              8
+                            )}-${place.phone.slice(8)}`}
+                          </a>
+                        </div>
+                      ) : (
+                        <div />
+                      )}
                     </div>
                     <div className="pops-card-mile">
                       {`Distance : ${distanceText(
