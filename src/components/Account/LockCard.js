@@ -151,7 +151,7 @@ class LockCard extends React.Component {
                     <div className="pops-card-phone">
                       {places.phone ? (
                         <div className="map-card-phone">
-                          <a href="tel:${place.phone}">
+                          <a href="tel:{place.phone}">
                             {`${places.phone.slice(2, 5)}-${places.phone.slice(
                               5,
                               8
