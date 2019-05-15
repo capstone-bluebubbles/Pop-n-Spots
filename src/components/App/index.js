@@ -10,12 +10,16 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import * as ROUTES from '../../constants/routes';
+import { connect } from 'react-redux'
 import { withAuthentication } from '../Session';
+
+
 
 class App extends React.Component {
 
+
+
   render() {
-    console.log(this.props)
     return (
       <Router>
         <Navigation props={this.props.user} />
@@ -35,4 +39,11 @@ class App extends React.Component {
   }
 }
 
-export default withAuthentication(App)
+const mapStateToProps = state => ({
+  currentPosition: state.position.currentPosition,
+  currentCategory: state.position.currentCategory,
+});
+
+const app = withAuthentication(App)
+
+export default connect(mapStateToProps)(app)

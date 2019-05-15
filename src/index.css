@@ -637,6 +637,7 @@ i {
   box-sizing: border-box;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
   background-color: white;
+
 }
 
 @media only screen and (max-width: 512px) {
@@ -743,24 +744,7 @@ i {
   background: #333;
   border-radius: 8px;
   font-size: 14px;
-  /* width: 4em;
-  text-align: center;
   cursor: pointer;
-  border-radius: 8px;
-  color: white;
-  background: #333;
-  border: none;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  font-family: "Ubuntu", sans-serif;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  font-size: 12px;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  margin: 5%;
-  margin-right: 3px;
-  float: right; */
 }
 
 .pops-card-button-right {
@@ -769,25 +753,7 @@ i {
   border-radius: 8px;
   margin-left: 15px;
   font-size: 14px;
-
-  /* width: 4em;
-  text-align: center;
   cursor: pointer;
-  border-radius: 8px;
-  color: white;
-  background: #333;
-  border: none;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  font-family: "Ubuntu", sans-serif;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  font-size: 12px;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  margin: 5%;
-  margin-right: 3px;
-  float: right; */
 }
 
 .popular-time-percent {

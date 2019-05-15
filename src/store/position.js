@@ -5,6 +5,46 @@ export const SET_CURRENT_POSITION = 'SET_CURRENT_POSITION'
 export const SET_CURRENT_PLACES = 'SET_CURRENT_PLACES'
 export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY'
 
+//--------------------------------------------------
+// helper data / functions
+//--------------------------------------------------
+
+// add degree to radian conversion to Number prototype
+if (typeof Number.prototype.toRad === "undefined") {
+  Number.prototype.toRad = function () {
+    return (this * Math.PI) / 180;
+  };
+}
+
+export const calculateDistanceMetrics = {
+  KM_PER_MILE: 1.60934,
+  MILE_PER_KM: 1.0 / 1.60934
+}
+
+// return distance in km between two points defined by lat/long
+// start = { lat: xxxx, lng: xxxx}
+// end = { lat: xxxx, lng: xxxx}
+export const calculateDistance = function (start, end) {
+  let earthRadius = 6371; // km
+  let lat1 = parseFloat(start.lat);
+  let lat2 = parseFloat(end.lat);
+  let lon1 = parseFloat(start.lng);
+  let lon2 = parseFloat(end.lng);
+
+  let dLat = (lat2 - lat1).toRad();
+  let dLon = (lon2 - lon1).toRad();
+  lat1 = lat1.toRad();
+  lat2 = lat2.toRad();
+
+  let a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  let d = earthRadius * c;
+  return d;
+};
+
+
 const defaultState = {
   currentPosition: {
     lat: 41.875792,
@@ -39,7 +79,7 @@ export const setCurrentCategory = (currentCategory) => {
   }
 }
 
-export const getCurrentPosition = () => async dispatch => {
+export const getCurrentPosition = (loadPlaces = true) => async dispatch => {
   console.log("REDUX -> position -> getCurrentPosition");
   try {
 
@@ -62,7 +102,9 @@ export const getCurrentPosition = () => async dispatch => {
           timestamp: pos.timestamp
         }
         dispatch(setCurrentPosition(center))
-        dispatch(getCurrentPlaces(center))
+        if (loadPlaces === true) {
+          dispatch(getCurrentPlaces(center))
+        }
       },
       err => {
         console.log(
@@ -95,7 +137,7 @@ export const getCurrentPlaces = (center) => async (dispatch, getState) => {
     let geoFire = new GeoFire(firebase)
     let geoQuery = geoFire.query({
       center: centerQuery,
-      radius: 1.609 * 2
+      radius: calculateDistanceMetrics.KM_PER_MILE * 2.0
     })
     let data = [];
     geoQuery.on("key_entered", function (key, location, distance) {

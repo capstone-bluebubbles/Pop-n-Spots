@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { Map, Marker, Circle, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import { GOOGLE_API_KEY } from "../../secrets";
 import InfoCard from "../Landing/infoCard";
-import { setCurrentCategory, getCurrentPosition } from "../../store/position"
+import { setCurrentCategory, getCurrentPosition, calculateDistanceMetrics, calculateDistance } from "../../store/position"
 import queryString from "query-string"
 
 const styleMapSilver = [
   {
-    elementType: "geometry",
+    // elementType: "geometry",
     stylers: [
       {
         color: "#f5f5f5"
@@ -231,7 +231,7 @@ export class Landing extends React.Component {
 
     // set the state
     this.state = {
-      currentRadius: 0.50,
+      currentRadius: 1.00,
       currentSelection: []
     }
 
@@ -315,12 +315,14 @@ export class Landing extends React.Component {
 
     // set the category in the redux store
     this.props.currentDispatch(setCurrentCategory(category))
-
-    // load the current position if necessary
-    // => automatically loads the current places
-    if (this.props.currentPosition.timestamp === 0) {
-      this.props.currentDispatch(getCurrentPosition())
-    }
+    /*
+        // load the current position if necessary
+        // => load the current places
+        if (this.props.currentPosition.timestamp === 0) {
+          this.props.currentDispatch(getCurrentPosition(true))
+        }
+    */
+    this.props.currentDispatch(getCurrentPosition(true))
 
     // add listener for window resize
     window.addEventListener('resize', this.resize)
@@ -469,7 +471,7 @@ export class Landing extends React.Component {
             < Map
               style={styleMapCSS}
               google={this.props.google}
-              zoom={15}
+              zoom={14}
               initialCenter={currentPosition}
               center={currentPosition}
               setCenter={currentPosition}
