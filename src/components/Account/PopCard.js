@@ -2,7 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchPops, getPops } from "../../store/user";
 import { placesRef, userRef } from "../Firebase/firebase";
-import { calculateDistanceMetrics, calculateDistance } from "../../store/position"
+import {
+  calculateDistanceMetrics,
+  calculateDistance
+} from "../../store/position";
 
 class PopCard extends React.Component {
   constructor(props) {
@@ -27,7 +30,7 @@ class PopCard extends React.Component {
   handleClick(location, address) {
     window.open(
       `http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${
-      this.props.currentPosition.lng
+        this.props.currentPosition.lng
       }&daddr=${location},${address}`
     );
   }
@@ -137,7 +140,10 @@ class PopCard extends React.Component {
   };
 
   render() {
-    console.log("REACT -> PopCard -> this.props.currentPosition", this.props.currentPosition)
+    console.log(
+      "REACT -> PopCard -> this.props.currentPosition",
+      this.props.currentPosition
+    );
 
     if (this.props.pops.length >= 1) {
       return (
@@ -154,21 +160,28 @@ class PopCard extends React.Component {
                   </div>
                   <ul className="pops-card-address-container">
                     <br />
-                    <div className="pops-card-address">{this.locationData(place.address)}</div>
+                    <div className="pops-card-address">
+                      {this.locationData(place.address)}
+                    </div>
                     <div className="pops-card-phone">
-                      <a href="tel:${place.phone}" >
-                      {`${place.phone.slice(2, 5)}-${place.phone.slice(
-                        5,
-                        8
-                      )}-${place.phone.slice(8)}`}
+                      <a href="tel:${place.phone}">
+                        {`${place.phone.slice(2, 5)}-${place.phone.slice(
+                          5,
+                          8
+                        )}-${place.phone.slice(8)}`}
                       </a>
                     </div>
                     <div className="pops-card-mile">
-                      {`Distance : ${distanceText(this.props.currentPosition, place)} miles`}
+                      {`Distance : ${distanceText(
+                        this.props.currentPosition,
+                        place
+                      )} miles`}
                     </div>
                     <div className="place-title">
                       {Array.from({ length: place.totalScore }).map((j, i) => (
-                        <span key={i}> 🌟 </span>
+                        <span className="stars" key={i}>
+                          🌟
+                        </span>
                       ))}
                     </div>
                   </ul>
@@ -208,11 +221,14 @@ class PopCard extends React.Component {
 }
 
 const distanceText = (currentPosition, place) => {
-  let result = calculateDistance(currentPosition, { lat: Number(place.gpsLat), lng: Number(place.gpsLong) })
-  result = result / calculateDistanceMetrics.KM_PER_MILE
-  result = result.toFixed(1)
-  return result
-}
+  let result = calculateDistance(currentPosition, {
+    lat: Number(place.gpsLat),
+    lng: Number(place.gpsLong)
+  });
+  result = result / calculateDistanceMetrics.KM_PER_MILE;
+  result = result.toFixed(1);
+  return result;
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
