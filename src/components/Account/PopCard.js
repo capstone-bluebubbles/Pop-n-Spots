@@ -151,7 +151,7 @@ class PopCard extends React.Component {
                   </ul>
                   <div className="pops-card-buttons-container">
                     <button
-                      className="pops-card-button"
+                      className="navigate-button"
                       type="button"
                       onClick={() => {
                         this.handleClick(place.title, place.address);

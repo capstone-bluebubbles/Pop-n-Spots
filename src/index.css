@@ -85,7 +85,7 @@ body {
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 512px) {
   .signin-container {
     width: 320px;
   }
@@ -271,7 +271,7 @@ body {
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 512px) {
   .sign-up-container {
     width: 320px;
   }
@@ -617,7 +617,7 @@ i {
   font-family: "Ubuntu", sans-serif;
   background-color: white;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 512px) {
   .user-page-card {
     display: flex;
     flex-direction: column;
@@ -639,7 +639,7 @@ i {
   background-color: white;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 512px) {
   .pops-card {
     width: 100%;
     margin: 1px;
@@ -838,21 +838,22 @@ i {
 .navigate-button {
   cursor: pointer;
   border-radius: 8px;
-  background: #333;
-  padding: 5px;
+  color: white;
+  background: black;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   font-family: "Ubuntu", sans-serif;
+  text-shadow: -1px 0 black, 0 3px black, 3px 0 black, 0 -1px black;
+  /* font-style: italic; */
   font-display: black;
-  font-size: 12px;
+  font-size: 14px;
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin: 2%;
   display: flex;
   position: relative;
-  color: #fff;
-}
-.navigate-button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-  border: none;
 }
 
 .styleMapButtonCSS {
@@ -903,7 +904,7 @@ i {
   outline: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 512px) {
   .styleMapButtonCSS {
     font-size: 8px;
   }
@@ -936,24 +937,6 @@ i {
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
-.navigate-button {
-  cursor: pointer;
-  border-radius: 8px;
-  color: yellow;
-  background: #333;
-  border: none;
-  font-family: "Ubuntu", sans-serif;
-  font-display: black;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  display: flex;
-}
-.navigate-button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-  border: none;
-}
-
 .phone {
   font-size: 14px;
   color: blue;
@@ -980,6 +963,7 @@ i {
   padding-right: 90px;
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 .forgot-pass:focus {
   border: 2px solid rgba(0, 0, 0, 0.18) !important;
@@ -1024,11 +1008,11 @@ i {
 }
 
 .map-page-card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-direction: row; */
+  /* flex-wrap: wrap;
   align-items: stretch;
-  justify-content: center;
+  justify-content: center; */
   margin: 10px;
   padding-top: 10px;
   font-family: "Ubuntu", sans-serif;
@@ -1071,29 +1055,27 @@ i {
 
 .map-card-address {
   color: black;
-  /* font-family: "Ubuntu", sans-serif;
-  display: flex; */
+  font-family: "Ubuntu", sans-serif;
+  display: flex;
   font-size: 14px;
 }
 
 .map-card-phone {
   color: black;
-  /* font-family: "Ubuntu", sans-serif;
-  display: flex; */
   font-size: 14px;
 }
 
 .map-card-mile {
   color: black;
-  /* font-family: "Ubuntu", sans-serif;
-  display: flex; */
+  font-family: "Ubuntu", sans-serif;
+  display: flex;
   font-size: 14px;
 }
 
 .map-card-buttons-container {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  justify-content: flex-end;
+  margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;

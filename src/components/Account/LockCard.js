@@ -132,7 +132,7 @@ class LockCard extends React.Component {
                   </ul>
                   <div className="pops-card-buttons-container">
                     <button
-                      className="pops-card-button"
+                      className="navigate-button"
                       type="button"
                       onClick={() => {
                         this.handleClick(places.title, places.address);

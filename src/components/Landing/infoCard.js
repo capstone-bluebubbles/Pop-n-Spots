@@ -1,29 +1,29 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchUser, fetchPops } from '../../store/user';
-import { Link, Redirect } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
-import { AuthUserContext, withAuthorization } from '../Session';
-import { userRef } from '../Firebase/firebase';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchUser, fetchPops } from "../../store/user";
+import { Link, Redirect } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
+import { AuthUserContext, withAuthorization } from "../Session";
+import { userRef } from "../Firebase/firebase";
 
 class InfoCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pops: [],
+      pops: []
     };
     this.handleClick = this.handleClick.bind(this);
 
     // current day abbreviation
     const date = new Date();
-    const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     this.currentDay = days[date.getDay()];
     this.currentHour = date.getHours();
     this.bubbles = [
-      'NewBubble00.png',
-      'NewBubble33.png',
-      'NewBubble66.png',
-      'NewBubble99.png',
+      "NewBubble00.png",
+      "NewBubble33.png",
+      "NewBubble66.png",
+      "NewBubble99.png"
     ];
   }
 
@@ -31,11 +31,11 @@ class InfoCard extends React.Component {
   async addPop(uID, locationId) {
     try {
       const User = userRef.child(uID);
-      const popsRef = User.child('pops');
-      await popsRef.on('value', snapshot => {
+      const popsRef = User.child("pops");
+      await popsRef.on("value", snapshot => {
         const pops = snapshot.val();
         this.setState({
-          pops: pops,
+          pops: pops
         });
       });
       let pops = await this.state.pops;
@@ -53,9 +53,9 @@ class InfoCard extends React.Component {
       if (popFound === true) {
         let foundPlaceRef = popsRef.child(`${placeIndex}`);
         foundPlaceRef.update({
-          dropped: false,
+          dropped: false
         });
-        let popRef = foundPlaceRef.child('timestamp').child(`${timesPopped}`);
+        let popRef = foundPlaceRef.child("timestamp").child(`${timesPopped}`);
 
         popRef.set(Date.now());
       } else {
@@ -65,8 +65,8 @@ class InfoCard extends React.Component {
           popIndex: length,
           placeKey: locationId,
           timestamp: {
-            0: Date.now(),
-          },
+            0: Date.now()
+          }
         });
       }
     } catch (err) {
@@ -117,7 +117,7 @@ class InfoCard extends React.Component {
         <div> {`${popDataTarget}% Poppin`} </div>
         <img
           className="pops-card-title_icon"
-          style={{ height: '30px', width: '30px' }}
+          style={{ height: "30px", width: "30px" }}
           src={`${this.bubbles[popDataTargetFrame]}`}
         />
       </div>
@@ -163,12 +163,12 @@ class InfoCard extends React.Component {
               <ul className="map-card-address-container">
                 <br />
                 <div className="map-card-address">{place.address}</div>
-                {/* <div className="map-card-phone">
-                      {`${place.phone.slice(2, 5)}-${place.phone.slice(
-                        5,
-                        8
-                      )}-${place.phone.slice(8)}`}
-                    </div> */}
+                <div className="map-card-phone">
+                  {`${place.phone.slice(2, 5)}-${place.phone.slice(
+                    5,
+                    8
+                  )}-${place.phone.slice(8)}`}
+                </div>
                 <div className="pops-card-mile">1.5 Miles</div>
                 <div className="place-title">
                   {Array.from({ length: place.totalScore }).map((j, i) => (
@@ -178,12 +178,11 @@ class InfoCard extends React.Component {
               </ul>
               <div className="map-card-buttons-container">
                 <button
-                  className="map-card-button"
+                  className="navigate-button"
                   type="button"
                   onClick={() => {
                     this.handleClick(place.title, place.address);
-                  }}
-                >
+                  }}>
                   NAV
                 </button>
                 <button
@@ -191,8 +190,7 @@ class InfoCard extends React.Component {
                   type="button"
                   onClick={() => {
                     this.addPop(authUser.uid, this.props.place.locationId);
-                  }}
-                >
+                  }}>
                   POP
                 </button>
               </div>
@@ -208,12 +206,12 @@ class InfoCard extends React.Component {
               <ul className="map-card-address-container">
                 <br />
                 <div className="map-card-address">{place.address}</div>
-                {/* <div className="map-card-phone">
-                      {`${place.phone.slice(2, 5)}-${place.phone.slice(
-                        5,
-                        8
-                      )}-${place.phone.slice(8)}`}
-                    </div> */}
+                <div className="map-card-phone">
+                  {`${place.phone.slice(2, 5)}-${place.phone.slice(
+                    5,
+                    8
+                  )}-${place.phone.slice(8)}`}
+                </div>
                 <div className="map-card-mile">1.5 Miles</div>
                 <div className="place-title">
                   {Array.from({ length: place.totalScore }).map((j, i) => (
@@ -223,12 +221,11 @@ class InfoCard extends React.Component {
               </ul>
               <div className="map-card-buttons-container">
                 <button
-                  className="map-card-button"
+                  className="navigate-button"
                   type="button"
                   onClick={() => {
                     this.handleClick(place.title, place.address);
-                  }}
-                >
+                  }}>
                   NAV
                 </button>
 
@@ -246,7 +243,7 @@ class InfoCard extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
-  fetchPops: places => dispatch(fetchPops(places)),
+  fetchPops: places => dispatch(fetchPops(places))
   // addPop: (uID, locationID) => dispatch(addPop(uID, locationID))
 });
 
@@ -254,7 +251,7 @@ const mapStateToProps = state => ({
   user: state.user.user,
   pops: state.user.pops,
   places: state.places,
-  currentPosition: state.position.currentPosition,
+  currentPosition: state.position.currentPosition
 });
 const condition = authUser => !!authUser;
 
