@@ -364,7 +364,7 @@ body {
   font-size: 12px;
 }
 
-/* Resturant Info.  Button*/
+/* Restaurant Info.  Button*/
 .pop-button {
   cursor: pointer;
   border-radius: 8px;
@@ -1018,4 +1018,87 @@ i {
 .LandingRight {
   flex: 65%;
   /* overflow: hidden; */
+}
+
+.map-page-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  margin: 10px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  background-color: white;
+}
+
+.map-card-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.map-card-title {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.map-card-title_icon {
+  margin-left: 10px;
+  /* text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+  color: black;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; */
+}
+
+.map-card-address-container {
+  padding: 0;
+  margin-left: 10px;
+  list-style-type: none;
+}
+
+.map-card-address {
+  color: black;
+  /* font-family: "Ubuntu", sans-serif;
+  display: flex; */
+  font-size: 14px;
+}
+
+.map-card-phone {
+  color: black;
+  /* font-family: "Ubuntu", sans-serif;
+  display: flex; */
+  font-size: 14px;
+}
+
+.map-card-mile {
+  color: black;
+  /* font-family: "Ubuntu", sans-serif;
+  display: flex; */
+  font-size: 14px;
+}
+
+.map-card-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.map-card-button {
+  color: white;
+  background: #333;
+  border-radius: 8px;
+  font-size: 14px;
 }
