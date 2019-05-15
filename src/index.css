@@ -904,7 +904,7 @@ i {
   outline: none;
 }
 
-@media only screen and (max-width: 512px) {
+@media only screen and (max-width: 400px) {
   .styleMapButtonCSS {
     font-size: 8px;
   }
