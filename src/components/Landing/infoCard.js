@@ -124,6 +124,23 @@ class InfoCard extends React.Component {
     );
   };
 
+  locationData = address => {
+    let result = address;
+    let located = result.indexOf("Located");
+    if (located !== -1) {
+      result = result.slice(0, located);
+    }
+    let usa = result.indexOf(", USA");
+    if (usa !== -1) {
+      result = result.slice(0, usa);
+    }
+    let eua = result.indexOf(", EUA");
+    if (eua !== -1) {
+      result = result.slice(0, eua);
+    }
+    return result;
+  };
+
   handleClick(location, address) {
     window.open(
       `http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${
@@ -162,17 +179,25 @@ class InfoCard extends React.Component {
               </div>
               <ul className="map-card-address-container">
                 <br />
-                <div className="map-card-address">{place.address}</div>
-                <div className="map-card-phone">
-                  {`${place.phone.slice(2, 5)}-${place.phone.slice(
-                    5,
-                    8
-                  )}-${place.phone.slice(8)}`}
+                <div className="map-card-address">
+                  {this.locationData(place.address)}
                 </div>
+                {place.phone ? (
+                  <div className="map-card-phone">
+                    {`${place.phone.slice(2, 5)}-${place.phone.slice(
+                      5,
+                      8
+                    )}-${place.phone.slice(8)}`}
+                  </div>
+                ) : (
+                  <div />
+                )}
+
+                <br />
                 <div className="pops-card-mile">1.5 Miles</div>
                 <div className="place-title">
                   {Array.from({ length: place.totalScore }).map((j, i) => (
-                    <span key={i}> ⭐ </span>
+                    <span key={i}>🌟</span>
                   ))}
                 </div>
               </ul>
