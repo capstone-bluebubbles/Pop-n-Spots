@@ -191,12 +191,16 @@ class InfoCard extends React.Component {
                 <div className="map-card-address">
                   {this.locationData(place.address)}
                 </div>
+                  
                 {place.phone ? (
                   <div className="map-card-phone">
+                    <a href="tel:${place.phone}" >
                     {`${place.phone.slice(2, 5)}-${place.phone.slice(
                       5,
                       8
                     )}-${place.phone.slice(8)}`}
+                    </a>
+                    
                   </div>
                 ) : (
                     <div />

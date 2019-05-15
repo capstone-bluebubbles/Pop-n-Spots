@@ -11,6 +11,17 @@ class LockCard extends React.Component {
     this.state = {
       lockedPlaces: []
     };
+    // current day abbreviation
+    const date = new Date();
+    const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+    this.currentDay = days[date.getDay()];
+    this.currentHour = date.getHours();
+    this.bubbles = [
+      "NewBubble00.png",
+      "NewBubble33.png",
+      "NewBubble66.png",
+      "NewBubble99.png"
+    ];
   }
 
   handleClick(location, address) {
@@ -126,21 +137,19 @@ class LockCard extends React.Component {
                   <div className="pops-card-title-container">
                     <div className="pops-card-title">{places.title}</div>
                     <div className="pops-card-title-icon">
-                      {/* {this.historyData(places.popularTimesHistogram)} */}
-                      <img
-                        style={{ height: "30px", width: "30px" }}
-                        src="NewBubble33.png"
-                      />
+                      {this.historyData(places.popularTimesHistogram)}
                     </div>
                   </div>
                   <ul className="pops-card-address-container">
                     <br />
                     <div className="pops-card-address">  {this.locationData(places.address)}</div>
                     <div className="pops-card-phone">
+                      <a href="tel:${place.phone}" >
                       {`${places.phone.slice(2, 5)}-${places.phone.slice(
                         5,
                         8
                       )}-${places.phone.slice(8)}`}
+                      </a>
                     </div>
                     <div className="pops-card-mile">
                       {`Distance : ${distanceText(this.props.currentPosition, places)} miles`}
@@ -161,7 +170,7 @@ class LockCard extends React.Component {
                       NAV
                     </button>
                     <button
-                      className="pops-card-button"
+                      className="pops-card-button-right"
                       type="button"
                       onClick={() => this.dropPlace(places)}>
                       DROP!
@@ -176,7 +185,7 @@ class LockCard extends React.Component {
     } else {
       return (
         <div className="pops-card">
-          <div className="pops-card-title" />
+          {/* <div className="pops-card-title" /> */}
           <h5>You have no Saves Places....</h5>
         </div>
       );
