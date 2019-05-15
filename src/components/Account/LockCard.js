@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { fetchUser, fetchPops, getPops } from "../../store/user";
 import { placesRef, userRef } from "../Firebase/firebase";
 import { number } from "prop-types";
-import { calculateDistanceMetrics, calculateDistance } from "../../store/position"
+import {
+  calculateDistanceMetrics,
+  calculateDistance
+} from "../../store/position";
 
 class LockCard extends React.Component {
   constructor(props) {
@@ -27,7 +30,7 @@ class LockCard extends React.Component {
   handleClick(location, address) {
     window.open(
       `http://maps.google.com/maps?saddr=${this.props.currentPosition.lat}+${
-      this.props.currentPosition.lng
+        this.props.currentPosition.lng
       }&daddr=${location},${address}`
     );
   }
@@ -142,21 +145,29 @@ class LockCard extends React.Component {
                   </div>
                   <ul className="pops-card-address-container">
                     <br />
-                    <div className="pops-card-address">  {this.locationData(places.address)}</div>
+                    <div className="pops-card-address">
+                      {this.locationData(places.address)}
+                    </div>
                     <div className="pops-card-phone">
-                      <a href="tel:${place.phone}" >
-                      {`${places.phone.slice(2, 5)}-${places.phone.slice(
-                        5,
-                        8
-                      )}-${places.phone.slice(8)}`}
+                      <a href="tel:${place.phone}">
+                        {`${places.phone.slice(2, 5)}-${places.phone.slice(
+                          5,
+                          8
+                        )}-${places.phone.slice(8)}`}
                       </a>
                     </div>
                     <div className="pops-card-mile">
-                      {`Distance : ${distanceText(this.props.currentPosition, places)} miles`}
+                      {`Distance : ${distanceText(
+                        this.props.currentPosition,
+                        places
+                      )} miles`}
                     </div>
                     <div className="place-title">
                       {Array.from({ length: places.totalScore }).map((j, i) => (
-                        <span key={i}> 🌟 </span>
+                        <span className="stars" key={i}>
+                          {" "}
+                          🌟{" "}
+                        </span>
                       ))}
                     </div>
                   </ul>
@@ -194,13 +205,14 @@ class LockCard extends React.Component {
 }
 
 const distanceText = (currentPosition, place) => {
-  let result = calculateDistance(currentPosition, { lat: Number(place.gpsLat), lng: Number(place.gpsLong) })
-  result = result / calculateDistanceMetrics.KM_PER_MILE
-  result = result.toFixed(1)
-  return result
-}
-
-
+  let result = calculateDistance(currentPosition, {
+    lat: Number(place.gpsLat),
+    lng: Number(place.gpsLong)
+  });
+  result = result / calculateDistanceMetrics.KM_PER_MILE;
+  result = result.toFixed(1);
+  return result;
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: uID => dispatch(fetchUser(uID)),
