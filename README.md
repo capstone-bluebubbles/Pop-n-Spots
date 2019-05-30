@@ -17,7 +17,7 @@ In the project directory, you can run:
 - [React](https://reactjs.org/docs) - Framework
 - [Redux](https://redux.js.org/) - State Container
 - [Google Maps API](hhttps://developers.google.com/maps/documentation/)
-- [FireBase] (https://firebase.google.com/docs) -Database
+- [FireBase](https://firebase.google.com/docs) - Database
 
 
 # Team
