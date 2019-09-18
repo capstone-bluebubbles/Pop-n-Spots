@@ -27,4 +27,4 @@ In the project directory, you can run:
 - [Jonathan Helvey](https://github.com/JonathanHelvey)
 
 # Demo
-<img src="Pop.gif" data-canonical-src="Pop.gif" width="200" height="400" />
+<img src="Pop.gif" data-canonical-src="Pop.gif" width="800" height="600" />
