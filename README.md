@@ -27,5 +27,5 @@ In the project directory, you can run:
 - [Jonathan Helvey](https://github.com/JonathanHelvey)
 
 # Demo
-- [YouTube Link](hhttps://www.youtube.com/watch?time_continue=83&v=F0MlCNOgaug)
+- [YouTube Link](https://www.youtube.com/watch?time_continue=83&v=F0MlCNOgaug)
 <img src="Pop.gif" data-canonical-src="Pop.gif" width="800" height="600" />
