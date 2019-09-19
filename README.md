@@ -19,6 +19,17 @@ In the project directory, you can run:
 - [Google Maps API](hhttps://developers.google.com/maps/documentation/)
 - [FireBase](https://firebase.google.com/docs) - Database
 
+# Setup
+
+Commands to get this repo set up for development:
+
+```
+npm install
+npm run start-dev
+open http://localhost:8080/
+```
+
+To log in as an admin (to see the admin functionality for the site), use the email "test@test.com". All users' passwords are 123456.
 
 # Team
 - [Danil Khrustov](https://github.com/Delta8Kilo)
